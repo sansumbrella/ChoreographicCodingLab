@@ -115,4 +115,30 @@ BezierMesh createWing(const ci::gl::GlslProgRef &shader, float scale, const ci::
 	return BezierMesh(rods, panels, shader, instance_data, instance_layout);
 }
 
+BezierMesh createReed(const ci::gl::GlslProgRef &shader, const ci::gl::VboRef &instance_data, const ci::geom::BufferLayout &instance_layout)
+{
+  vector<BezierVertex> rods;
+  vector<BezierVertex> panels;
+
+  auto segments = 3;
+  auto inner_open = vec3(-0.1f, 0.5f, 0);
+  auto rotation = glm::rotate<float>(Tau * (1.0f / segments), vec3(0, 1, 0));
+  auto side_normal = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(vec3(0, 1, 0) - inner_open))) * vec4(0, 1, 0, 0));
+  auto center = BezierVertex(vec3(0), vec3(0, 1, 0)).setNormals(vec3(0, 1, 0), vec3(0, 1, 0));
+  auto l1 = BezierVertex(vec3(-0.5, 0, 0), inner_open).setNormals(vec3(0, 1, 0), side_normal);
+  auto l2 = rotation * l1;
+
+  // triangle between point and its dual
+  for (auto i = 0; i < segments; i += 1) {
+    panels.push_back(center);
+    panels.push_back(l1);
+    panels.push_back(l2);
+
+    l1 = l2;
+    l2 = rotation * l1;
+  }
+
+  return BezierMesh(rods, panels, shader, instance_data, instance_layout);
+}
+
 } // namespace sansumbrella

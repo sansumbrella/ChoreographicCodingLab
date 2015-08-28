@@ -22,7 +22,7 @@ public:
   void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override;
 private:
   double  _time = 0;
-  double  _acceleration = 0.5f;
+  double  _acceleration = 0.2f;
   float   _scale = 0.4f;
 };
 
