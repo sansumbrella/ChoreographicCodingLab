@@ -6,6 +6,7 @@
 //
 
 #pragma once
+#include "Choreograph.h"
 
 namespace sansumbrella
 {
@@ -18,11 +19,11 @@ struct Transform
     orientation(orientation)
   {}
 
-  ci::vec3	position = ci::vec3(0);
-  ci::vec3	scale = ci::vec3(1);
-  ci::quat	orientation;
+  ch::Output<ci::vec3>	position = ci::vec3(0);
+  ch::Output<ci::vec3>	scale = ci::vec3(1);
+  ch::Output<ci::quat>	orientation;
 
-  ci::mat4 transform() const { return glm::translate(position) * glm::toMat4(orientation) * glm::scale(scale); }
+  ci::mat4 transform() const { return glm::translate(position()) * glm::toMat4(orientation()) * glm::scale(scale()); }
 };
 
 } // namespace sansumbrella

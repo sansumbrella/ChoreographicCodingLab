@@ -10,9 +10,14 @@
 #include "cinder/Path2d.h"
 #include "CameraController.h"
 
+#include "SharedTimeline.h"
+
+#include "IslandCreation.h"
+
 using namespace ci;
 using namespace ci::app;
 using namespace sansumbrella;
+using namespace entityx;
 using namespace std;
 
 class DeltasIslandsApp : public App {
@@ -20,6 +25,7 @@ public:
   DeltasIslandsApp();
   void setup() override;
   void createTestIsland();
+
   void mouseDown( MouseEvent event ) override;
   void update() override;
   void draw() override;
@@ -31,15 +37,6 @@ private:
 
   Timer                  _timer;
 };
-
-entityx::Entity createShrub(entityx::EntityManager &entities, const ci::vec2 &pos)
-{
-  auto e = entities.create();
-  e.assign<Transform>( vec3(pos.x, 0.0f, pos.y) );
-  e.assign<InstanceShape>( randFloat() );
-
-  return e;
-}
 
 DeltasIslandsApp::DeltasIslandsApp()
 : _entities(_events),
@@ -56,26 +53,16 @@ void DeltasIslandsApp::setup()
 
 void DeltasIslandsApp::createTestIsland()
 {
-  createShrub(_entities, vec2(0, 0));
-
   auto path = Path2d();
   auto pos = vec2(0);
   path.moveTo(pos);
   auto len = 5.0f;
   path.quadTo(pos + vec2(1, 1) * len, pos + vec2(2, 0) * len);
 
-  auto cache = Path2dCalcCache(path);
-
-  for (auto i = 0; i < 10; i += 1) {
-    auto t = cache.calcNormalizedTime(i / 10.0f);
-    auto p = path.getPosition(t);
-    auto tangent = normalize(path.getTangent(t));
-    auto normal = vec2(-tangent.y, tangent.x);
-
-    auto pos = p;
-    createShrub(_entities, pos);
-    createShrub(_entities, pos + normal * 2.0f);
-    createShrub(_entities, pos - normal * 2.0f);
+  auto island = createIslandFromPath(_entities, path);
+  for (auto e : island)
+  {
+    auto xf = e.component<Transform>();
   }
 }
 
@@ -91,6 +78,7 @@ void DeltasIslandsApp::update()
   }
   _timer.start();
 
+  sharedTimeline().step(dt);
   _systems.update<InstanceRenderer>(dt);
 }
 
