@@ -7,11 +7,11 @@ using namespace ci::app;
 using namespace std;
 
 class DeltasIslandsApp : public App {
-  public:
-	void setup() override;
-	void mouseDown( MouseEvent event ) override;
-	void update() override;
-	void draw() override;
+public:
+  void setup() override;
+  void mouseDown( MouseEvent event ) override;
+  void update() override;
+  void draw() override;
 };
 
 void DeltasIslandsApp::setup()
@@ -28,7 +28,9 @@ void DeltasIslandsApp::update()
 
 void DeltasIslandsApp::draw()
 {
-	gl::clear( Color( 0, 0, 0 ) ); 
+	gl::clear( Color( 0, 0, 0 ) );
 }
 
-CINDER_APP( DeltasIslandsApp, RendererGl )
+CINDER_APP( DeltasIslandsApp, RendererGl, [] (App::Settings *settings) {
+  settings->setWindowSize(1280, 720);
+} )
