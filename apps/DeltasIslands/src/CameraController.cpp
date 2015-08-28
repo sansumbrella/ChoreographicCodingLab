@@ -32,7 +32,7 @@ _camera_ui(&_camera)
   _camera.setNearClip(0.1f);
   _camera.setFarClip(500.0f);
   _camera.setWorldUp(vec3(0, 1, 0));
-  _camera.lookAt(vec3(0, 0, -100), vec3(0));
+  _camera.lookAt(vec3(0, 3, -50), vec3(0));
 }
 
 void CameraController::keyDown(const ci::app::KeyEvent &event)

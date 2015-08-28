@@ -35,7 +35,7 @@ private:
 entityx::Entity createShrub(entityx::EntityManager &entities, const ci::vec2 &pos)
 {
   auto e = entities.create();
-  e.assign<Transform>( vec3(pos, 0.0f) );
+  e.assign<Transform>( vec3(pos.x, 0.0f, pos.y) );
   e.assign<InstanceShape>( randFloat() );
 
   return e;
@@ -69,10 +69,13 @@ void DeltasIslandsApp::createTestIsland()
   for (auto i = 0; i < 10; i += 1) {
     auto t = cache.calcNormalizedTime(i / 10.0f);
     auto p = path.getPosition(t);
-    auto n = path.getTangent(t);
+    auto tangent = normalize(path.getTangent(t));
+    auto normal = vec2(-tangent.y, tangent.x);
 
     auto pos = p;
     createShrub(_entities, pos);
+    createShrub(_entities, pos + normal * 2.0f);
+    createShrub(_entities, pos - normal * 2.0f);
   }
 }
 
