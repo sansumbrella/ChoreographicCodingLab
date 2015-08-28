@@ -2,6 +2,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cinder/Rand.h"
+#include "cinder/Utilities.h"
 
 #include "entityx/entityx.h"
 #include "InstanceRenderer.h"
@@ -12,6 +13,7 @@
 #include "CameraController.h"
 
 #include "SharedTimeline.h"
+#include "DataExport.h"
 
 #include "IslandCreation.h"
 
@@ -103,6 +105,12 @@ void DeltasIslandsApp::update()
   sharedTimeline().step(dt);
   _systems.update<WindSystem>(dt);
   _systems.update<InstanceRenderer>(dt);
+
+  auto state = serializePositions(_entities);
+  if (getElapsedFrames() % 100) {
+    ofstream f((getDocumentsDirectory() / "state.csv").string());
+    f << state;
+  }
 }
 
 void DeltasIslandsApp::draw()
