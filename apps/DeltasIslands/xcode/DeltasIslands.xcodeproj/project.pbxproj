@@ -21,6 +21,10 @@
 		15CD7C971B90959E00C76083 /* FormBuilders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C931B90959E00C76083 /* FormBuilders.cpp */; };
 		15CD7C981B90959E00C76083 /* InstanceRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C941B90959E00C76083 /* InstanceRenderer.cpp */; };
 		15CD7C991B90959E00C76083 /* BezierMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C951B90959E00C76083 /* BezierMesh.cpp */; };
+		15CD7C9B1B90A14C00C76083 /* CinderImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ED526D2B966403C87BE146B /* CinderImGui.cpp */; };
+		15CD7C9E1B90A23900C76083 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C9C1B90A23900C76083 /* imgui_demo.cpp */; };
+		15CD7C9F1B90A23900C76083 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C9D1B90A23900C76083 /* imgui_draw.cpp */; };
+		15CD7CA31B90B38700C76083 /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CA11B90B38700C76083 /* CameraController.cpp */; };
 		191646C563A44994819D819D /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = E25C62C3851849949373E3D0 /* Entity.cc */; };
 		2038CFF6DA2140C4A354AA30 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 25E74E03101A4ED9B98ADA62 /* Event.cc */; };
 		34BB76D324F949AB8DFDB0CF /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = DB5C3D6D390548BEA521E3DA /* Pool.cc */; };
@@ -64,6 +68,12 @@
 		15CD7C941B90959E00C76083 /* InstanceRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstanceRenderer.cpp; sourceTree = "<group>"; };
 		15CD7C951B90959E00C76083 /* BezierMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierMesh.cpp; sourceTree = "<group>"; };
 		15CD7C9A1B9098CE00C76083 /* MathTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathTypes.h; sourceTree = "<group>"; };
+		15CD7C9C1B90A23900C76083 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_demo.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui_demo.cpp"; sourceTree = "<group>"; };
+		15CD7C9D1B90A23900C76083 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_draw.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui_draw.cpp"; sourceTree = "<group>"; };
+		15CD7CA01B90AE2200C76083 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
+		15CD7CA11B90B38700C76083 /* CameraController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraController.cpp; sourceTree = "<group>"; };
+		15CD7CA21B90B38700C76083 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
+		15CD7CA41B90B46000C76083 /* SharedTimeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedTimeline.h; sourceTree = "<group>"; };
 		19647646A3AD4E49990DF384 /* ci_nanovg_gl.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = ci_nanovg_gl.hpp; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/include/ci_nanovg_gl.hpp"; sourceTree = "<group>"; };
 		19861B75740042E39C6687DE /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BehaviorSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.cpp"; sourceTree = "<group>"; };
 		1D10C7246A2D4356989C971F /* TimelineOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = TimelineOptions.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimelineOptions.hpp; sourceTree = "<group>"; };
@@ -119,7 +129,6 @@
 		F23C4FE02CAD4EBDBA149631 /* nanovg.c */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = nanovg.c; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/deps/nanovg/src/nanovg.c"; sourceTree = "<group>"; };
 		F5D17BCB68A044F0AB3B0962 /* DeltasIslands_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = DeltasIslands_Prefix.pch; sourceTree = "<group>"; };
 		F65B7B1961044FF6984850DE /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
-		FA8F37FB3AA144DDBDE616C4 /* TransformComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TransformComponent.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/TransformComponent.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +202,7 @@
 		152738B51B908C3D00D8214C /* src */ = {
 			isa = PBXGroup;
 			children = (
+				15CD7CA41B90B46000C76083 /* SharedTimeline.h */,
 				15CD7C9A1B9098CE00C76083 /* MathTypes.h */,
 				15CD7C8E1B90959E00C76083 /* BezierVertex.h */,
 				15CD7C8F1B90959E00C76083 /* FormBuilders.h */,
@@ -202,6 +212,9 @@
 				15CD7C931B90959E00C76083 /* FormBuilders.cpp */,
 				15CD7C941B90959E00C76083 /* InstanceRenderer.cpp */,
 				15CD7C951B90959E00C76083 /* BezierMesh.cpp */,
+				15CD7CA01B90AE2200C76083 /* Transform.h */,
+				15CD7CA11B90B38700C76083 /* CameraController.cpp */,
+				15CD7CA21B90B38700C76083 /* CameraController.h */,
 			);
 			name = src;
 			path = ../src;
@@ -350,6 +363,8 @@
 			children = (
 				EE3121FAD85A4FA381868CD6 /* imgui.h */,
 				C5264BC479834D85BEE41EA9 /* imgui.cpp */,
+				15CD7C9C1B90A23900C76083 /* imgui_demo.cpp */,
+				15CD7C9D1B90A23900C76083 /* imgui_draw.cpp */,
 			);
 			name = imgui;
 			sourceTree = "<group>";
@@ -404,7 +419,6 @@
 				1F61FD2DB2684B618B8373C0 /* Behavior.h */,
 				070D1B0052AF488D8CB113BF /* BehaviorSystem.h */,
 				5A8B9BB9E8CF4BE18C42C69E /* HierarchyComponentT.h */,
-				FA8F37FB3AA144DDBDE616C4 /* TransformComponent.h */,
 				D6DF9979292E41BC86541C45 /* VerletBody.h */,
 				1F25317FA7F14D0B884FDD40 /* VerletPhysicsSystem.h */,
 				19861B75740042E39C6687DE /* BehaviorSystem.cpp */,
@@ -538,6 +552,8 @@
 				15CD7C991B90959E00C76083 /* BezierMesh.cpp in Sources */,
 				15CD7C971B90959E00C76083 /* FormBuilders.cpp in Sources */,
 				15CD7C961B90959E00C76083 /* DeltasIslandsApp.cpp in Sources */,
+				15CD7C9B1B90A14C00C76083 /* CinderImGui.cpp in Sources */,
+				15CD7C9E1B90A23900C76083 /* imgui_demo.cpp in Sources */,
 				134AA56276C94615864DEFB3 /* MotionGroup.cpp in Sources */,
 				C56250D4ECBB452EADFB93B0 /* Timeline.cpp in Sources */,
 				AEA14970C689446CB13112C9 /* TimelineItem.cpp in Sources */,
@@ -549,6 +565,8 @@
 				15CD7C981B90959E00C76083 /* InstanceRenderer.cpp in Sources */,
 				5BFEB38F758F4D6F90A1600E /* BehaviorSystem.cpp in Sources */,
 				6464FC3D62554FA2B62C06DF /* VerletPhysicsSystem.cpp in Sources */,
+				15CD7C9F1B90A23900C76083 /* imgui_draw.cpp in Sources */,
+				15CD7CA31B90B38700C76083 /* CameraController.cpp in Sources */,
 				191646C563A44994819D819D /* Entity.cc in Sources */,
 				2038CFF6DA2140C4A354AA30 /* Event.cc in Sources */,
 				FEB6C6E22C1541B394D71BDD /* System.cc in Sources */,

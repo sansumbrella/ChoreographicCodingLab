@@ -26,11 +26,17 @@ public:
   void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override;
   void draw() const;
 
+  struct InstanceData
+  {
+    ci::mat4 transform;
+    float		 activation;
+  };
+
 private:
   size_t													_shape_index = 0;
-  size_t                          _instances = 0;
   std::vector<BezierMesh>         _shapes;
-  ci::gl::VboRef									_instance_data;
+  ci::gl::VboRef									_instance_buffer;
+  std::vector<InstanceData>       _instance_data;
 };
 
 } // namespace sansumbrella
