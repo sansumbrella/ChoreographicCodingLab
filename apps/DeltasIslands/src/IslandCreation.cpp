@@ -13,6 +13,7 @@
 #include "CurveUtilities.h"
 #include "glm/gtc/noise.hpp"
 #include "WindReceiver.h"
+#include "Island.h"
 
 using namespace cinder;
 using namespace entityx;
@@ -36,13 +37,14 @@ namespace sansumbrella
 
   } // namespace
 
-vector<Entity> createIslandFromPath(entityx::EntityManager &entities, const ci::Path2d &path)
+vector<Entity> createIslandFromPath(entityx::EntityManager &entities, const ci::Path2d &path, uint32_t island_id)
 {
   auto cache = Path2dCalcCache(path);
   auto island = vector<Entity>();
   auto count = 100;
 
-  for (auto i = 0; i < count; i += 1) {
+  for (auto i = 0; i < count; i += 1)
+  {
     auto t = cache.calcNormalizedTime(i / (count - 1.0f));
     auto p = path.getPosition(t);
     auto tangent = normalize(path.getTangent(t));
@@ -54,7 +56,25 @@ vector<Entity> createIslandFromPath(entityx::EntityManager &entities, const ci::
     island.emplace_back( createShrub(entities, pos - normal * randFloat(2.0f)) );
   }
 
+  for (auto e : island)
+  {
+    e.assign<Island>( island_id );
+  }
   return island;
+}
+
+std::vector<entityx::Entity> gatherIsland(entityx::EntityManager &entities, uint32_t island)
+{
+  vector<Entity> members;
+  ComponentHandle<Island> isle;
+  for (auto e : entities.entities_with_components(isle))
+  {
+    if (isle->_id == island)
+    {
+      members.push_back(e);
+    }
+  }
+  return members;
 }
 
 void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Path2d &path)
@@ -85,7 +105,7 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
     {
       sharedTimeline().append(&wind->_influence)
         .hold(delay)
-        .then<RampTo>(0.0f, 0.1f)
+        .set(0.0f)
         .holdUntil(delay + duration)
         .then<RampTo>(1.0f, 1.5f);
     }

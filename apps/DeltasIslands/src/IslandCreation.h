@@ -14,8 +14,10 @@ namespace sansumbrella
 {
 
 /// Make a new island from a path.
-std::vector<entityx::Entity> createIslandFromPath(entityx::EntityManager &entities, const ci::Path2d &path);
+std::vector<entityx::Entity> createIslandFromPath(entityx::EntityManager &entities, const ci::Path2d &path, uint32_t island_id=0);
 
+/// Returns a list of all the entities belonging to the given island.
+std::vector<entityx::Entity> gatherIsland(entityx::EntityManager &entities, uint32_t island);
 
 /// Map an existing island to a new path.
 void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Path2d &path);

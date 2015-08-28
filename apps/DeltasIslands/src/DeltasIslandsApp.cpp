@@ -85,7 +85,7 @@ void DeltasIslandsApp::keyDown( KeyEvent event )
   switch (event.getCode())
   {
     case KeyEvent::KEY_r:
-      mapIslandToPath(_island, randomPath());
+      mapIslandToPath(gatherIsland(_entities, 0), randomPath());
     break;
     default:
     break;
