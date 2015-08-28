@@ -67,8 +67,10 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
   {
     auto t = cache.calcNormalizedTime(i / length);
     i += 1.0f;
-    auto delay_t = t + randFloat(-0.1f, 0.1f);
+    auto delay_t = t + randFloat(-0.2f, 0.2f);
+//    auto delay_t = t;
     auto delay = mix(0.0f, 1.0f, easeOutQuad(glm::clamp(delay_t, 0.0f, 1.0f)));
+//    delay = easeOutQuad(randFloat());
 
     auto pos = path.getPosition(t);
     auto tangent = normalize(path.getTangent(t));
@@ -76,7 +78,7 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
 
     sharedTimeline().append(positionAnim(e))
       .hold(delay)
-      .then<RampTo>(planar(pos + offset * normal) + vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0), 0.5f, EaseInOutCubic());
+      .then<RampTo>(planar(pos + offset * normal) + vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0), 1.0f, EaseInOutCubic());
 
     offset += 1.0f;
     if (offset > 1.0f) {
