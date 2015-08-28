@@ -18,6 +18,7 @@ using namespace ci;
 using namespace ci::app;
 using namespace sansumbrella;
 using namespace entityx;
+using namespace choreograph;
 using namespace std;
 
 class DeltasIslandsApp : public App {
@@ -60,9 +61,16 @@ void DeltasIslandsApp::createTestIsland()
   path.quadTo(pos + vec2(1, 1) * len, pos + vec2(2, 0) * len);
 
   auto island = createIslandFromPath(_entities, path);
+  auto delay = 0.0f;
   for (auto e : island)
   {
     auto xf = e.component<Transform>();
+    sharedTimeline().apply(&xf->position)
+      .set( xf->position() - vec3( 0, 10, 0 ) )
+      .hold( delay )
+      .then<RampTo>( xf->position(), 0.5f, EaseOutCubic() );
+
+    delay += 0.1f;
   }
 }
 
