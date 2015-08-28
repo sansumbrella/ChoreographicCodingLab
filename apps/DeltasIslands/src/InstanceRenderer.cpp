@@ -4,6 +4,7 @@
 //
 
 #include "InstanceRenderer.h"
+#include "FormBuilders.h"
 
 using namespace entityx;
 using namespace sansumbrella;
@@ -20,7 +21,19 @@ struct InstanceData
 } // namespace
 
 InstanceRenderer::InstanceRenderer()
-{}
+{
+  auto shader = gl::GlslProg::create(gl::GlslProg::Format().vertex(app::loadAsset("glsl/bezier.vs")).fragment(app::loadAsset("glsl/passthrough.fs")));
+
+  _instance_data = gl::Vbo::create(GL_ARRAY_BUFFER, 500 * sizeof(InstanceData), nullptr, GL_DYNAMIC_DRAW);
+  auto instance_layout = geom::BufferLayout();
+  instance_layout.append(geom::Attrib::CUSTOM_8, 16, sizeof(InstanceData), offsetof(InstanceData, transform), 1);
+  instance_layout.append(geom::Attrib::CUSTOM_9, 1, sizeof(InstanceData), offsetof(InstanceData, activation), 1);
+
+  _shapes.push_back(createUmbrella(shader, -0.40f, _instance_data, instance_layout));
+  _shapes.push_back(createWing(shader, 0.5f, _instance_data, instance_layout));
+
+  _shape_index = _shapes.size() - 1;
+}
 
 InstanceRenderer::~InstanceRenderer()
 {}
