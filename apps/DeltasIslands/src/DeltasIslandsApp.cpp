@@ -5,6 +5,7 @@
 
 #include "entityx/entityx.h"
 #include "InstanceRenderer.h"
+#include "WindSystem.h"
 #include "InstanceShape.h"
 #include "Transform.h"
 #include "cinder/Path2d.h"
@@ -49,6 +50,7 @@ DeltasIslandsApp::DeltasIslandsApp()
 void DeltasIslandsApp::setup()
 {
   _systems.add<InstanceRenderer>();
+  _systems.add<WindSystem>();
   _systems.configure();
 
   createTestIsland();
@@ -99,6 +101,7 @@ void DeltasIslandsApp::update()
   _timer.start();
 
   sharedTimeline().step(dt);
+  _systems.update<WindSystem>(dt);
   _systems.update<InstanceRenderer>(dt);
 }
 
