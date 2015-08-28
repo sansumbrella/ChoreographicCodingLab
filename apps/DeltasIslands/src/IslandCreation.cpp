@@ -39,7 +39,7 @@ vector<Entity> createIslandFromPath(entityx::EntityManager &entities, const ci::
   auto cache = Path2dCalcCache(path);
   auto island = vector<Entity>();
 
-  for (auto i = 0; i < 10; i += 1) {
+  for (auto i = 0; i < 100; i += 1) {
     auto t = cache.calcNormalizedTime(i / 10.0f);
     auto p = path.getPosition(t);
     auto tangent = normalize(path.getTangent(t));
@@ -60,18 +60,19 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
   auto i = 0.0f;
   const auto length = entities.size() - 1.0f;
   auto offset = -1.0f;
-  auto delay = 0.0f;
 
   for (auto e : entities)
   {
     auto t = cache.calcNormalizedTime(i / length);
     i += 1.0f;
+    auto delay_t = t + randFloat(-0.1f, 0.1f);
+    auto delay = mix(0.0f, 1.0f, easeOutQuad(glm::clamp(delay_t, 0.0f, 1.0f)));
 
     auto pos = path.getPosition(t);
     auto tangent = normalize(path.getTangent(t));
     auto normal = vec2(-tangent.y, tangent.x);
 
-    sharedTimeline().apply(positionAnim(e))
+    sharedTimeline().append(positionAnim(e))
       .hold(delay)
       .then<RampTo>(planar(pos + offset * normal), 0.5f, EaseInOutCubic());
 
@@ -79,7 +80,6 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
     if (offset > 1.0f) {
       offset = -1.0f;
     }
-    delay += 0.05f;
   }
 }
 
