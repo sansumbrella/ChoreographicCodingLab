@@ -6,6 +6,7 @@
 #include "InstanceRenderer.h"
 #include "FormBuilders.h"
 #include "Transform.h"
+#include "InstanceShape.h"
 
 using namespace entityx;
 using namespace sansumbrella;
@@ -18,7 +19,7 @@ InstanceRenderer::InstanceRenderer()
   _instance_buffer = gl::Vbo::create(GL_ARRAY_BUFFER, 1000 * sizeof(InstanceData), nullptr, GL_DYNAMIC_DRAW);
   auto instance_layout = geom::BufferLayout();
   instance_layout.append(geom::Attrib::CUSTOM_8, 16, sizeof(InstanceData), offsetof(InstanceData, transform), 1);
-  instance_layout.append(geom::Attrib::CUSTOM_9, 1, sizeof(InstanceData), offsetof(InstanceData, activation), 1);
+  instance_layout.append(geom::Attrib::CUSTOM_9, 1, sizeof(InstanceData), offsetof(InstanceData, openness), 1);
 
   _shapes.push_back(createUmbrella(shader, -0.40f, _instance_buffer, instance_layout));
   _shapes.push_back(createWing(shader, 0.5f, _instance_buffer, instance_layout));
@@ -33,10 +34,11 @@ void InstanceRenderer::update( EntityManager &entities, EventManager &events, Ti
 {
   _instance_data.clear();
 
-  ComponentHandle<Transform> xf;
-  for (auto e : entities.entities_with_components(xf))
+  ComponentHandle<Transform>      xf;
+  ComponentHandle<InstanceShape>  instance;
+  for (auto e : entities.entities_with_components(xf, instance))
   {
-    _instance_data.emplace_back(InstanceData{ xf->transform(), 0.5f });
+    _instance_data.emplace_back(InstanceData{ xf->transform(), instance->_openness });
   }
 
   _instance_buffer->bufferSubData(0, sizeof(InstanceData) * _instance_data.size(), _instance_data.data());

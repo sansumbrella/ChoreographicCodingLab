@@ -29,7 +29,7 @@ public:
   struct InstanceData
   {
     ci::mat4 transform;
-    float		 activation;
+    float		 openness;
   };
 
 private:

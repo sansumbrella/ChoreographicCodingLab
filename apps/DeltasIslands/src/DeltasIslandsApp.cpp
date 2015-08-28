@@ -1,9 +1,11 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "cinder/Rand.h"
 
 #include "entityx/entityx.h"
 #include "InstanceRenderer.h"
+#include "InstanceShape.h"
 #include "Transform.h"
 #include "cinder/Path2d.h"
 #include "CameraController.h"
@@ -34,6 +36,7 @@ entityx::Entity createShrub(entityx::EntityManager &entities, const ci::vec2 &po
 {
   auto e = entities.create();
   e.assign<Transform>( vec3(pos, 0.0f) );
+  e.assign<InstanceShape>( randFloat() );
 
   return e;
 }
