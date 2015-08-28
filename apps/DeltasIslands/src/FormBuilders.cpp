@@ -128,7 +128,7 @@ BezierMesh createReed(const ci::gl::GlslProgRef &shader, const ci::gl::VboRef &i
   auto inner_normal = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(vec3(0, 1, 0) - inner_open))) * vec4(0, 1, 0, 0));
   auto outer_normal = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(inner_open - outer_open))) * vec4(0, 1, 0, 0));;
 
-  auto center = BezierVertex(vec3(0), vec3(0, 1, 0)).setNormals(vec3(0, 1, 0), vec3(0, 1, 0));
+  auto center = BezierVertex(vec3(0, 0.2, 0), vec3(0, 1, 0)).setNormals(vec3(0, 1, 0), vec3(0, 1, 0));
 
   auto inner1 = BezierVertex(vec3(-0.25, 0, 0), inner_open).setNormals(vec3(0, 1, 0), inner_normal);
   auto inner2 = rotation * inner1;
