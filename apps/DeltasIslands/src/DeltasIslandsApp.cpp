@@ -27,7 +27,7 @@ public:
   void setup() override;
   void createTestIsland();
 
-  void mouseDown( MouseEvent event ) override;
+  void keyDown( KeyEvent event ) override;
   void update() override;
   void draw() override;
 private:
@@ -35,6 +35,8 @@ private:
   entityx::EventManager	 _events;
   entityx::EntityManager _entities;
   entityx::SystemManager _systems;
+
+  vector<Entity>         _island;
 
   Timer                  _timer;
 };
@@ -60,9 +62,9 @@ void DeltasIslandsApp::createTestIsland()
   auto len = 5.0f;
   path.quadTo(pos + vec2(1, 1) * len, pos + vec2(2, 0) * len);
 
-  auto island = createIslandFromPath(_entities, path);
+  _island = createIslandFromPath(_entities, path);
   auto delay = 0.0f;
-  for (auto e : island)
+  for (auto e : _island)
   {
     auto xf = e.component<Transform>();
     sharedTimeline().apply(&xf->position)
@@ -70,12 +72,20 @@ void DeltasIslandsApp::createTestIsland()
       .hold( delay )
       .then<RampTo>( xf->position(), 0.5f, EaseOutCubic() );
 
-    delay += 0.1f;
+    delay += 0.05f;
   }
 }
 
-void DeltasIslandsApp::mouseDown( MouseEvent event )
+void DeltasIslandsApp::keyDown( KeyEvent event )
 {
+  switch (event.getCode())
+  {
+    case KeyEvent::KEY_r:
+      mapIslandToPath(_island, randomPath());
+    break;
+    default:
+    break;
+  }
 }
 
 void DeltasIslandsApp::update()

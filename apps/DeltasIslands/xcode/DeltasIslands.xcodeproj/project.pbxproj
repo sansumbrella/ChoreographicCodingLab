@@ -29,6 +29,7 @@
 		15CD7CAC1B90BBF600C76083 /* IslandCreation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CAA1B90BBF600C76083 /* IslandCreation.cpp */; };
 		15CD7CB31B90BDCD00C76083 /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CB11B90BDCD00C76083 /* BehaviorSystem.cpp */; };
 		15CD7CB41B90BDCD00C76083 /* ExpiresSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CB21B90BDCD00C76083 /* ExpiresSystem.cpp */; };
+		15CD7CB81B90C39500C76083 /* CurveUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CB61B90C39500C76083 /* CurveUtilities.cpp */; };
 		191646C563A44994819D819D /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = E25C62C3851849949373E3D0 /* Entity.cc */; };
 		2038CFF6DA2140C4A354AA30 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 25E74E03101A4ED9B98ADA62 /* Event.cc */; };
 		34BB76D324F949AB8DFDB0CF /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = DB5C3D6D390548BEA521E3DA /* Pool.cc */; };
@@ -88,6 +89,8 @@
 		15CD7CB01B90BDCD00C76083 /* ExpiresSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpiresSystem.h; sourceTree = "<group>"; };
 		15CD7CB11B90BDCD00C76083 /* BehaviorSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BehaviorSystem.cpp; sourceTree = "<group>"; };
 		15CD7CB21B90BDCD00C76083 /* ExpiresSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExpiresSystem.cpp; sourceTree = "<group>"; };
+		15CD7CB61B90C39500C76083 /* CurveUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CurveUtilities.cpp; sourceTree = "<group>"; };
+		15CD7CB71B90C39500C76083 /* CurveUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveUtilities.h; sourceTree = "<group>"; };
 		19647646A3AD4E49990DF384 /* ci_nanovg_gl.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = ci_nanovg_gl.hpp; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/include/ci_nanovg_gl.hpp"; sourceTree = "<group>"; };
 		19861B75740042E39C6687DE /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BehaviorSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.cpp"; sourceTree = "<group>"; };
 		1D10C7246A2D4356989C971F /* TimelineOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = TimelineOptions.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimelineOptions.hpp; sourceTree = "<group>"; };
@@ -216,6 +219,7 @@
 		152738B51B908C3D00D8214C /* src */ = {
 			isa = PBXGroup;
 			children = (
+				15CD7CB51B90C39500C76083 /* utilities */,
 				15CD7CAD1B90BDCD00C76083 /* Behavior.h */,
 				15CD7CAE1B90BDCD00C76083 /* BehaviorSystem.h */,
 				15CD7CAF1B90BDCD00C76083 /* Expires.h */,
@@ -241,6 +245,15 @@
 			);
 			name = src;
 			path = ../src;
+			sourceTree = "<group>";
+		};
+		15CD7CB51B90C39500C76083 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				15CD7CB61B90C39500C76083 /* CurveUtilities.cpp */,
+				15CD7CB71B90C39500C76083 /* CurveUtilities.h */,
+			);
+			path = utilities;
 			sourceTree = "<group>";
 		};
 		1796D110D35943E2A926F1CD /* NanoVG */ = {
@@ -585,6 +598,7 @@
 				D0B599DE3F2646D4A108301C /* imgui.cpp in Sources */,
 				75450A120C6B4F2DA756D962 /* nanovg.c in Sources */,
 				15CD7CB41B90BDCD00C76083 /* ExpiresSystem.cpp in Sources */,
+				15CD7CB81B90C39500C76083 /* CurveUtilities.cpp in Sources */,
 				15CD7CAC1B90BBF600C76083 /* IslandCreation.cpp in Sources */,
 				E567E94138D3483697137F8B /* ci_nanovg.cpp in Sources */,
 				F8164905694E4295A804A4A2 /* ci_nanovg_gl.cpp in Sources */,
