@@ -122,7 +122,7 @@ BezierMesh createReed(const ci::gl::GlslProgRef &shader, const ci::gl::VboRef &i
 
   auto segments = 7;
   auto inner_open = vec3(-0.08f, 0.5f, 0);
-  auto outer_open = vec3( -0.2f, 0, 0);
+  auto outer_open = vec3( -0.24f, 0, 0);
 
   auto rotation = glm::rotate<float>(Tau * (1.0f / segments), vec3(0, 1, 0));
   auto inner_normal = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(vec3(0, 1, 0) - inner_open))) * vec4(0, 1, 0, 0));

@@ -78,7 +78,7 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
 
     sharedTimeline().append(positionAnim(e))
       .hold(delay)
-      .then<RampTo>(planar(pos + offset * normal) + vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0), 1.0f, EaseInOutCubic());
+      .then<RampTo>(planar(pos + offset * normal * randFloat(0.4f, 1.0f)) + vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0), 1.0f, EaseInOutCubic());
 
     offset += 1.0f;
     if (offset > 1.0f) {
