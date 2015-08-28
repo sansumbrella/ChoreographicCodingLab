@@ -22,7 +22,7 @@ InstanceRenderer::InstanceRenderer()
   instance_layout.append(geom::Attrib::CUSTOM_9, 1, sizeof(InstanceData), offsetof(InstanceData, openness), 1);
 
   _shapes.push_back(createUmbrella(shader, -1.0f, _instance_buffer, instance_layout));
-  _shapes.push_back(createWing(shader, 1.0f, _instance_buffer, instance_layout));
+//  _shapes.push_back(createWing(shader, 1.0f, _instance_buffer, instance_layout));
 
   _shape_index = _shapes.size() - 1;
 }
@@ -52,6 +52,6 @@ void InstanceRenderer::draw() const
   shape.panels()->getGlslProg()->uniform("uColor", ColorA::gray(1.0f));
   shape.panels()->drawInstanced(_instance_data.size());
 
-  shape.rods()->getGlslProg()->uniform("uColor", ColorA::gray(0.6f));
-  shape.rods()->drawInstanced(_instance_data.size());
+//  shape.rods()->getGlslProg()->uniform("uColor", ColorA::gray(0.6f));
+//  shape.rods()->drawInstanced(_instance_data.size());
 }

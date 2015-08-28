@@ -38,17 +38,18 @@ vector<Entity> createIslandFromPath(entityx::EntityManager &entities, const ci::
 {
   auto cache = Path2dCalcCache(path);
   auto island = vector<Entity>();
+  auto count = 100;
 
-  for (auto i = 0; i < 100; i += 1) {
-    auto t = cache.calcNormalizedTime(i / 10.0f);
+  for (auto i = 0; i < count; i += 1) {
+    auto t = cache.calcNormalizedTime(i / (count - 1.0f));
     auto p = path.getPosition(t);
     auto tangent = normalize(path.getTangent(t));
     auto normal = vec2(-tangent.y, tangent.x);
 
     auto pos = p;
     island.emplace_back( createShrub(entities, pos) );
-    island.emplace_back( createShrub(entities, pos + normal * 2.0f) );
-    island.emplace_back( createShrub(entities, pos - normal * 2.0f) );
+    island.emplace_back( createShrub(entities, pos + normal * randFloat(2.0f)) );
+    island.emplace_back( createShrub(entities, pos - normal * randFloat(2.0f)) );
   }
 
   return island;

@@ -21,12 +21,12 @@ WindSystem::~WindSystem()
 
 void WindSystem::update( EntityManager &entities, EventManager &events, TimeDelta dt )
 {
-  _time += dt;
+  _time += dt * _acceleration;
   ComponentHandle<Transform>      xf;
   ComponentHandle<InstanceShape>  instance;
-  for (auto e : entities.entities_with_components(xf, instance))
+  for (auto __unused e : entities.entities_with_components(xf, instance))
   {
-    auto noise = glm::simplex(xf->position() + vec3(0, 0, _time));
+    auto noise = glm::simplex(xf->position() * _scale + vec3(0, 0, _time));
     instance->_openness = glm::clamp(noise, 0.0f, 1.0f);
   }
 }
