@@ -17,7 +17,10 @@
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
 		134AA56276C94615864DEFB3 /* MotionGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2F7985C0BBC94C25985FE8F3 /* MotionGroup.cpp */; };
-		152738B71B908C3D00D8214C /* DeltasIslandsApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 152738B61B908C3D00D8214C /* DeltasIslandsApp.cpp */; };
+		15CD7C961B90959E00C76083 /* DeltasIslandsApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C921B90959E00C76083 /* DeltasIslandsApp.cpp */; };
+		15CD7C971B90959E00C76083 /* FormBuilders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C931B90959E00C76083 /* FormBuilders.cpp */; };
+		15CD7C981B90959E00C76083 /* InstanceRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C941B90959E00C76083 /* InstanceRenderer.cpp */; };
+		15CD7C991B90959E00C76083 /* BezierMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C951B90959E00C76083 /* BezierMesh.cpp */; };
 		191646C563A44994819D819D /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = E25C62C3851849949373E3D0 /* Entity.cc */; };
 		2038CFF6DA2140C4A354AA30 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 25E74E03101A4ED9B98ADA62 /* Event.cc */; };
 		34BB76D324F949AB8DFDB0CF /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = DB5C3D6D390548BEA521E3DA /* Pool.cc */; };
@@ -52,7 +55,15 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		11601B0A33554E82B5C56C5C /* CinderImGui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CinderImGui.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/include/CinderImGui.h"; sourceTree = "<group>"; };
 		13079CD31C2647A5A6059A0A /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
-		152738B61B908C3D00D8214C /* DeltasIslandsApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeltasIslandsApp.cpp; sourceTree = "<group>"; };
+		15CD7C8E1B90959E00C76083 /* BezierVertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierVertex.h; sourceTree = "<group>"; };
+		15CD7C8F1B90959E00C76083 /* FormBuilders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormBuilders.h; sourceTree = "<group>"; };
+		15CD7C901B90959E00C76083 /* InstanceRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstanceRenderer.h; sourceTree = "<group>"; };
+		15CD7C911B90959E00C76083 /* BezierMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierMesh.h; sourceTree = "<group>"; };
+		15CD7C921B90959E00C76083 /* DeltasIslandsApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeltasIslandsApp.cpp; sourceTree = "<group>"; };
+		15CD7C931B90959E00C76083 /* FormBuilders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FormBuilders.cpp; sourceTree = "<group>"; };
+		15CD7C941B90959E00C76083 /* InstanceRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstanceRenderer.cpp; sourceTree = "<group>"; };
+		15CD7C951B90959E00C76083 /* BezierMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierMesh.cpp; sourceTree = "<group>"; };
+		15CD7C9A1B9098CE00C76083 /* MathTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathTypes.h; sourceTree = "<group>"; };
 		19647646A3AD4E49990DF384 /* ci_nanovg_gl.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = ci_nanovg_gl.hpp; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/include/ci_nanovg_gl.hpp"; sourceTree = "<group>"; };
 		19861B75740042E39C6687DE /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BehaviorSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.cpp"; sourceTree = "<group>"; };
 		1D10C7246A2D4356989C971F /* TimelineOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = TimelineOptions.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimelineOptions.hpp; sourceTree = "<group>"; };
@@ -182,7 +193,15 @@
 		152738B51B908C3D00D8214C /* src */ = {
 			isa = PBXGroup;
 			children = (
-				152738B61B908C3D00D8214C /* DeltasIslandsApp.cpp */,
+				15CD7C9A1B9098CE00C76083 /* MathTypes.h */,
+				15CD7C8E1B90959E00C76083 /* BezierVertex.h */,
+				15CD7C8F1B90959E00C76083 /* FormBuilders.h */,
+				15CD7C901B90959E00C76083 /* InstanceRenderer.h */,
+				15CD7C911B90959E00C76083 /* BezierMesh.h */,
+				15CD7C921B90959E00C76083 /* DeltasIslandsApp.cpp */,
+				15CD7C931B90959E00C76083 /* FormBuilders.cpp */,
+				15CD7C941B90959E00C76083 /* InstanceRenderer.cpp */,
+				15CD7C951B90959E00C76083 /* BezierMesh.cpp */,
 			);
 			name = src;
 			path = ../src;
@@ -516,6 +535,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EE0642709184B0F94B6058E /* Cue.cpp in Sources */,
+				15CD7C991B90959E00C76083 /* BezierMesh.cpp in Sources */,
+				15CD7C971B90959E00C76083 /* FormBuilders.cpp in Sources */,
+				15CD7C961B90959E00C76083 /* DeltasIslandsApp.cpp in Sources */,
 				134AA56276C94615864DEFB3 /* MotionGroup.cpp in Sources */,
 				C56250D4ECBB452EADFB93B0 /* Timeline.cpp in Sources */,
 				AEA14970C689446CB13112C9 /* TimelineItem.cpp in Sources */,
@@ -524,11 +546,11 @@
 				E567E94138D3483697137F8B /* ci_nanovg.cpp in Sources */,
 				F8164905694E4295A804A4A2 /* ci_nanovg_gl.cpp in Sources */,
 				4E96F2BC33754716B609582F /* SvgRenderer.cpp in Sources */,
+				15CD7C981B90959E00C76083 /* InstanceRenderer.cpp in Sources */,
 				5BFEB38F758F4D6F90A1600E /* BehaviorSystem.cpp in Sources */,
 				6464FC3D62554FA2B62C06DF /* VerletPhysicsSystem.cpp in Sources */,
 				191646C563A44994819D819D /* Entity.cc in Sources */,
 				2038CFF6DA2140C4A354AA30 /* Event.cc in Sources */,
-				152738B71B908C3D00D8214C /* DeltasIslandsApp.cpp in Sources */,
 				FEB6C6E22C1541B394D71BDD /* System.cc in Sources */,
 				34BB76D324F949AB8DFDB0CF /* Pool.cc in Sources */,
 			);
