@@ -25,6 +25,7 @@
 		15CD7C9E1B90A23900C76083 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C9C1B90A23900C76083 /* imgui_demo.cpp */; };
 		15CD7C9F1B90A23900C76083 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C9D1B90A23900C76083 /* imgui_draw.cpp */; };
 		15CD7CA31B90B38700C76083 /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CA11B90B38700C76083 /* CameraController.cpp */; };
+		15CD7CA91B90B87C00C76083 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 15CD7CA81B90B87C00C76083 /* assets */; };
 		191646C563A44994819D819D /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = E25C62C3851849949373E3D0 /* Entity.cc */; };
 		2038CFF6DA2140C4A354AA30 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 25E74E03101A4ED9B98ADA62 /* Event.cc */; };
 		34BB76D324F949AB8DFDB0CF /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = DB5C3D6D390548BEA521E3DA /* Pool.cc */; };
@@ -75,6 +76,7 @@
 		15CD7CA21B90B38700C76083 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
 		15CD7CA41B90B46000C76083 /* SharedTimeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedTimeline.h; sourceTree = "<group>"; };
 		15CD7CA61B90B73200C76083 /* InstanceShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstanceShape.h; sourceTree = "<group>"; };
+		15CD7CA81B90B87C00C76083 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
 		19647646A3AD4E49990DF384 /* ci_nanovg_gl.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = ci_nanovg_gl.hpp; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/include/ci_nanovg_gl.hpp"; sourceTree = "<group>"; };
 		19861B75740042E39C6687DE /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BehaviorSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.cpp"; sourceTree = "<group>"; };
 		1D10C7246A2D4356989C971F /* TimelineOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = TimelineOptions.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimelineOptions.hpp; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		29B97314FDCFA39411CA2CEA /* DeltasIslands */ = {
 			isa = PBXGroup;
 			children = (
+				15CD7CA81B90B87C00C76083 /* assets */,
 				01B97315FEAEA392516A2CEA /* Blocks */,
 				29B97315FDCFA39411CA2CEA /* Headers */,
 				152738B51B908C3D00D8214C /* src */,
@@ -540,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E12291FCC45A474AB4A71E44 /* CinderApp.icns in Resources */,
+				15CD7CA91B90B87C00C76083 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

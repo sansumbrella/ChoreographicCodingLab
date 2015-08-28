@@ -5,7 +5,7 @@ uniform vec4 uColor = vec4(1.0);
 uniform mat3 ciNormalMatrix;
 
 uniform vec3 uLightDirection = vec3(0, 1, 0);
-uniform vec3 uGroundColor = vec3(0.1);
+uniform vec3 uGroundColor = vec3(0.4);
 uniform vec3 uSkyColor = vec3(1.0);
 
 uniform float uDepthCutoff = 500.0;
