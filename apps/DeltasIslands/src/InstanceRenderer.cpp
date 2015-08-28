@@ -54,6 +54,4 @@ void InstanceRenderer::draw() const
 
   shape.rods()->getGlslProg()->uniform("uColor", ColorA::gray(0.6f));
   shape.rods()->drawInstanced(_instance_data.size());
-
-  gl::drawSolidCircle( vec2(0), 1.0f, 32 );
 }
