@@ -94,6 +94,8 @@
 		15CD7CB71B90C39500C76083 /* CurveUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveUtilities.h; sourceTree = "<group>"; };
 		15CD7CB91B90CD4000C76083 /* WindSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WindSystem.cpp; sourceTree = "<group>"; };
 		15CD7CBA1B90CD4000C76083 /* WindSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindSystem.h; sourceTree = "<group>"; };
+		15CD7CBC1B90ED4100C76083 /* WindReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindReceiver.h; sourceTree = "<group>"; };
+		15CD7CBD1B90ED8100C76083 /* Island.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Island.h; sourceTree = "<group>"; };
 		19647646A3AD4E49990DF384 /* ci_nanovg_gl.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = ci_nanovg_gl.hpp; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/include/ci_nanovg_gl.hpp"; sourceTree = "<group>"; };
 		19861B75740042E39C6687DE /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BehaviorSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.cpp"; sourceTree = "<group>"; };
 		1D10C7246A2D4356989C971F /* TimelineOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = TimelineOptions.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimelineOptions.hpp; sourceTree = "<group>"; };
@@ -247,6 +249,8 @@
 				15CD7CAB1B90BBF600C76083 /* IslandCreation.h */,
 				15CD7CB91B90CD4000C76083 /* WindSystem.cpp */,
 				15CD7CBA1B90CD4000C76083 /* WindSystem.h */,
+				15CD7CBC1B90ED4100C76083 /* WindReceiver.h */,
+				15CD7CBD1B90ED8100C76083 /* Island.h */,
 			);
 			name = src;
 			path = ../src;

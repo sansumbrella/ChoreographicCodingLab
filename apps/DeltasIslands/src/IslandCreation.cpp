@@ -12,6 +12,7 @@
 #include "cinder/Rand.h"
 #include "CurveUtilities.h"
 #include "glm/gtc/noise.hpp"
+#include "WindReceiver.h"
 
 using namespace cinder;
 using namespace entityx;
@@ -68,17 +69,26 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
     auto t = cache.calcNormalizedTime(i / length);
     i += 1.0f;
     auto delay_t = t + randFloat(-0.2f, 0.2f);
-//    auto delay_t = t;
     auto delay = mix(0.0f, 1.0f, easeOutQuad(glm::clamp(delay_t, 0.0f, 1.0f)));
-//    delay = easeOutQuad(randFloat());
 
     auto pos = path.getPosition(t);
     auto tangent = normalize(path.getTangent(t));
     auto normal = vec2(-tangent.y, tangent.x);
+    auto duration = 1.0f;
 
     sharedTimeline().append(positionAnim(e))
       .hold(delay)
-      .then<RampTo>(planar(pos + offset * normal * randFloat(0.4f, 1.0f)) + vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0), 1.0f, EaseInOutCubic());
+      .then<RampTo>(planar(pos + offset * normal * randFloat(0.4f, 1.0f)) + vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0), duration, EaseInOutCubic());
+
+    auto wind = e.component<WindReceiver>();
+    if (wind)
+    {
+      sharedTimeline().append(&wind->_influence)
+        .hold(delay)
+        .then<RampTo>(0.0f, 0.1f)
+        .holdUntil(delay + duration)
+        .then<RampTo>(1.0f, 1.5f);
+    }
 
     offset += 1.0f;
     if (offset > 1.0f) {
@@ -92,6 +102,7 @@ Entity createShrub(entityx::EntityManager &entities, const ci::vec2 &pos)
   auto e = entities.create();
   e.assign<Transform>( vec3(pos.x, 0.0f, pos.y) );
   e.assign<InstanceShape>( randFloat() );
+  e.assign<WindReceiver>();
 
   return e;
 }
