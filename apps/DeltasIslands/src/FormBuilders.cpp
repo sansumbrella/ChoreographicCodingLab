@@ -120,20 +120,24 @@ BezierMesh createReed(const ci::gl::GlslProgRef &shader, const ci::gl::VboRef &i
   vector<BezierVertex> rods;
   vector<BezierVertex> panels;
 
-  auto segments = 7;
+  auto segments = 13;
+  auto inner_closed = vec3(-0.25, 0, 0);
   auto inner_open = vec3(-0.08f, 0.5f, 0);
+  auto outer_closed = vec3(-0.5f, 0, 0);
   auto outer_open = vec3( -0.24f, 0, 0);
 
   auto rotation = glm::rotate<float>(Tau * (1.0f / segments), vec3(0, 1, 0));
-  auto inner_normal = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(vec3(0, 1, 0) - inner_open))) * vec4(0, 1, 0, 0));
-  auto outer_normal = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(inner_open - outer_open))) * vec4(0, 1, 0, 0));;
+  auto inner_normal1 = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(vec3(0, 1, 0) - inner_closed))) * vec4(0, 1, 0, 0));
+  auto inner_normal2 = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(vec3(0, 1, 0) - inner_open))) * vec4(0, 1, 0, 0));
+  auto outer_normal1 = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(inner_closed - outer_closed))) * vec4(0, 1, 0, 0));;
+  auto outer_normal2 = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(inner_open - outer_open))) * vec4(0, 1, 0, 0));;
 
   auto center = BezierVertex(vec3(0, 0.2, 0), vec3(0, 1, 0)).setNormals(vec3(0, 1, 0), vec3(0, 1, 0));
 
-  auto inner1 = BezierVertex(vec3(-0.25, 0, 0), inner_open).setNormals(vec3(0, 1, 0), inner_normal);
+  auto inner1 = BezierVertex(inner_closed, inner_open).setNormals(inner_normal1, inner_normal2);
   auto inner2 = rotation * inner1;
 
-  auto outer1 = BezierVertex(vec3(-0.5f, 0, 0), outer_open).setNormals(vec3(0, 1, 0), outer_normal);
+  auto outer1 = BezierVertex(outer_closed, outer_open).setNormals(outer_normal1, outer_normal2);
   auto outer2 = rotation * outer1;
 
   // triangle between point and its dual
