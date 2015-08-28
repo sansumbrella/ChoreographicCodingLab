@@ -101,7 +101,12 @@ ci::Path2d randomPath()
     pos += vec2(randFloat(-1.0f, 1.0f) * 10.0f, randFloat(-1.0f, 1.0f) * 10.0f);
   }
 
-  points = pockets::curveThrough(points);
+  return pathThroughPoints(points);
+}
+
+ci::Path2d pathThroughPoints(const std::vector<ci::vec2> &waypoints)
+{
+  auto points = pockets::curveThrough(waypoints);
   auto path = Path2d();
   const auto stride = 4;
 

@@ -30,4 +30,6 @@ entityx::Entity createShrub(entityx::EntityManager &entities, const ci::vec2 &po
 /// Creates a curve through a random walk.
 ci::Path2d randomPath();
 
+ci::Path2d pathThroughPoints(const std::vector<ci::vec2> &points);
+
 } // namespace sansumbrella
