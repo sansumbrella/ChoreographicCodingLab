@@ -11,6 +11,7 @@
 #include "SharedTimeline.h"
 #include "cinder/Rand.h"
 #include "CurveUtilities.h"
+#include "glm/gtc/noise.hpp"
 
 using namespace cinder;
 using namespace entityx;
@@ -75,7 +76,7 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
 
     sharedTimeline().append(positionAnim(e))
       .hold(delay)
-      .then<RampTo>(planar(pos + offset * normal), 0.5f, EaseInOutCubic());
+      .then<RampTo>(planar(pos + offset * normal) + vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0), 0.5f, EaseInOutCubic());
 
     offset += 1.0f;
     if (offset > 1.0f) {
