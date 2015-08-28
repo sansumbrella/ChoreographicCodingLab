@@ -23,7 +23,7 @@ std::string serializePositions(entityx::EntityManager &entities)
 
   for (auto e : entities.entities_with_components(xf, instance))
   {
-    ss << xf->position() << "," << instance->_openness << std::endl;
+    ss << xf->position().x << "," << xf->position().y << "," << xf->position().z << "," << instance->_openness << std::endl;
   }
   
   return ss.str();

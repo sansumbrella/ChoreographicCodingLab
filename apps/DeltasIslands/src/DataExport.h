@@ -11,6 +11,7 @@
 namespace sansumbrella
 {
 
+inline std::string serializationHeader() { return "px,py,pz,openness\n"; }
 std::string serializePositions(entityx::EntityManager &entities);
 
 } // namespace sansumbrella
