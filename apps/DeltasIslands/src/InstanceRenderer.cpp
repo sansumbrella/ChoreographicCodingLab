@@ -72,7 +72,6 @@ void InstanceRenderer::draw() const
 
   shape.panels()->getGlslProg()->uniform("uColor", ColorA::gray(1.0f));
   shape.panels()->drawInstanced(_instance_data.size());
-
 //  shape.rods()->getGlslProg()->uniform("uColor", ColorA::gray(0.6f));
 //  shape.rods()->drawInstanced(_instance_data.size());
 }
