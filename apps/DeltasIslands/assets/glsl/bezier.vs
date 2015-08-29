@@ -8,8 +8,8 @@ uniform vec3 uLightDirection = vec3(0, 1, 0);
 uniform vec3 uGroundColor = vec3(0.4);
 uniform vec3 uSkyColor = vec3(1.0);
 
-uniform float uDepthCutoff = 500.0;
-uniform float uDepthFalloff = 2.4;
+uniform float uDepthCutoff = 300.0;
+uniform float uDepthFalloff = 3.4;
 
 uniform float uT = 0.5;
 

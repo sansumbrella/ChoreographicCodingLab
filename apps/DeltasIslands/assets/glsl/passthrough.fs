@@ -21,5 +21,5 @@ void main()
   float color_t = easeOutQuart(vHeight);
   vec3 dark = vec3(0.0);
   vec3 light = vec3(1.0);
-	fColor = vec4(mix(dark, light, color_t), 1.0) * vDepth;
+	fColor = vec4(mix(dark, light, color_t) * vec3(vDepth), 1.0);
 }
