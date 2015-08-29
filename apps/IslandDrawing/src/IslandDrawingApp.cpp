@@ -112,4 +112,9 @@ void IslandDrawingApp::draw()
 	gl::clear( Color( 0, 0, 0 ) ); 
 }
 
-CINDER_APP( IslandDrawingApp, RendererGl )
+CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {
+#if defined(CINDER_COCOA_TOUCH)
+#else
+  settings->setWindowSize(768, 1024);
+#endif
+} )
