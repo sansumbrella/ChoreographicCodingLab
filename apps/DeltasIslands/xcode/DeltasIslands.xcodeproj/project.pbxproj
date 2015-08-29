@@ -25,7 +25,6 @@
 		15CD7C9E1B90A23900C76083 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C9C1B90A23900C76083 /* imgui_demo.cpp */; };
 		15CD7C9F1B90A23900C76083 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7C9D1B90A23900C76083 /* imgui_draw.cpp */; };
 		15CD7CA31B90B38700C76083 /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CA11B90B38700C76083 /* CameraController.cpp */; };
-		15CD7CA91B90B87C00C76083 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 15CD7CA81B90B87C00C76083 /* assets */; };
 		15CD7CAC1B90BBF600C76083 /* IslandCreation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CAA1B90BBF600C76083 /* IslandCreation.cpp */; };
 		15CD7CB31B90BDCD00C76083 /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CB11B90BDCD00C76083 /* BehaviorSystem.cpp */; };
 		15CD7CB41B90BDCD00C76083 /* ExpiresSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CB21B90BDCD00C76083 /* ExpiresSystem.cpp */; };
@@ -589,7 +588,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E12291FCC45A474AB4A71E44 /* CinderApp.icns in Resources */,
-				15CD7CA91B90B87C00C76083 /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

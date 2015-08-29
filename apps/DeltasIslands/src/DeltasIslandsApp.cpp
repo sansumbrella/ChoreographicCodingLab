@@ -63,7 +63,7 @@ void DeltasIslandsApp::setup()
 
 void DeltasIslandsApp::reloadAssets()
 {
-  
+  _systems.system<InstanceRenderer>()->reloadAssets();
 }
 
 void DeltasIslandsApp::createTestIsland()

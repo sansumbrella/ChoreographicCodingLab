@@ -23,6 +23,7 @@ public:
   InstanceRenderer();
   ~InstanceRenderer();
 
+  void reloadAssets();
   void update( entityx::EntityManager &entities, entityx::EventManager &events, entityx::TimeDelta dt) override;
   void draw() const;
 

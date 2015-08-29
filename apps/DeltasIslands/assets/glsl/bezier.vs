@@ -21,7 +21,7 @@ in vec3 NormalBegin, NormalEnd;
 in mat4 Transform;
 in float Activation;
 
-smooth out vec4 vColor;
+smooth out float vHeight;
 
 vec4 hemisphereColor(vec3 normal)
 {
@@ -42,12 +42,14 @@ vec4 depth(vec4 position)
 void main()
 {
 	float t = Activation * CurveWeight;
-	vColor = uColor;
 	vec3 ab = mix(A, B, t);
 	vec3 bc = mix(B, C, t);
 	vec3 cd = mix(C, D, t);
 	vec4 position = Transform * vec4(mix(mix(ab, bc, t), mix(bc, cd, t), t), 1.0);
 	vec3 normal = normalize(ciNormalMatrix * mat3(Transform) * mix(NormalBegin, NormalEnd, t));
-	vColor = hemisphereColor(normal) * uColor * depth(position);
+
+  vHeight = clamp(position.y / 1.0, 0.0, 1.0);
+//	vColor = hemisphereColor(normal) * uColor * depth(position);
+//  vColor = vec4(1.0, 1.0, 0.0, 1.0);
 	gl_Position = ciModelViewProjection * position;
 }

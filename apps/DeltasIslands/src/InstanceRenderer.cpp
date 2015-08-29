@@ -7,6 +7,7 @@
 #include "FormBuilders.h"
 #include "Transform.h"
 #include "InstanceShape.h"
+#include "cinder/Log.h"
 
 using namespace entityx;
 using namespace sansumbrella;
@@ -30,6 +31,25 @@ InstanceRenderer::InstanceRenderer()
 
 InstanceRenderer::~InstanceRenderer()
 {}
+
+void InstanceRenderer::reloadAssets()
+{
+  try
+  {
+    auto shader = gl::GlslProg::create(gl::GlslProg::Format().vertex(app::loadAsset("glsl/bezier.vs")).fragment(app::loadAsset("glsl/passthrough.fs")));
+    for (auto &shape : _shapes)
+    {
+      shape.panels()->replaceGlslProg( shader );
+      shape.rods()->replaceGlslProg( shader );
+    }
+
+    CI_LOG_I("Replaced instance shaders");
+  }
+  catch (const std::exception &exc)
+  {
+    CI_LOG_W("Error reloading shader: " << exc.what());
+  }
+}
 
 void InstanceRenderer::update( EntityManager &entities, EventManager &events, TimeDelta dt )
 {

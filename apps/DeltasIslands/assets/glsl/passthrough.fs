@@ -1,10 +1,24 @@
 #version 330
 
-in vec4 vColor;
+smooth in float vHeight;
 
 out vec4 fColor;
 
+float easeOutQuad( float t )
+{
+  return -t * ( t - 2 );
+}
+
+float easeOutQuart( float t )
+{
+  t -= 1;
+  return -(t*t*t*t - 1);
+}
+
 void main()
 {
-	fColor = vColor;
+  float color_t = easeOutQuart(vHeight);
+  vec3 dark = vec3(0.0);
+  vec3 light = vec3(1.0);
+	fColor = vec4(mix(dark, light, color_t), 1.0);
 }
