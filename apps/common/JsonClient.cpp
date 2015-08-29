@@ -94,7 +94,7 @@ void JsonClient::receive( const asio::error_code &iError, size_t iBytes )
 	}
 	else
 	{
-		CI_LOG_E( "Frame Client received data of incorrect size: " << iBytes );
+		CI_LOG_W( "Message still needs " << _bytes_remaining << " of " << _message_size );
 		listen(_message_size - _bytes_remaining);
 	}
 
@@ -114,7 +114,7 @@ void JsonClient::listen(size_t offset)
   }
   else
   {
-    CI_LOG_I("Reading some more data into buffer");
+    CI_LOG_I("Listening for more data.");
     socket.async_receive( asio::buffer( _message.data() + offset, _bytes_remaining ), [this] (const asio::error_code &error, size_t bytes) {
       receive(error, bytes);
     });
