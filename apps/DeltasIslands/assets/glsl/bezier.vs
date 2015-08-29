@@ -22,6 +22,7 @@ in mat4 Transform;
 in float Activation;
 
 smooth out float vHeight;
+smooth out float vDepth;
 
 vec4 hemisphereColor(vec3 normal)
 {
@@ -52,4 +53,5 @@ void main()
 //	vColor = hemisphereColor(normal) * uColor * depth(position);
 //  vColor = vec4(1.0, 1.0, 0.0, 1.0);
 	gl_Position = ciModelViewProjection * position;
+  vDepth = depth(position).x;
 }
