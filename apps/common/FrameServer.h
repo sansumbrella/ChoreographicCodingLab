@@ -44,7 +44,6 @@ private:
 	std::thread											thread;
 	ci::Timer												timer;
 	std::atomic_bool								running;
-  std::shared_ptr<asio::io_service::work> _work;
 
 	/// Run the threaded update loop
 	void run();

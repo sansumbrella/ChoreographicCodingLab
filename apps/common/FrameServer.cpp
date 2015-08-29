@@ -37,6 +37,8 @@ void FrameConnection::broadcast( const ci::JsonTree &data )
 {
   asio::error_code error;
   auto data_str = data.serialize();
+  const auto header = (int)data_str.size();
+  asio::write( socket, asio::buffer( &header, sizeof(header) ), error );
   asio::write( socket, asio::buffer( data_str ), error );
 
   if (error)
@@ -64,7 +66,6 @@ FrameServer::~FrameServer()
 void FrameServer::start()
 {
 	running = true;
-  _work = std::make_shared<asio::io_service::work>(ioService);
 	thread = std::thread( [this] { run(); } );
 }
 

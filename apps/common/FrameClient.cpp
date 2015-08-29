@@ -77,10 +77,21 @@ void FrameClient::receive( const asio::error_code &iError, size_t iBytes )
 	}
 	else if( _bytes_remaining == 0 )
 	{
-    auto str = std::string(_message.begin(), _message.end());
-    auto json = ci::JsonTree(str);
-    _data_signal.emit(json);
-
+    auto str = std::string(_message.begin(), _message.begin() + _message_size);
+    try
+    {
+      auto json = ci::JsonTree(str);
+      _data_signal.emit(json);
+    }
+    catch (std::exception &exc)
+    {
+      CI_LOG_E("Received invalid json: " << exc.what());
+      CI_LOG_I("Received string: " << str);
+      for (auto &c: _message)
+      {
+        std::cout << c << std::endl;
+      }
+    }
 
 		listen(0);
 	}
@@ -97,16 +108,18 @@ void FrameClient::listen(size_t offset)
   if (offset == 0)
   {
     socket.async_receive( asio::buffer(&_message_size, sizeof(_message_size)), [this] (const asio::error_code &error, size_t bytes) {
-      CI_LOG_I("Header received " << _message_size);
+      CI_LOG_I("Header received " << _message_size << ", " << bytes);
       _bytes_remaining = _message_size;
-      socket.async_receive( asio::buffer( &_message, _message_size ), [this] (const asio::error_code &error, size_t bytes) {
+      _message.reserve(_message_size);
+      socket.async_receive( asio::buffer( _message.data(), _message_size ), [this] (const asio::error_code &error, size_t bytes) {
         receive(error, bytes);
       });
     });
   }
   else
   {
-    socket.async_receive( asio::buffer( &_message + offset, _bytes_remaining ), [this] (const asio::error_code &error, size_t bytes) {
+    CI_LOG_I("Reading some more data into buffer");
+    socket.async_receive( asio::buffer( _message.data() + offset, _bytes_remaining ), [this] (const asio::error_code &error, size_t bytes) {
       receive(error, bytes);
     });
   }

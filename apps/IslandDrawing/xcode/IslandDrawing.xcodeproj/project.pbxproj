@@ -19,7 +19,6 @@
 		15CD7CC31B91B8BD00C76083 /* IslandDrawingApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CC21B91B8BD00C76083 /* IslandDrawingApp.cpp */; };
 		15CD7D051B91C1B000C76083 /* FrameClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D001B91C1B000C76083 /* FrameClient.cpp */; };
 		15CD7D071B91C1B000C76083 /* FrameServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D021B91C1B000C76083 /* FrameServer.cpp */; };
-		15CD7D0C1B91C94800C76083 /* WaitTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D0A1B91C94800C76083 /* WaitTimer.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		754DA8A81D8F4AC6BEDC7754 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = D745A0F413BF4A5AB7399681 /* CinderApp.icns */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -42,8 +41,6 @@
 		15CD7CFD1B91C1B000C76083 /* FrameServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameServer.h; sourceTree = "<group>"; };
 		15CD7D001B91C1B000C76083 /* FrameClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameClient.cpp; sourceTree = "<group>"; };
 		15CD7D021B91C1B000C76083 /* FrameServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameServer.cpp; sourceTree = "<group>"; };
-		15CD7D0A1B91C94800C76083 /* WaitTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaitTimer.cpp; sourceTree = "<group>"; };
-		15CD7D0B1B91C94800C76083 /* WaitTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitTimer.h; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		3E68496D18244F7E84A90B28 /* IslandDrawing_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = IslandDrawing_Prefix.pch; sourceTree = "<group>"; };
@@ -125,8 +122,6 @@
 				15CD7CFD1B91C1B000C76083 /* FrameServer.h */,
 				15CD7D001B91C1B000C76083 /* FrameClient.cpp */,
 				15CD7D021B91C1B000C76083 /* FrameServer.cpp */,
-				15CD7D0A1B91C94800C76083 /* WaitTimer.cpp */,
-				15CD7D0B1B91C94800C76083 /* WaitTimer.h */,
 			);
 			name = common;
 			path = ../../common;
@@ -244,7 +239,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15CD7D0C1B91C94800C76083 /* WaitTimer.cpp in Sources */,
 				15CD7D051B91C1B000C76083 /* FrameClient.cpp in Sources */,
 				15CD7CC31B91B8BD00C76083 /* IslandDrawingApp.cpp in Sources */,
 				15CD7D071B91C1B000C76083 /* FrameServer.cpp in Sources */,
