@@ -4,8 +4,8 @@
 #include "cinder/Log.h"
 #include "asio/asio.hpp"
 
-#include "FrameClient.h"
-#include "FrameServer.h"
+#include "JsonClient.h"
+#include "JsonServer.h"
 #include "cinder/Utilities.h"
 #include "cinder/System.h"
 #include "cinder/Rand.h"
@@ -43,8 +43,8 @@ private:
   std::vector<Path>                   _paths;
   std::unordered_map<uint32_t, Touch> _touches;
 
-  shared_ptr<FrameClient> _client;
-  shared_ptr<FrameServer> _server;
+  shared_ptr<JsonClient> _client;
+  shared_ptr<JsonServer> _server;
 };
 
 void IslandDrawingApp::setup()
@@ -53,9 +53,9 @@ void IslandDrawingApp::setup()
   _paths.push_back(Path{"Hello", 1, {vec2(10.0f), vec2(0.0f)} });
 
   auto port = 9191;
-  _server = make_shared<FrameServer>( port );
+  _server = make_shared<JsonServer>( port );
   _server->start();
-  _client = make_shared<FrameClient>( io_service() );
+  _client = make_shared<JsonClient>( io_service() );
   _client->getSignalConnected().connect( [] (bool success) {
     CI_LOG_I("Client connected to server.");
   });

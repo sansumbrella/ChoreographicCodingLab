@@ -1,5 +1,5 @@
 //
-//  FrameServer.h
+//  JsonServer.h
 //
 //  Created by David Wicks on 5/4/15.
 //
@@ -12,22 +12,22 @@
 
 namespace sansumbrella {
 
-/// A socket connection to a FrameClient.
-/// Used internally by FrameServer.
+/// A socket connection to a JsonClient.
+/// Used internally by JsonServer.
 class FrameConnection;
 using FrameConnectionRef = std::shared_ptr<FrameConnection>;
 
 ///
-/// A server for sending FrameData to FrameClients over TCP.
+/// A server for sending FrameData to JsonClients over TCP.
 /// Waits until all clients are connected before sending reset.
 /// Waits until all clients have rendered a frame before sending update.
 /// Runs all commands synchronously, so place in a separate thread (potentially with separate io_service).
 ///
-class FrameServer
+class JsonServer
 {
 public:
-	FrameServer( int iPort );
-	~FrameServer();
+	JsonServer( int iPort );
+	~JsonServer();
 
 	/// Start running a frame update loop.
 	void start();

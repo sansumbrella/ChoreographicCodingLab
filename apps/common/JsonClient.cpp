@@ -1,28 +1,28 @@
 //
-//  FrameClient.cpp
+//  JsonClient.cpp
 //
 //  Created by David Wicks on 5/4/15.
 //
 //
 
-#include "FrameClient.h"
+#include "JsonClient.h"
 #include "cinder/app/App.h"
 #include "cinder/Timeline.h"
 #include "cinder/Log.h"
 
 using namespace sansumbrella;
 
-FrameClient::FrameClient( asio::io_service &iIoService )
+JsonClient::JsonClient( asio::io_service &iIoService )
 : socket( iIoService )
 {
 }
 
-FrameClient::~FrameClient()
+JsonClient::~JsonClient()
 {
 	socket.close();
 }
 
-void FrameClient::connect( const std::string &iServerAddress, int iPort )
+void JsonClient::connect( const std::string &iServerAddress, int iPort )
 {
 	serverAddress = iServerAddress;
 	port = iPort;
@@ -52,12 +52,12 @@ void FrameClient::connect( const std::string &iServerAddress, int iPort )
 	});
 }
 
-void FrameClient::reconnect(float delay)
+void JsonClient::reconnect(float delay)
 {
   ci::app::timeline().add( [this] { connect( serverAddress, port ); }, 3.0 );
 }
 
-void FrameClient::receive( const asio::error_code &iError, size_t iBytes )
+void JsonClient::receive( const asio::error_code &iError, size_t iBytes )
 {
   _bytes_remaining -= iBytes;
 	if( iError ) {
@@ -100,7 +100,7 @@ void FrameClient::receive( const asio::error_code &iError, size_t iBytes )
 
 }
 
-void FrameClient::listen(size_t offset)
+void JsonClient::listen(size_t offset)
 {
   if (offset == 0)
   {

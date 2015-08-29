@@ -1,11 +1,11 @@
 //
-//  FrameServer.cpp
+//  JsonServer.cpp
 //
 //  Created by David Wicks on 5/4/15.
 //
 //
 
-#include "FrameServer.h"
+#include "JsonServer.h"
 #include "cinder/Log.h"
 #include "cinder/Utilities.h"
 
@@ -50,33 +50,33 @@ void FrameConnection::broadcast( const ci::JsonTree &data )
 
 } // namespace sansumbrella
 
-#pragma mark - FrameServer
+#pragma mark - JsonServer
 
-FrameServer::FrameServer( int iPort )
+JsonServer::JsonServer( int iPort )
 : acceptor( ioService, asio::ip::tcp::endpoint( asio::ip::tcp::v4(), iPort ) ),
 	running( false )
 {
 }
 
-FrameServer::~FrameServer()
+JsonServer::~JsonServer()
 {
 	stop();
 }
 
-void FrameServer::start()
+void JsonServer::start()
 {
 	running = true;
 	thread = std::thread( [this] { run(); } );
 }
 
-void FrameServer::stop()
+void JsonServer::stop()
 {
 	running = false;
 	thread.join();
 	ioService.stop();
 }
 
-void FrameServer::run()
+void JsonServer::run()
 {
 	ci::ThreadSetup ts;
 	timer.start();
@@ -92,7 +92,7 @@ void FrameServer::run()
 	}
 }
 
-void FrameServer::sendMessage( const ci::JsonTree &message )
+void JsonServer::sendMessage( const ci::JsonTree &message )
 {
 	ioService.post( [this, message] {
 		for( auto &s : sockets ) {
@@ -101,7 +101,7 @@ void FrameServer::sendMessage( const ci::JsonTree &message )
 	} );
 }
 
-void FrameServer::listenForClients()
+void JsonServer::listenForClients()
 {
 	CI_LOG_I( "Listening for clients" );
 
@@ -114,7 +114,7 @@ void FrameServer::listenForClients()
 	} );
 }
 
-void FrameServer::handleClientConnect( const FrameConnectionRef &iConnection )
+void JsonServer::handleClientConnect( const FrameConnectionRef &iConnection )
 {
 	CI_LOG_I( "Client Connected" );
 
@@ -122,7 +122,7 @@ void FrameServer::handleClientConnect( const FrameConnectionRef &iConnection )
 	listenForClients();
 }
 
-void FrameServer::update()
+void JsonServer::update()
 {
 	// Remove disconnected sockets.
 	auto begin = std::remove_if( sockets.begin(), sockets.end(), [] (const FrameConnectionRef &fc) {

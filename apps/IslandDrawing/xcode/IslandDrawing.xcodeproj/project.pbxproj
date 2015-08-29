@@ -17,8 +17,8 @@
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
 		15CD7CC31B91B8BD00C76083 /* IslandDrawingApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CC21B91B8BD00C76083 /* IslandDrawingApp.cpp */; };
-		15CD7D051B91C1B000C76083 /* FrameClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D001B91C1B000C76083 /* FrameClient.cpp */; };
-		15CD7D071B91C1B000C76083 /* FrameServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D021B91C1B000C76083 /* FrameServer.cpp */; };
+		15CD7D051B91C1B000C76083 /* JsonClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D001B91C1B000C76083 /* JsonClient.cpp */; };
+		15CD7D071B91C1B000C76083 /* JsonServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D021B91C1B000C76083 /* JsonServer.cpp */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		754DA8A81D8F4AC6BEDC7754 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = D745A0F413BF4A5AB7399681 /* CinderApp.icns */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -37,10 +37,10 @@
 		03D020CBE4F247048FFA24A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		15CD7CC21B91B8BD00C76083 /* IslandDrawingApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IslandDrawingApp.cpp; sourceTree = "<group>"; };
-		15CD7CFB1B91C1B000C76083 /* FrameClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameClient.h; sourceTree = "<group>"; };
-		15CD7CFD1B91C1B000C76083 /* FrameServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameServer.h; sourceTree = "<group>"; };
-		15CD7D001B91C1B000C76083 /* FrameClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameClient.cpp; sourceTree = "<group>"; };
-		15CD7D021B91C1B000C76083 /* FrameServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameServer.cpp; sourceTree = "<group>"; };
+		15CD7CFB1B91C1B000C76083 /* JsonClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonClient.h; sourceTree = "<group>"; };
+		15CD7CFD1B91C1B000C76083 /* JsonServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonServer.h; sourceTree = "<group>"; };
+		15CD7D001B91C1B000C76083 /* JsonClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonClient.cpp; sourceTree = "<group>"; };
+		15CD7D021B91C1B000C76083 /* JsonServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonServer.cpp; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		3E68496D18244F7E84A90B28 /* IslandDrawing_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = IslandDrawing_Prefix.pch; sourceTree = "<group>"; };
@@ -118,10 +118,10 @@
 		15CD7CC51B91B8DB00C76083 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				15CD7CFB1B91C1B000C76083 /* FrameClient.h */,
-				15CD7CFD1B91C1B000C76083 /* FrameServer.h */,
-				15CD7D001B91C1B000C76083 /* FrameClient.cpp */,
-				15CD7D021B91C1B000C76083 /* FrameServer.cpp */,
+				15CD7CFB1B91C1B000C76083 /* JsonClient.h */,
+				15CD7CFD1B91C1B000C76083 /* JsonServer.h */,
+				15CD7D001B91C1B000C76083 /* JsonClient.cpp */,
+				15CD7D021B91C1B000C76083 /* JsonServer.cpp */,
 			);
 			name = common;
 			path = ../../common;
@@ -239,9 +239,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15CD7D051B91C1B000C76083 /* FrameClient.cpp in Sources */,
+				15CD7D051B91C1B000C76083 /* JsonClient.cpp in Sources */,
 				15CD7CC31B91B8BD00C76083 /* IslandDrawingApp.cpp in Sources */,
-				15CD7D071B91C1B000C76083 /* FrameServer.cpp in Sources */,
+				15CD7D071B91C1B000C76083 /* JsonServer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

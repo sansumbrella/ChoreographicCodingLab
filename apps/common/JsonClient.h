@@ -1,5 +1,5 @@
 //
-//  FrameClient.h
+//  JsonClient.h
 //
 //  Created by David Wicks on 5/4/15.
 //
@@ -14,13 +14,13 @@
 namespace sansumbrella {
 
 ///
-/// Client for receiving FrameData from a FrameServer.
+/// Client for receiving FrameData from a JsonServer.
 ///
-class FrameClient
+class JsonClient
 {
 public:
-	FrameClient( asio::io_service &iIoService );
-	~FrameClient();
+	JsonClient( asio::io_service &iIoService );
+	~JsonClient();
 
 	void connect( const std::string &iServerAddress, int iPort );
 	bool isConnected() const { return connected; }
