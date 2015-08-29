@@ -135,6 +135,23 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
   }
 }
 
+void animateIslandIntoPosition(const std::vector<entityx::Entity> &island)
+{
+  auto i = 0.0f;
+  for (auto e : island)
+  {
+    auto xf = e.component<Transform>();
+    auto t = i / (island.size() - 1.0f);
+    t += randFloat(-0.1f, 0.1f);
+    auto delay = mix(0.0f, 2.0f, easeOutQuad(glm::clamp(t, 0.0f, 1.0f)));
+
+    sharedTimeline().apply(&xf->position)
+      .set( xf->position() - vec3( 0, 10, 0 ) )
+      .hold( delay )
+      .then<RampTo>( xf->position(), 0.5f, EaseOutCubic() );
+  }
+}
+
 Entity createShrub(entityx::EntityManager &entities, const ci::vec2 &pos)
 {
   auto e = entities.create();

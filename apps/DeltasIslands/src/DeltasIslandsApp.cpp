@@ -114,7 +114,8 @@ void DeltasIslandsApp::handlePathData(const ci::JsonTree &data)
       if (island.empty())
       {
         CI_LOG_I("Creating New Island: " << id);
-        createIslandFromPath(_entities, path, id, 50);
+        island = createIslandFromPath(_entities, path, id, 50);
+        animateIslandIntoPosition(island);
       }
       else
       {
@@ -138,19 +139,7 @@ void DeltasIslandsApp::createTestIsland()
   path.quadTo(pos + vec2(1, 1) * len, pos + vec2(2, 0) * len);
 
   auto island = createIslandFromPath(_entities, path);
-  auto i = 0.0f;
-  for (auto e : island)
-  {
-    auto xf = e.component<Transform>();
-    auto t = i / (island.size() - 1.0f);
-         t += randFloat(-0.1f, 0.1f);
-    auto delay = mix(0.0f, 2.0f, easeOutQuad(glm::clamp(t, 0.0f, 1.0f)));
-
-    sharedTimeline().apply(&xf->position)
-      .set( xf->position() - vec3( 0, 10, 0 ) )
-      .hold( delay )
-      .then<RampTo>( xf->position(), 0.5f, EaseOutCubic() );
-  }
+  animateIslandIntoPosition(island);
 }
 
 void DeltasIslandsApp::keyDown( KeyEvent event )
