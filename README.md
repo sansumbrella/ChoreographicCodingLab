@@ -25,17 +25,22 @@ Drawing tool for realtime performance control of Deltas/Islands.
 - Send camera orientation to Deltas/Islands.
 - Runs a server on an iPad
 
-Notes
------
+Notes (also see physical sketchbook)
+------------------------------------
 
 Hildegaard, sound artist
 Are we talking about Data Quality or Dance Quality?
 
 Qualities of Dance V. Qualities in Data
 
+Gaga
 Energy: choppy, smooth
 Balanced, unbalanced
 Texture, thickness
 Soft
 Tense, Tranquil
 Moving from bones or flesh
+
+Small Dance
+- Lead viewer through some of the interior process.
+- Sharing the invisible parts of the dance.
