@@ -48,7 +48,7 @@ private:
 
   Timer                  _timer;
   std::string            _state;
-  bool                   _show_gui = true;
+  bool                   _show_gui = false;
   std::string            _server_ip = "169.254.164.242";
   int                    _server_port = 9191;
 };
@@ -185,8 +185,10 @@ void DeltasIslandsApp::update()
   _systems.update<WindSystem>(dt);
   _systems.update<InstanceRenderer>(dt);
 
+  /*
   _state += "frame\n";
   _state += serializePositions(_entities);
+  */
 
   if (_show_gui)
   {
