@@ -102,16 +102,19 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
     auto pos = path.getPosition(t);
     auto tangent = normalize(path.getTangent(t));
     auto normal = vec2(-tangent.y, tangent.x);
-    auto duration = 1.0f;
 
-    sharedTimeline().append(positionAnim(e))
+    auto end_pos = planar(pos + (offset * normal * randFloat(0.4f, 1.0f)));
+//    auto vertical_offset = vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0);
+    auto delta = distance(e.component<Transform>()->position(), end_pos);
+    auto duration = lmap(glm::clamp(delta, 0.0f, 40.0f), 0.0f, 40.0f, 1.0f, 3.0f);
+    sharedTimeline().apply(positionAnim(e))
       .hold(delay)
-      .then<RampTo>(planar(pos + offset * normal * randFloat(0.4f, 1.0f)) + vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0), duration, EaseInOutCubic());
+      .then<RampTo>(end_pos, duration, EaseInOutCubic());
 
     auto wind = e.component<WindReceiver>();
     if (wind)
     {
-      sharedTimeline().append(&wind->_influence)
+      sharedTimeline().apply(&wind->_influence)
         .hold(delay)
         .set(0.0f)
         .holdUntil(delay + duration)
