@@ -85,14 +85,33 @@ void IslandDrawingApp::setup()
   });
 }
 
-void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
+void IslandDrawingApp::createPath(const std::vector<ci::vec2> &points)
 {
 
 }
 
+void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
+{
+  for (auto &touch : event.getTouches())
+  {
+    auto t = Touch();
+    t._points.push_back(touch.getPos());
+    _touches[touch.getId()] = t;
+  }
+}
+
 void IslandDrawingApp::touchesMoved(cinder::app::TouchEvent event)
 {
-
+  for (auto &touch : event.getTouches())
+  {
+    auto &t = _touches[touch.getId()];
+    auto pos = touch.getPos();
+    auto d = distance(t._points.back(), pos);
+    if (d > 4.0f)
+    {
+      t._points.push_back(pos);
+    }
+  }
 }
 
 void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
@@ -100,6 +119,13 @@ void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
   for (auto &touch : event.getTouches())
   {
     auto &t = _touches[touch.getId()];
+    auto pos = touch.getPos();
+    auto d = distance(t._points.back(), pos);
+    if (d > 4.0f)
+    {
+      t._points.push_back(pos);
+    }
+
     createPath(t._points);
   }
 }
