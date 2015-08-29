@@ -31,6 +31,8 @@
 		15CD7CB81B90C39500C76083 /* CurveUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CB61B90C39500C76083 /* CurveUtilities.cpp */; };
 		15CD7CBB1B90CD4000C76083 /* WindSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CB91B90CD4000C76083 /* WindSystem.cpp */; };
 		15CD7CC01B91100500C76083 /* DataExport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7CBE1B91100500C76083 /* DataExport.cpp */; };
+		15CD7D131B921EDA00C76083 /* JsonClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D0F1B921EDA00C76083 /* JsonClient.cpp */; };
+		15CD7D141B921EDA00C76083 /* JsonServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D111B921EDA00C76083 /* JsonServer.cpp */; };
 		191646C563A44994819D819D /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = E25C62C3851849949373E3D0 /* Entity.cc */; };
 		2038CFF6DA2140C4A354AA30 /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 25E74E03101A4ED9B98ADA62 /* Event.cc */; };
 		34BB76D324F949AB8DFDB0CF /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = DB5C3D6D390548BEA521E3DA /* Pool.cc */; };
@@ -98,6 +100,11 @@
 		15CD7CBD1B90ED8100C76083 /* Island.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Island.h; sourceTree = "<group>"; };
 		15CD7CBE1B91100500C76083 /* DataExport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataExport.cpp; sourceTree = "<group>"; };
 		15CD7CBF1B91100500C76083 /* DataExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataExport.h; sourceTree = "<group>"; };
+		15CD7D0D1B9213B300C76083 /* ColorComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorComponent.h; sourceTree = "<group>"; };
+		15CD7D0F1B921EDA00C76083 /* JsonClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonClient.cpp; sourceTree = "<group>"; };
+		15CD7D101B921EDA00C76083 /* JsonClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonClient.h; sourceTree = "<group>"; };
+		15CD7D111B921EDA00C76083 /* JsonServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonServer.cpp; sourceTree = "<group>"; };
+		15CD7D121B921EDA00C76083 /* JsonServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonServer.h; sourceTree = "<group>"; };
 		19647646A3AD4E49990DF384 /* ci_nanovg_gl.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = ci_nanovg_gl.hpp; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/include/ci_nanovg_gl.hpp"; sourceTree = "<group>"; };
 		19861B75740042E39C6687DE /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BehaviorSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.cpp"; sourceTree = "<group>"; };
 		1D10C7246A2D4356989C971F /* TimelineOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = TimelineOptions.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimelineOptions.hpp; sourceTree = "<group>"; };
@@ -226,6 +233,7 @@
 		152738B51B908C3D00D8214C /* src */ = {
 			isa = PBXGroup;
 			children = (
+				15CD7D0E1B921EDA00C76083 /* common */,
 				15CD7CB51B90C39500C76083 /* utilities */,
 				15CD7CAD1B90BDCD00C76083 /* Behavior.h */,
 				15CD7CAE1B90BDCD00C76083 /* BehaviorSystem.h */,
@@ -255,6 +263,7 @@
 				15CD7CBD1B90ED8100C76083 /* Island.h */,
 				15CD7CBE1B91100500C76083 /* DataExport.cpp */,
 				15CD7CBF1B91100500C76083 /* DataExport.h */,
+				15CD7D0D1B9213B300C76083 /* ColorComponent.h */,
 			);
 			name = src;
 			path = ../src;
@@ -267,6 +276,18 @@
 				15CD7CB71B90C39500C76083 /* CurveUtilities.h */,
 			);
 			path = utilities;
+			sourceTree = "<group>";
+		};
+		15CD7D0E1B921EDA00C76083 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				15CD7D0F1B921EDA00C76083 /* JsonClient.cpp */,
+				15CD7D101B921EDA00C76083 /* JsonClient.h */,
+				15CD7D111B921EDA00C76083 /* JsonServer.cpp */,
+				15CD7D121B921EDA00C76083 /* JsonServer.h */,
+			);
+			name = common;
+			path = ../../common;
 			sourceTree = "<group>";
 		};
 		1796D110D35943E2A926F1CD /* NanoVG */ = {
@@ -607,6 +628,7 @@
 				15CD7C9E1B90A23900C76083 /* imgui_demo.cpp in Sources */,
 				134AA56276C94615864DEFB3 /* MotionGroup.cpp in Sources */,
 				C56250D4ECBB452EADFB93B0 /* Timeline.cpp in Sources */,
+				15CD7D141B921EDA00C76083 /* JsonServer.cpp in Sources */,
 				AEA14970C689446CB13112C9 /* TimelineItem.cpp in Sources */,
 				D0B599DE3F2646D4A108301C /* imgui.cpp in Sources */,
 				75450A120C6B4F2DA756D962 /* nanovg.c in Sources */,
@@ -624,6 +646,7 @@
 				15CD7CBB1B90CD4000C76083 /* WindSystem.cpp in Sources */,
 				15CD7CA31B90B38700C76083 /* CameraController.cpp in Sources */,
 				191646C563A44994819D819D /* Entity.cc in Sources */,
+				15CD7D131B921EDA00C76083 /* JsonClient.cpp in Sources */,
 				2038CFF6DA2140C4A354AA30 /* Event.cc in Sources */,
 				FEB6C6E22C1541B394D71BDD /* System.cc in Sources */,
 				34BB76D324F949AB8DFDB0CF /* Pool.cc in Sources */,

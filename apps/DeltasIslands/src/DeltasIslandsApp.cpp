@@ -12,6 +12,7 @@
 #include "Transform.h"
 #include "cinder/Path2d.h"
 #include "CameraController.h"
+#include "JsonClient.h"
 
 #include "SharedTimeline.h"
 #include "DataExport.h"
@@ -35,13 +36,13 @@ public:
   void update() override;
   void draw() override;
   void reloadAssets();
+  void handlePathData(const ci::JsonTree &data);
 private:
   CameraController       _camera;
   entityx::EventManager	 _events;
   entityx::EntityManager _entities;
   entityx::SystemManager _systems;
-
-  vector<Entity>         _island;
+  JsonClient             _json_client;
 
   Timer                  _timer;
   std::string            _state;
@@ -49,7 +50,8 @@ private:
 
 DeltasIslandsApp::DeltasIslandsApp()
 : _entities(_events),
-  _systems(_entities, _events)
+  _systems(_entities, _events),
+  _json_client(io_service())
 {}
 
 void DeltasIslandsApp::setup()
@@ -58,12 +60,66 @@ void DeltasIslandsApp::setup()
   _systems.add<WindSystem>();
   _systems.configure();
 
-  createTestIsland();
+  _json_client.connect("localhost", 9191);
+  _json_client.getSignalConnected().connect([] (bool success) {
+    CI_LOG_I("Json Client " << (success ? "Successfully Connected" : "Failed to connect.") );
+  });
+  _json_client.getSignalDataReceived().connect([this] (const ci::JsonTree &data) {
+    CI_LOG_I("Received Path");
+    handlePathData(data);
+  });
+
+//  createTestIsland();
 }
 
 void DeltasIslandsApp::reloadAssets()
 {
   _systems.system<InstanceRenderer>()->reloadAssets();
+}
+
+void DeltasIslandsApp::handlePathData(const ci::JsonTree &data)
+{
+  try
+  {
+    auto type = data.getChild("type").getValue();
+    if (type == "path")
+    {
+      auto id = data.getChild("id").getValue<uint32_t>();
+      auto points = data.getChild("points");
+
+      Path2d path;
+      for (auto &p : points)
+      {
+        auto pos = vec2(p.getValueForKey<float>("x"), p.getValueForKey<float>("y"));
+        pos = mix(vec2(-20.0f), vec2(20.0f), pos);
+
+        if(path.empty())
+        {
+          path.moveTo(pos);
+        }
+        else
+        {
+          path.lineTo(pos);
+        }
+      }
+
+      auto island = gatherIsland(_entities, id);
+      if (island.empty())
+      {
+        CI_LOG_I("Creating New Island: " << id);
+        createIslandFromPath(_entities, path, id, 50);
+      }
+      else
+      {
+        CI_LOG_I("Moving Island: " << id);
+        mapIslandToPath(island, path);
+      }
+    }
+  }
+  catch (std::exception &exc)
+  {
+    CI_LOG_W("Exception parsing path data: " << exc.what());
+  }
 }
 
 void DeltasIslandsApp::createTestIsland()
@@ -74,12 +130,12 @@ void DeltasIslandsApp::createTestIsland()
   auto len = 5.0f;
   path.quadTo(pos + vec2(1, 1) * len, pos + vec2(2, 0) * len);
 
-  _island = createIslandFromPath(_entities, path);
+  auto island = createIslandFromPath(_entities, path);
   auto i = 0.0f;
-  for (auto e : _island)
+  for (auto e : island)
   {
     auto xf = e.component<Transform>();
-    auto t = i / (_island.size() - 1.0f);
+    auto t = i / (island.size() - 1.0f);
          t += randFloat(-0.1f, 0.1f);
     auto delay = mix(0.0f, 2.0f, easeOutQuad(glm::clamp(t, 0.0f, 1.0f)));
 

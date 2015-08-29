@@ -57,11 +57,12 @@ void InstanceRenderer::update( EntityManager &entities, EventManager &events, Ti
 
   ComponentHandle<Transform>      xf;
   ComponentHandle<InstanceShape>  instance;
-  for (auto e : entities.entities_with_components(xf, instance))
+  for (auto __unused e : entities.entities_with_components(xf, instance))
   {
     _instance_data.emplace_back(InstanceData{ xf->transform(), instance->_openness });
   }
 
+  _instance_buffer->ensureMinimumSize(sizeof(InstanceData) * _instance_data.size());
   _instance_buffer->bufferSubData(0, sizeof(InstanceData) * _instance_data.size(), _instance_data.data());
 }
 
@@ -72,7 +73,6 @@ void InstanceRenderer::draw() const
 
   shape.panels()->getGlslProg()->uniform("uColor", ColorA::gray(1.0f));
   shape.panels()->drawInstanced(_instance_data.size());
-
 //  shape.rods()->getGlslProg()->uniform("uColor", ColorA::gray(0.6f));
 //  shape.rods()->drawInstanced(_instance_data.size());
 }

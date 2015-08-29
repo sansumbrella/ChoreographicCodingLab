@@ -39,15 +39,23 @@ public:
 	void draw() override;
 
   void createPath(const std::vector<ci::vec2> &points);
+  void broadcastPath(const Path &path);
+  vec2 normalizePosition(const ci::vec2 &position);
 
 private:
   std::vector<Path>                   _paths;
   std::unordered_map<uint32_t, Touch> _touches;
-  const int                           _max_paths = 7;
+  const uint32_t                      _max_paths = 7;
+  uint32_t                            _current_id = 0;
 
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
 };
+
+vec2 IslandDrawingApp::normalizePosition(const ci::vec2 &position)
+{
+  return position / vec2(getWindowSize());
+}
 
 void IslandDrawingApp::setup()
 {
@@ -64,35 +72,91 @@ void IslandDrawingApp::setup()
 
   _client->getSignalDataReceived().connect( [] (const ci::JsonTree &json) {
     CI_LOG_I("Received json, " << json.getChild("type").getValue());
+    if (json.hasChild("points"))
+    {
+      auto c = json.getChild("points").getNumChildren();
+      CI_LOG_I("Json contains " << c << " points.");
+    }
   });
 
   _client->connect(System::getIpAddress(), port);
 
   getWindow()->getSignalKeyDown().connect([this] (const KeyEvent &event) {
-    JsonTree json;
-    json.pushBack(JsonTree("type", "awesome"));
-    auto arr = JsonTree::makeArray("points");
-
-    for (auto i = 0; i < 512; i += 1)
+    if (event.getCode() == KeyEvent::KEY_t)
     {
-      auto obj = JsonTree::makeObject();
-      obj.addChild(JsonTree("x", randFloat()));
-      obj.addChild(JsonTree("y", randFloat()));
-      arr.pushBack( obj );
+      JsonTree json;
+      json.pushBack(JsonTree("type", "awesome"));
+      auto arr = JsonTree::makeArray("points");
+
+      for (auto i = 0; i < 512; i += 1)
+      {
+        auto obj = JsonTree::makeObject();
+        obj.addChild(JsonTree("x", randFloat()));
+        obj.addChild(JsonTree("y", randFloat()));
+        arr.pushBack( obj );
+      }
+      json.pushBack(arr);
+      _server->sendMessage(json);
     }
-    json.pushBack(arr);
-    _server->sendMessage(json);
   });
+}
+
+void IslandDrawingApp::createPath(const std::vector<ci::vec2> &points)
+{
+  if (_current_id >= _paths.size())
+  {
+    auto p = Path{_current_id, points};
+    _paths.push_back(p);
+  }
+  else
+  {
+    _paths.at(_current_id)._points = points;
+  }
+
+  broadcastPath(_paths.at(_current_id));
+  _current_id = (_current_id + 1) % _max_paths;
+}
+
+void IslandDrawingApp::broadcastPath(const Path &path)
+{
+  JsonTree json;
+  json.pushBack(JsonTree("type", "path"));
+  json.pushBack(JsonTree("id", path._id));
+  auto arr = JsonTree::makeArray("points");
+  for (auto &p : path._points)
+  {
+    auto np = normalizePosition(p);
+    auto obj = JsonTree::makeObject();
+    obj.addChild(JsonTree("x", np.x));
+    obj.addChild(JsonTree("y", np.y));
+    arr.pushBack(obj);
+  }
+  json.pushBack(arr);
+  _server->sendMessage(json);
 }
 
 void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
 {
-
+  for (auto &touch : event.getTouches())
+  {
+    auto t = Touch();
+    t._points.push_back(touch.getPos());
+    _touches[touch.getId()] = t;
+  }
 }
 
 void IslandDrawingApp::touchesMoved(cinder::app::TouchEvent event)
 {
-
+  for (auto &touch : event.getTouches())
+  {
+    auto &t = _touches[touch.getId()];
+    auto pos = touch.getPos();
+    auto d = distance(t._points.back(), pos);
+    if (d > 4.0f)
+    {
+      t._points.push_back(pos);
+    }
+  }
 }
 
 void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
@@ -100,7 +164,15 @@ void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
   for (auto &touch : event.getTouches())
   {
     auto &t = _touches[touch.getId()];
+    auto pos = touch.getPos();
+    auto d = distance(t._points.back(), pos);
+    if (d > 4.0f)
+    {
+      t._points.push_back(pos);
+    }
+
     createPath(t._points);
+    _touches.erase(touch.getId());
   }
 }
 
@@ -110,7 +182,31 @@ void IslandDrawingApp::update()
 
 void IslandDrawingApp::draw()
 {
-	gl::clear( Color( 0, 0, 0 ) ); 
+	gl::clear( Color( 0, 0, 0 ) );
+
+  for(auto &pair : _touches)
+  {
+    gl::begin(GL_LINE_STRIP);
+    const auto &touch = pair.second;
+    for (auto &p : touch._points)
+    {
+      gl::vertex(p);
+    }
+    gl::end();
+  }
+
+  for(auto &path : _paths)
+  {
+    auto t = (path._id / (float)_max_paths);
+    gl::ScopedColor color(Color(CM_HSV, t, 1.0f, 1.0f));
+    gl::begin(GL_LINE_STRIP);
+    for (auto &p : path._points)
+    {
+      gl::vertex(p);
+    }
+    gl::end();
+  }
+
 }
 
 CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {
@@ -118,4 +214,5 @@ CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {
 #else
   settings->setWindowSize(768, 1024);
 #endif
+  settings->setMultiTouchEnabled();
 } )
