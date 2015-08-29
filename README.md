@@ -1,7 +1,7 @@
 Choreographic Coding Lab
 ========================
 
-Applications written while working at the 4th Choreographic Coding Lab.
+Applications and notes written while working at the 4th Choreographic Coding Lab.
 
 Everything is a work in progress at this point.
 
@@ -24,3 +24,18 @@ Drawing tool for realtime performance control of Deltas/Islands.
 - Send camera altitude to Deltas/Islands.
 - Send camera orientation to Deltas/Islands.
 - Runs a server on an iPad
+
+Notes
+-----
+
+Hildegaard, sound artist
+Are we talking about Data Quality or Dance Quality?
+
+Qualities of Dance V. Qualities in Data
+
+Energy: choppy, smooth
+Balanced, unbalanced
+Texture, thickness
+Soft
+Tense, Tranquil
+Moving from bones or flesh
