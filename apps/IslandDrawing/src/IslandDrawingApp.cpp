@@ -8,6 +8,7 @@
 #include "FrameServer.h"
 #include "cinder/Utilities.h"
 #include "cinder/System.h"
+#include "cinder/Rand.h"
 
 #include <unordered_map>
 
@@ -60,7 +61,7 @@ void IslandDrawingApp::setup()
   });
 
   _client->getSignalDataReceived().connect( [] (const ci::JsonTree &json) {
-    CI_LOG_I("Received json: " << json.serialize());
+    CI_LOG_I("Received json, " << json.getChild("type").getValue());
   });
 
   _client->connect(System::getIpAddress(), port);
@@ -68,10 +69,16 @@ void IslandDrawingApp::setup()
   getWindow()->getSignalKeyDown().connect([this] (const KeyEvent &event) {
     JsonTree json;
     json.pushBack(JsonTree("type", "awesome"));
-//    auto arr = JsonTree::makeArray("points");
-//    arr.pushBack( JsonTree("{'x': 0, 'y': 10, 'z': 100, 'a': 5}") );
-//    arr.pushBack( JsonTree("{'x': 0, 'y': 10, 'z': 20, 'a': 2}") );
-//    json.pushBack(arr);
+    auto arr = JsonTree::makeArray("points");
+
+    for (auto i = 0; i < 512; i += 1)
+    {
+      auto obj = JsonTree::makeObject();
+      obj.addChild(JsonTree("x", randFloat()));
+      obj.addChild(JsonTree("y", randFloat()));
+      arr.pushBack( obj );
+    }
+    json.pushBack(arr);
     _server->sendMessage(json);
   });
 }
