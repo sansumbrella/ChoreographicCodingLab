@@ -14,6 +14,7 @@
 #include "glm/gtc/noise.hpp"
 #include "WindReceiver.h"
 #include "Island.h"
+#include "cinder/Log.h"
 
 using namespace cinder;
 using namespace entityx;
@@ -83,12 +84,19 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
   auto i = 0.0f;
   const auto length = entities.size() - 1.0f;
   auto offset = -1.0f;
+  auto step_dir = 1;
 
   for (auto e : entities)
   {
-    auto t = cache.calcNormalizedTime(i / length);
+    auto t_offset = mix(0.0f, 0.5f, i / length);
+    auto t_desired = 0.5f + t_offset * step_dir;
+    auto time = i / length;
+    step_dir *= -1;
+
+    auto t = cache.calcNormalizedTime(t_desired);
+
     i += 1.0f;
-    auto delay_t = t + randFloat(-0.2f, 0.2f);
+    auto delay_t = time + randFloat(-0.2f, 0.2f);
     auto delay = mix(0.0f, 1.0f, easeOutQuad(glm::clamp(delay_t, 0.0f, 1.0f)));
 
     auto pos = path.getPosition(t);
