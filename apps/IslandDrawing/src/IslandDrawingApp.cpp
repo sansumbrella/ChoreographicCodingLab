@@ -72,7 +72,6 @@ void IslandDrawingApp::setup()
 
   _client->getSignalDataReceived().connect( [] (const ci::JsonTree &json) {
     CI_LOG_I("Received json, " << json.getChild("type").getValue());
-    CI_LOG_I(json);
     if (json.hasChild("points"))
     {
       auto c = json.getChild("points").getNumChildren();
@@ -190,6 +189,18 @@ void IslandDrawingApp::draw()
     gl::begin(GL_LINE_STRIP);
     const auto &touch = pair.second;
     for (auto &p : touch._points)
+    {
+      gl::vertex(p);
+    }
+    gl::end();
+  }
+
+  for(auto &path : _paths)
+  {
+    auto t = (path._id / (float)_max_paths);
+    gl::ScopedColor color(Color(CM_HSV, t, 1.0f, 1.0f));
+    gl::begin(GL_LINE_STRIP);
+    for (auto &p : path._points)
     {
       gl::vertex(p);
     }
