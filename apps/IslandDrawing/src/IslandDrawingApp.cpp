@@ -17,6 +17,8 @@ using namespace ci::app;
 using namespace std;
 using namespace sansumbrella;
 
+const int Port = 9191;
+
 struct Path
 {
   uint32_t              _id;
@@ -42,11 +44,14 @@ public:
   void broadcastPath(const Path &path);
   vec2 normalizePosition(const ci::vec2 &position);
 
+  void connectDebugClient();
+
 private:
   std::vector<Path>                   _paths;
   std::unordered_map<uint32_t, Touch> _touches;
   const uint32_t                      _max_paths = 7;
   uint32_t                            _current_id = 0;
+  gl::TextureFontRef                  _font;
 
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
@@ -59,12 +64,18 @@ vec2 IslandDrawingApp::normalizePosition(const ci::vec2 &position)
 
 void IslandDrawingApp::setup()
 {
-  _paths.push_back(Path{0, {vec2(10.0f), vec2(0.0f)} });
-  _paths.push_back(Path{1, {vec2(10.0f), vec2(0.0f)} });
+  _font = gl::TextureFont::create(Font("Avenir-Medium", 16.0f));
 
-  auto port = 9191;
-  _server = make_shared<JsonServer>( port );
+  _server = make_shared<JsonServer>( Port );
   _server->start();
+
+#if ! defined(CINDER_COCOA_TOUCH)
+  connectDebugClient();
+#endif
+}
+
+void IslandDrawingApp::connectDebugClient()
+{
   _client = make_shared<JsonClient>( io_service() );
   _client->getSignalConnected().connect( [] (bool success) {
     CI_LOG_I("Client connected to server.");
@@ -79,7 +90,7 @@ void IslandDrawingApp::setup()
     }
   });
 
-  _client->connect(System::getIpAddress(), port);
+  _client->connect(System::getIpAddress(), Port);
 
   getWindow()->getSignalKeyDown().connect([this] (const KeyEvent &event) {
     if (event.getCode() == KeyEvent::KEY_t)
@@ -207,6 +218,7 @@ void IslandDrawingApp::draw()
     gl::end();
   }
 
+  _font->drawString("IP: " + System::getIpAddress(), vec2(20, 20));
 }
 
 CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {

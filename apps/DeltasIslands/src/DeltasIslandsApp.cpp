@@ -60,7 +60,7 @@ void DeltasIslandsApp::setup()
   _systems.add<WindSystem>();
   _systems.configure();
 
-  _json_client.connect("localhost", 9191);
+  _json_client.connect("169.254.164.242", 9191);
   _json_client.getSignalConnected().connect([] (bool success) {
     CI_LOG_I("Json Client " << (success ? "Successfully Connected" : "Failed to connect.") );
   });
