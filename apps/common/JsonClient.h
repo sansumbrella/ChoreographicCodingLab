@@ -23,17 +23,18 @@ public:
 	~JsonClient();
 
 	void connect( const std::string &iServerAddress, int iPort );
-	bool isConnected() const { return connected; }
+	bool isConnected() const { return _connected; }
 
   auto& getSignalDataReceived() { return _data_signal; }
   auto& getSignalConnected() { return _connection_signal; }
 
 	/// Called when the client receives data from the server.
 	void receive( const asio::error_code &iError, size_t iBytes );
+  void reconnect(float delay);
 
 private:
 	asio::ip::tcp::socket       socket;
-	bool												connected = false;
+	bool												_connected = false;
 	std::string									serverAddress;
 	int													port = 0;
 
@@ -46,7 +47,6 @@ private:
   int               _message_size = 0;
   std::vector<char> _message;
 
-  void reconnect(float delay);
 };
 
 } // namespace sansumbrella

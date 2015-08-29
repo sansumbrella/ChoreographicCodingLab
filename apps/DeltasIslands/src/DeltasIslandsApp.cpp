@@ -19,6 +19,8 @@
 
 #include "IslandCreation.h"
 
+#include "CinderImGui.h"
+
 using namespace ci;
 using namespace ci::app;
 using namespace sansumbrella;
@@ -46,6 +48,9 @@ private:
 
   Timer                  _timer;
   std::string            _state;
+  bool                   _show_gui = true;
+  std::string            _server_ip = "169.254.164.242";
+  int                    _server_port = 9191;
 };
 
 DeltasIslandsApp::DeltasIslandsApp()
@@ -60,7 +65,9 @@ void DeltasIslandsApp::setup()
   _systems.add<WindSystem>();
   _systems.configure();
 
-  _json_client.connect("169.254.164.242", 9191);
+  ui::initialize();
+
+  _json_client.connect(_server_ip, _server_port); // try our initial settings at least
   _json_client.getSignalConnected().connect([] (bool success) {
     CI_LOG_I("Json Client " << (success ? "Successfully Connected" : "Failed to connect.") );
   });
@@ -156,6 +163,9 @@ void DeltasIslandsApp::keyDown( KeyEvent event )
     case KeyEvent::KEY_r:
       reloadAssets();
     break;
+    case KeyEvent::KEY_g:
+      _show_gui = ! _show_gui;
+    break;
     case KeyEvent::KEY_w:
     {
       ofstream f((getDocumentsDirectory() / "state.csv").string());
@@ -184,6 +194,24 @@ void DeltasIslandsApp::update()
 
   _state += "frame\n";
   _state += serializePositions(_entities);
+
+  if (_show_gui)
+  {
+    if (_json_client.isConnected())
+    {
+      ui::Text(("Connected to server at: " + _server_ip + ":" + to_string(_server_port)).c_str());
+    }
+    else
+    {
+      ui::InputText("Server IP:", &_server_ip);
+      ui::SameLine();
+      ui::InputInt("Server Port:", &_server_port);
+      if (ui::Button("Connect"))
+      {
+        _json_client.connect(_server_ip, _server_port);
+      }
+    }
+  }
 }
 
 void DeltasIslandsApp::draw()

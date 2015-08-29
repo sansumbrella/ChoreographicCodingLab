@@ -33,22 +33,25 @@ void JsonClient::connect( const std::string &iServerAddress, int iPort )
 	auto iter = resolver.resolve( query );
 
 	asio::async_connect( socket, iter, [this] (const asio::error_code &error, const asio::ip::tcp::resolver::iterator &iter) {
-		if( error ) {
-			if( error == asio::error::operation_aborted ) {
+		if( error )
+    {
+			if( error == asio::error::operation_aborted )
+      {
 				CI_LOG_W( "Aborting previous connection attempt." );
 			}
-			else {
-				CI_LOG_W( "Error connecting to server: " << error.message() << ". Retrying." );
-				connected = false;
-        reconnect(2.0f);
+			else
+      {
+				CI_LOG_W( "Error connecting to server: " << error.message() );
+				_connected = false;
 			}
 		}
 		else {
 			CI_LOG_I( "Connected to server: " << iter->host_name() );
-			connected = true;
-      _connection_signal.emit(true);
+			_connected = true;
 			listen(0);
 		}
+
+    _connection_signal.emit(_connected);
 	});
 }
 
@@ -70,8 +73,8 @@ void JsonClient::receive( const asio::error_code &iError, size_t iBytes )
 		}
 
 		socket.close();
-		connected = false;
-    _connection_signal.emit(false);
+		_connected = false;
+    _connection_signal.emit(_connected);
 
     reconnect(5.0f);
 	}
