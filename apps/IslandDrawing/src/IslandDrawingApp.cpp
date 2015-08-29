@@ -39,15 +39,23 @@ public:
 	void draw() override;
 
   void createPath(const std::vector<ci::vec2> &points);
+  void broadcastPath(const Path &path);
+  vec2 normalizePosition(const ci::vec2 &position);
 
 private:
   std::vector<Path>                   _paths;
   std::unordered_map<uint32_t, Touch> _touches;
-  const int                           _max_paths = 7;
+  const uint32_t                      _max_paths = 7;
+  uint32_t                            _current_id = 0;
 
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
 };
+
+vec2 IslandDrawingApp::normalizePosition(const ci::vec2 &position)
+{
+  return position / vec2(getWindowSize());
+}
 
 void IslandDrawingApp::setup()
 {
@@ -64,30 +72,68 @@ void IslandDrawingApp::setup()
 
   _client->getSignalDataReceived().connect( [] (const ci::JsonTree &json) {
     CI_LOG_I("Received json, " << json.getChild("type").getValue());
+    CI_LOG_I(json);
+    if (json.hasChild("points"))
+    {
+      auto c = json.getChild("points").getNumChildren();
+      CI_LOG_I("Json contains " << c << " points.");
+    }
   });
 
   _client->connect(System::getIpAddress(), port);
 
   getWindow()->getSignalKeyDown().connect([this] (const KeyEvent &event) {
-    JsonTree json;
-    json.pushBack(JsonTree("type", "awesome"));
-    auto arr = JsonTree::makeArray("points");
-
-    for (auto i = 0; i < 512; i += 1)
+    if (event.getCode() == KeyEvent::KEY_t)
     {
-      auto obj = JsonTree::makeObject();
-      obj.addChild(JsonTree("x", randFloat()));
-      obj.addChild(JsonTree("y", randFloat()));
-      arr.pushBack( obj );
+      JsonTree json;
+      json.pushBack(JsonTree("type", "awesome"));
+      auto arr = JsonTree::makeArray("points");
+
+      for (auto i = 0; i < 512; i += 1)
+      {
+        auto obj = JsonTree::makeObject();
+        obj.addChild(JsonTree("x", randFloat()));
+        obj.addChild(JsonTree("y", randFloat()));
+        arr.pushBack( obj );
+      }
+      json.pushBack(arr);
+      _server->sendMessage(json);
     }
-    json.pushBack(arr);
-    _server->sendMessage(json);
   });
 }
 
 void IslandDrawingApp::createPath(const std::vector<ci::vec2> &points)
 {
+  if (_current_id >= _paths.size())
+  {
+    auto p = Path{_current_id, points};
+    _paths.push_back(p);
+  }
+  else
+  {
+    _paths.at(_current_id)._points = points;
+  }
 
+  broadcastPath(_paths.at(_current_id));
+  _current_id = (_current_id + 1) % _max_paths;
+}
+
+void IslandDrawingApp::broadcastPath(const Path &path)
+{
+  JsonTree json;
+  json.pushBack(JsonTree("type", "path"));
+  json.pushBack(JsonTree("id", path._id));
+  auto arr = JsonTree::makeArray("points");
+  for (auto &p : path._points)
+  {
+    auto np = normalizePosition(p);
+    auto obj = JsonTree::makeObject();
+    obj.addChild(JsonTree("x", np.x));
+    obj.addChild(JsonTree("y", np.y));
+    arr.pushBack(obj);
+  }
+  json.pushBack(arr);
+  _server->sendMessage(json);
 }
 
 void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
