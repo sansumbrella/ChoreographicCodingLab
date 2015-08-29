@@ -121,9 +121,17 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
         .then<RampTo>(1.0f, 1.5f);
     }
 
-    offset += 1.0f;
-    if (offset > 1.0f) {
+    if(offset == -1.0f)
+    {
+      offset = 0.1f;
+    }
+    else if(offset == 1.0f)
+    {
       offset = -1.0f;
+    }
+    else
+    {
+      offset = 1.0f;
     }
   }
 }
