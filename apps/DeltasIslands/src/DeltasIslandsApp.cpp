@@ -2,6 +2,8 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cinder/Rand.h"
+#include "cinder/Utilities.h"
+#include "cinder/Log.h"
 
 #include "entityx/entityx.h"
 #include "InstanceRenderer.h"
@@ -12,6 +14,7 @@
 #include "CameraController.h"
 
 #include "SharedTimeline.h"
+#include "DataExport.h"
 
 #include "IslandCreation.h"
 
@@ -40,6 +43,7 @@ private:
   vector<Entity>         _island;
 
   Timer                  _timer;
+  std::string            _state;
 };
 
 DeltasIslandsApp::DeltasIslandsApp()
@@ -87,6 +91,15 @@ void DeltasIslandsApp::keyDown( KeyEvent event )
     case KeyEvent::KEY_r:
       mapIslandToPath(gatherIsland(_entities, 0), randomPath());
     break;
+    case KeyEvent::KEY_w:
+    {
+      ofstream f((getDocumentsDirectory() / "state.csv").string());
+      f << serializationHeader();
+      f << _state;
+      _state.clear();
+      CI_LOG_I("Finished writing state");
+    }
+    break;
     default:
     break;
   }
@@ -103,6 +116,9 @@ void DeltasIslandsApp::update()
   sharedTimeline().step(dt);
   _systems.update<WindSystem>(dt);
   _systems.update<InstanceRenderer>(dt);
+
+  _state += "frame\n";
+  _state += serializePositions(_entities);
 }
 
 void DeltasIslandsApp::draw()
