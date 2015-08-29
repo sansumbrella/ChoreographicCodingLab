@@ -57,7 +57,7 @@ void InstanceRenderer::update( EntityManager &entities, EventManager &events, Ti
 
   ComponentHandle<Transform>      xf;
   ComponentHandle<InstanceShape>  instance;
-  for (auto e : entities.entities_with_components(xf, instance))
+  for (auto __unused e : entities.entities_with_components(xf, instance))
   {
     _instance_data.emplace_back(InstanceData{ xf->transform(), instance->_openness });
   }

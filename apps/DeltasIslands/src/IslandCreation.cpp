@@ -38,11 +38,10 @@ namespace sansumbrella
 
   } // namespace
 
-vector<Entity> createIslandFromPath(entityx::EntityManager &entities, const ci::Path2d &path, uint32_t island_id)
+vector<Entity> createIslandFromPath(entityx::EntityManager &entities, const ci::Path2d &path, uint32_t island_id, int count)
 {
   auto cache = Path2dCalcCache(path);
   auto island = vector<Entity>();
-  auto count = 100;
 
   for (auto i = 0; i < count; i += 1)
   {
