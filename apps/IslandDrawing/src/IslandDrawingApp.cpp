@@ -127,6 +127,7 @@ void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
     }
 
     createPath(t._points);
+    _touches.erase(touch.getId());
   }
 }
 
@@ -136,7 +137,19 @@ void IslandDrawingApp::update()
 
 void IslandDrawingApp::draw()
 {
-	gl::clear( Color( 0, 0, 0 ) ); 
+	gl::clear( Color( 0, 0, 0 ) );
+
+  for(auto &pair : _touches)
+  {
+    gl::begin(GL_LINE_STRIP);
+    const auto &touch = pair.second;
+    for (auto &p : touch._points)
+    {
+      gl::vertex(p);
+    }
+    gl::end();
+  }
+
 }
 
 CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {
@@ -144,4 +157,5 @@ CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {
 #else
   settings->setWindowSize(768, 1024);
 #endif
+  settings->setMultiTouchEnabled();
 } )
