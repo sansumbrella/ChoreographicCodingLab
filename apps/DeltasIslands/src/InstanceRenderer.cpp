@@ -62,6 +62,7 @@ void InstanceRenderer::update( EntityManager &entities, EventManager &events, Ti
     _instance_data.emplace_back(InstanceData{ xf->transform(), instance->_openness });
   }
 
+  _instance_buffer->ensureMinimumSize(sizeof(InstanceData) * _instance_data.size());
   _instance_buffer->bufferSubData(0, sizeof(InstanceData) * _instance_data.size(), _instance_data.data());
 }
 

@@ -69,7 +69,7 @@ void DeltasIslandsApp::setup()
     handlePathData(data);
   });
 
-  createTestIsland();
+//  createTestIsland();
 }
 
 void DeltasIslandsApp::reloadAssets()
@@ -106,10 +106,12 @@ void DeltasIslandsApp::handlePathData(const ci::JsonTree &data)
       auto island = gatherIsland(_entities, id);
       if (island.empty())
       {
+        CI_LOG_I("Creating New Island: " << id);
         createIslandFromPath(_entities, path, id, 50);
       }
       else
       {
+        CI_LOG_I("Moving Island: " << id);
         mapIslandToPath(island, path);
       }
     }
