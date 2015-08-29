@@ -32,8 +32,9 @@ Hildegaard, sound artist
 Are we talking about Data Quality or Dance Quality?
 
 Qualities of Dance V. Qualities in Data
-
 Gaga
+Groove
+Degree of interruption
 Energy: choppy, smooth
 Balanced, unbalanced
 Texture, thickness
@@ -44,3 +45,6 @@ Moving from bones or flesh
 Small Dance
 - Lead viewer through some of the interior process.
 - Sharing the invisible parts of the dance.
+
+How do we find a general/common vocabulary between disciplines?
+What is left behind/reusable across projects?
