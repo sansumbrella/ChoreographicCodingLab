@@ -34,6 +34,7 @@ public:
   void keyDown( KeyEvent event ) override;
   void update() override;
   void draw() override;
+  void reloadAssets();
 private:
   CameraController       _camera;
   entityx::EventManager	 _events;
@@ -58,6 +59,11 @@ void DeltasIslandsApp::setup()
   _systems.configure();
 
   createTestIsland();
+}
+
+void DeltasIslandsApp::reloadAssets()
+{
+  
 }
 
 void DeltasIslandsApp::createTestIsland()
@@ -88,8 +94,11 @@ void DeltasIslandsApp::keyDown( KeyEvent event )
 {
   switch (event.getCode())
   {
-    case KeyEvent::KEY_r:
+    case KeyEvent::KEY_p:
       mapIslandToPath(gatherIsland(_entities, 0), randomPath());
+    break;
+    case KeyEvent::KEY_r:
+      reloadAssets();
     break;
     case KeyEvent::KEY_w:
     {

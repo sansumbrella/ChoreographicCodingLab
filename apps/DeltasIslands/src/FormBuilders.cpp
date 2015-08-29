@@ -132,12 +132,12 @@ BezierMesh createReed(const ci::gl::GlslProgRef &shader, const ci::gl::VboRef &i
   auto outer_normal1 = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(inner_closed - outer_closed))) * vec4(0, 1, 0, 0));;
   auto outer_normal2 = vec3(glm::mat4_cast(glm::rotation(vec3(1, 0, 0), normalize(inner_open - outer_open))) * vec4(0, 1, 0, 0));;
 
-  auto center = BezierVertex(vec3(0, 0.2, 0), vec3(0, 1, 0)).setNormals(vec3(0, 1, 0), vec3(0, 1, 0));
+  auto center = BezierVertex(vec3(0.01, 0.1, 0), vec3(0, 1, 0)).setNormals(vec3(0, 1, 0), vec3(0, 1, 0));
 
-  auto inner1 = BezierVertex(inner_closed, inner_open).setNormals(inner_normal1, inner_normal2);
+  auto inner1 = BezierVertex(inner_closed, inner_open).setNormals(vec3(1, 0, 0), vec3(0, 1, 0));
   auto inner2 = rotation * inner1;
 
-  auto outer1 = BezierVertex(outer_closed, outer_open).setNormals(outer_normal1, outer_normal2);
+  auto outer1 = BezierVertex(outer_closed, outer_open).setNormals(vec3(1, 0, 0), vec3(0, 1, 0));
   auto outer2 = rotation * outer1;
 
   // triangle between point and its dual

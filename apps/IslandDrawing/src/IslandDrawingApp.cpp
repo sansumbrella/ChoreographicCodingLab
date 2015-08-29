@@ -19,14 +19,13 @@ using namespace sansumbrella;
 
 struct Path
 {
-  std::string           _name;
   uint32_t              _id;
   std::vector<ci::vec2> _points;
 };
 
 struct Touch
 {
-  
+  std::vector<ci::vec2> _points;
 };
 
 class IslandDrawingApp : public App {
@@ -39,9 +38,12 @@ public:
 	void update() override;
 	void draw() override;
 
+  void createPath(const std::vector<ci::vec2> &points);
+
 private:
   std::vector<Path>                   _paths;
   std::unordered_map<uint32_t, Touch> _touches;
+  const int                           _max_paths = 7;
 
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
@@ -49,8 +51,8 @@ private:
 
 void IslandDrawingApp::setup()
 {
-  _paths.push_back(Path{"Hello", 0, {vec2(10.0f), vec2(0.0f)} });
-  _paths.push_back(Path{"Hello", 1, {vec2(10.0f), vec2(0.0f)} });
+  _paths.push_back(Path{0, {vec2(10.0f), vec2(0.0f)} });
+  _paths.push_back(Path{1, {vec2(10.0f), vec2(0.0f)} });
 
   auto port = 9191;
   _server = make_shared<JsonServer>( port );
@@ -95,11 +97,10 @@ void IslandDrawingApp::touchesMoved(cinder::app::TouchEvent event)
 
 void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
 {
-
-  if (_touches.empty())
+  for (auto &touch : event.getTouches())
   {
-    // send out path
-    CI_LOG_I("Path complete.");
+    auto &t = _touches[touch.getId()];
+    createPath(t._points);
   }
 }
 
