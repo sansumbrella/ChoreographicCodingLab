@@ -77,7 +77,7 @@ std::vector<entityx::Entity> gatherIsland(entityx::EntityManager &entities, uint
   return members;
 }
 
-void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Path2d &path)
+void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Path2d &path, float drawing_duration)
 {
   auto cache = Path2dCalcCache(path);
   auto i = 0.0f;
@@ -105,7 +105,7 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
     auto end_pos = planar(pos + (offset * normal * randFloat(0.4f, 1.0f)));
 //    auto vertical_offset = vec3(0, glm::simplex(pos * 0.1f) * 0.2f, 0);
     auto delta = distance(e.component<Transform>()->position(), end_pos);
-    auto duration = lmap(glm::clamp(delta, 0.0f, 40.0f), 0.0f, 40.0f, 1.0f, 3.0f);
+    auto duration = lmap(glm::clamp(delta, 0.0f, 40.0f), 0.0f, 40.0f, 1.0f, drawing_duration);
     sharedTimeline().apply(positionAnim(e))
       .hold(delay)
       .then<RampTo>(end_pos, duration, EaseInOutCubic());
@@ -135,7 +135,7 @@ void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Pat
   }
 }
 
-void animateIslandIntoPosition(const std::vector<entityx::Entity> &island)
+void animateIslandIntoPosition(const std::vector<entityx::Entity> &island, float drawing_duration)
 {
   auto i = 0.0f;
   for (auto e : island)
@@ -148,7 +148,7 @@ void animateIslandIntoPosition(const std::vector<entityx::Entity> &island)
     sharedTimeline().apply(&xf->position)
       .set( xf->position() - vec3( 0, 10, 0 ) )
       .hold( delay )
-      .then<RampTo>( xf->position(), 0.5f, EaseOutCubic() );
+      .then<RampTo>( xf->position(), drawing_duration, EaseOutCubic() );
   }
 }
 

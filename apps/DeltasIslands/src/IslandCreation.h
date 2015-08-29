@@ -20,9 +20,9 @@ std::vector<entityx::Entity> createIslandFromPath(entityx::EntityManager &entiti
 std::vector<entityx::Entity> gatherIsland(entityx::EntityManager &entities, uint32_t island);
 
 /// Map an existing island to a new path.
-void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Path2d &path);
+void mapIslandToPath(const std::vector<entityx::Entity> &entities, const ci::Path2d &path, float drawing_duration);
 
-void animateIslandIntoPosition(const std::vector<entityx::Entity> &entities);
+void animateIslandIntoPosition(const std::vector<entityx::Entity> &entities, float drawing_duration);
 
 /*
 /// TODO: use 3d polylines for creating islands

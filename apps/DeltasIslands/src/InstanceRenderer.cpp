@@ -22,8 +22,8 @@ InstanceRenderer::InstanceRenderer()
   instance_layout.append(geom::Attrib::CUSTOM_8, 16, sizeof(InstanceData), offsetof(InstanceData, transform), 1);
   instance_layout.append(geom::Attrib::CUSTOM_9, 1, sizeof(InstanceData), offsetof(InstanceData, openness), 1);
 
-  _shapes.push_back(createUmbrella(shader, -1.0f, _instance_buffer, instance_layout));
   _shapes.push_back(createReed(shader, _instance_buffer, instance_layout));
+//  _shapes.push_back(createUmbrella(shader, 1.0f, _instance_buffer, instance_layout));
 //  _shapes.push_back(createWing(shader, 1.0f, _instance_buffer, instance_layout));
 
   _shape_index = _shapes.size() - 1;

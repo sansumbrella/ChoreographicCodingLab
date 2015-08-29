@@ -93,12 +93,13 @@ void DeltasIslandsApp::handlePathData(const ci::JsonTree &data)
     {
       auto id = data.getChild("id").getValue<uint32_t>();
       auto points = data.getChild("points");
+      auto duration = data.getValueForKey<float>("duration");
 
       Path2d path;
       for (auto &p : points)
       {
         auto pos = vec2(p.getValueForKey<float>("x"), p.getValueForKey<float>("y"));
-        pos = mix(vec2(-20.0f), vec2(20.0f), pos);
+        pos = mix(vec2(-20.0f, -25.0f), vec2(20.0f, 25.0f), pos);
 
         if(path.empty())
         {
@@ -115,12 +116,12 @@ void DeltasIslandsApp::handlePathData(const ci::JsonTree &data)
       {
         CI_LOG_I("Creating New Island: " << id);
         island = createIslandFromPath(_entities, path, id, 50);
-        animateIslandIntoPosition(island);
+        animateIslandIntoPosition(island, duration);
       }
       else
       {
         CI_LOG_I("Moving Island: " << id);
-        mapIslandToPath(island, path);
+        mapIslandToPath(island, path, duration);
       }
     }
   }
@@ -139,7 +140,7 @@ void DeltasIslandsApp::createTestIsland()
   path.quadTo(pos + vec2(1, 1) * len, pos + vec2(2, 0) * len);
 
   auto island = createIslandFromPath(_entities, path);
-  animateIslandIntoPosition(island);
+  animateIslandIntoPosition(island, 2.0f);
 }
 
 void DeltasIslandsApp::keyDown( KeyEvent event )
@@ -147,13 +148,16 @@ void DeltasIslandsApp::keyDown( KeyEvent event )
   switch (event.getCode())
   {
     case KeyEvent::KEY_p:
-      mapIslandToPath(gatherIsland(_entities, 0), randomPath());
+      mapIslandToPath(gatherIsland(_entities, 0), randomPath(), 2.0f);
     break;
     case KeyEvent::KEY_r:
       reloadAssets();
     break;
     case KeyEvent::KEY_g:
       _show_gui = ! _show_gui;
+    break;
+    case KeyEvent::KEY_f:
+      setFullScreen(! isFullScreen());
     break;
     case KeyEvent::KEY_w:
     {
