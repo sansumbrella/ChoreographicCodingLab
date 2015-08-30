@@ -55,7 +55,7 @@ void DiscontinuousBodyApp::draw()
   {
     auto t = i / 100.0f;
     auto x = mix(0.0f, 4.0f, t);
-    auto y = sin(t * M_PI * 4.0f);
+    auto y = sin(t * M_PI * 4.0f + getElapsedSeconds() * 3.0f);
     points.push_back(vec3(x, y, 0));
   }
 
