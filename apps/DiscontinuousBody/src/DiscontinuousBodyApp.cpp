@@ -11,6 +11,7 @@
 #include "CCL_MocapData.h"
 
 #include "cinder/Rand.h"
+#include "cinder/Log.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -35,6 +36,19 @@ private:
   gl::GlslProgRef _shader;
 
   vector<Ribbon>  _ribbons;
+
+  gl::BatchRef    _sphere_batch;
+  gl::VboRef			_instance_vbo;
+
+  int             _current_frame = 0;
+
+  vector<CCL_MocapJoint>  _joint_list;
+  vector<size_t>          _ordered_indices;
+
+  size_t          frameIndex(int frame);
+  vector<size_t>  generateOrderedIndices(const std::vector<CCL_MocapJoint> &joints);
+
+
 };
 
 void DiscontinuousBodyApp::setup()
@@ -44,6 +58,8 @@ void DiscontinuousBodyApp::setup()
   _camera_ui.connect(getWindow());
 
   _camera.lookAt(vec3(0, 0, -50.0f), vec3(0), vec3(0, 1, 0));
+
+  _joint_list = ccl::loadMotionCaptureFromJson(getAssetPath("CCL_JOINT.json"));
 
   auto r = Ribbon();
   for (auto i = 0; i < 12; i += 1)
@@ -103,6 +119,23 @@ void DiscontinuousBodyApp::draw()
       gl::vertex(p);
     }
     gl::end();
+  }
+}
+
+size_t DiscontinuousBodyApp::frameIndex(int frame)
+{
+  if (_ordered_indices.empty())
+  {
+    return frame;
+  }
+  else if (frame >= _ordered_indices.size())
+  {
+    CI_LOG_W("Out of range index!");
+    return frame;
+  }
+  else
+  {
+    return _ordered_indices.at(frame);
   }
 }
 
