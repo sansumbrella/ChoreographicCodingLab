@@ -195,7 +195,7 @@ void DeltasIslandsApp::update()
     if (_json_client.isConnected())
     {
       auto server_info = "Connected to server at: " + _server_ip + ":" + to_string(_server_port);
-      ui::Text(server_info.c_str());
+      ui::Text(server_info.c_str(), "");
     }
     else
     {
