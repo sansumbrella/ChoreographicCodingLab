@@ -21,7 +21,7 @@ std::string serializePositions(entityx::EntityManager &entities)
   ComponentHandle<InstanceShape>  instance;
   std::stringstream ss;
 
-  for (auto e : entities.entities_with_components(xf, instance))
+  for (auto __unused e : entities.entities_with_components(xf, instance))
   {
     ss << xf->position().x << "," << xf->position().y << "," << xf->position().z << "," << instance->_openness << std::endl;
   }
