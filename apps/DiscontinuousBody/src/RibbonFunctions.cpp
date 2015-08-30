@@ -7,14 +7,16 @@
 
 #include "RibbonFunctions.h"
 
-using namespace sansumbrella;
 using namespace std;
 using namespace cinder;
+
+namespace sansumbrella
+{
 
 vector<vec3> createRibbon(float width, const std::function<float (float)> &shape_fn, const ci::vec3 &eye_vector, const std::vector<ci::vec3> &spine)
 {
   vector<vec3> ribbon;
-  ribbon.assign(spine.size() * 3, vec3(0));
+  ribbon.assign(spine.size() * 2, vec3(0));
 
   auto half_width = [w = width * 0.5f, &shape_fn] (float v) {
     return w * shape_fn(v);
@@ -45,13 +47,6 @@ vector<vec3> createRibbon(float width, const std::function<float (float)> &shape
   }
 
   return ribbon;
-  /*
-  auto iter = mVbo.mapVertexBuffer();
-  for( const auto &loc : mOutline )
-  {
-    iter.setPosition( loc );
-    ++iter;
-  }
-  */
 }
 
+} // namespace sansumbrella
