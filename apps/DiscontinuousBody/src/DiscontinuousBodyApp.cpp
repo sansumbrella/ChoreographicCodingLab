@@ -22,6 +22,7 @@ struct Ribbon
   vec3              _target;
   std::vector<vec3> _spine;
   std::vector<vec3> _triangles;
+  size_t            _joint_index = 0;
 };
 
 class DiscontinuousBodyApp : public App {
@@ -30,6 +31,10 @@ public:
 	void keyDown( KeyEvent event ) override;
 	void update() override;
 	void draw() override;
+
+  void updateRibbons();
+  void updateSequence();
+
 private:
   CameraPersp     _camera;
   CameraUi        _camera_ui;
@@ -41,9 +46,16 @@ private:
   gl::VboRef			_instance_vbo;
 
   int             _current_frame = 0;
+  float           _fps = 4.0f;
+  float           _frame_duration = 1.0f / _fps;
+  float           _current_time = 0.0f;
+  Timer           _frame_timer;
 
   vector<CCL_MocapJoint>  _joint_list;
   vector<size_t>          _ordered_indices;
+
+  vec3            currentJointPosition(int joint_index);
+  int             numFrames();
 
   size_t          frameIndex(int frame);
   vector<size_t>  generateOrderedIndices(const std::vector<CCL_MocapJoint> &joints);
@@ -53,39 +65,109 @@ private:
 
 void DiscontinuousBodyApp::setup()
 {
-  _camera = CameraPersp(getWindowWidth(), getWindowHeight(), 60.0f, 0.1f, 500.0f);
+  _camera = CameraPersp(getWindowWidth(), getWindowHeight(), 60.0f, 1.0f, 10000.0f);
   _camera_ui.setCamera(&_camera);
   _camera_ui.connect(getWindow());
 
   _camera.lookAt(vec3(0, 0, -50.0f), vec3(0), vec3(0, 1, 0));
+//  _camera.lookAt(vec3( 0, 500, 0 ), vec3( -1888.450,  142.485, -891.197 ));
 
-  _joint_list = ccl::loadMotionCaptureFromJson(getAssetPath("CCL_JOINT.json"));
+  _joint_list = ccl::loadMotionCaptureFromJson(getAssetPath("joint_sequence.json"));
+  _camera.lookAt(currentJointPosition(0));
 
-  auto r = Ribbon();
-  for (auto i = 0; i < 12; i += 1)
+  for (auto i = 0; i < _joint_list.size(); i += 1)
   {
-    auto t = i / 12.0f;
-    auto x = mix(0.0f, 4.0f, t);
-    auto y = sin(t * M_PI * 4.0f + getElapsedSeconds() * 3.0f);
-    r._spine.push_back(vec3(x, y, 0));
+    auto r = Ribbon();
+    auto pos = currentJointPosition(i);
+    r._spine.assign(16, pos);
+    r._joint_index = i;
+    r._target = pos;
+    _ribbons.push_back(r);
   }
-  _ribbons.push_back(r);
+
+  _ordered_indices = generateOrderedIndices(_joint_list);
+}
+
+vector<size_t> DiscontinuousBodyApp::generateOrderedIndices(const std::vector<CCL_MocapJoint> &joints)
+{
+  auto count = joints.at(0).jointPositions.size();
+  vector<size_t> indices;
+  indices.reserve(count);
+  for (auto i = 0; i < count; i += 1) {
+    indices.push_back(i);
+  }
+
+  auto sort_joint = 27;
+  std::stable_sort(indices.begin(), indices.end(), [&] (size_t lhs, size_t rhs) {
+    //
+    auto lhs_joint = joints.at(sort_joint).jointPositions.at(lhs);
+    auto rhs_joint = joints.at(sort_joint).jointPositions.at(rhs);
+
+    return lhs_joint.x < rhs_joint.x;
+  });
+
+  std::stable_sort(indices.begin(), indices.end(), [&] (size_t lhs, size_t rhs) {
+    //
+    auto lhs_joint = joints.at(sort_joint).jointPositions.at(lhs);
+    auto rhs_joint = joints.at(sort_joint).jointPositions.at(rhs);
+
+    return lhs_joint.z < rhs_joint.z;
+  });
+
+  return indices;
 }
 
 void DiscontinuousBodyApp::keyDown( KeyEvent event )
 {
-  auto pos = randVec3() * 3.0f;
-  for (auto &r : _ribbons)
+  switch (event.getCode())
   {
-    r._target = vec3(pos);
+    case KeyEvent::KEY_f:
+      _camera.lookAt(currentJointPosition(0));
+    break;
+    default:
+    break;
   }
 }
 
 void DiscontinuousBodyApp::update()
 {
+  updateSequence();
+  updateRibbons();
+}
+
+vec3 DiscontinuousBodyApp::currentJointPosition(int joint_index)
+{
+  return _joint_list.at(joint_index).jointPositions.at(frameIndex(_current_frame));
+}
+
+void DiscontinuousBodyApp::updateSequence()
+{
+  _current_time += _frame_timer.getSeconds();
+  _frame_timer.start();
+
+  if (_current_time > _frame_duration) {
+    _current_time -= _frame_duration;
+    _current_frame = (_current_frame + 1) % numFrames();
+  }
+}
+
+int DiscontinuousBodyApp::numFrames()
+{
+  return _joint_list[0].jointPositions.size();
+}
+
+void DiscontinuousBodyApp::updateRibbons()
+{
   auto easing = 0.5f;
   for (auto &r: _ribbons)
   {
+    auto target = currentJointPosition(r._joint_index);
+    const auto no_data_value = -123456;
+    if (glm::all(glm::greaterThan(target, vec3(no_data_value))))
+    {
+      r._target = target;
+    }
+
     auto &points = r._spine;
     for (auto i = points.size() - 1; i > 0; i -= 1)
     {
@@ -99,8 +181,10 @@ void DiscontinuousBodyApp::update()
 
   for (auto &r: _ribbons)
   {
-    r._triangles = sansumbrella::createRibbon(0.2f, ch::EaseOutCubic(), _camera.getViewDirection(), r._spine);
+    r._triangles = sansumbrella::createRibbon(12.0f, ch::EaseInOutQuad(), _camera.getViewDirection(), r._spine);
   }
+
+//  _camera.lookAt(currentJointPosition(0));
 }
 
 void DiscontinuousBodyApp::draw()
