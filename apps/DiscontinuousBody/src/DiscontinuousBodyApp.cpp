@@ -53,13 +53,14 @@ private:
 
   vector<CCL_MocapJoint>  _joint_list;
   vector<size_t>          _ordered_indices;
+  ci::gl::VboRef   _position_buffer;
+  ci::gl::BatchRef _batch;
 
   vec3            currentJointPosition(int joint_index);
   int             numFrames();
 
   size_t          frameIndex(int frame);
   vector<size_t>  generateOrderedIndices(const std::vector<CCL_MocapJoint> &joints);
-
 
 };
 
@@ -122,7 +123,7 @@ void DiscontinuousBodyApp::keyDown( KeyEvent event )
   switch (event.getCode())
   {
     case KeyEvent::KEY_f:
-      _camera.lookAt(currentJointPosition(0));
+      _camera.lookAt(currentJointPosition(0) - vec3(0, 0, 2000), currentJointPosition(0));
     break;
     default:
     break;
@@ -179,9 +180,17 @@ void DiscontinuousBodyApp::updateRibbons()
     point += (r._target - point) * easing;
   }
 
+  auto shape_fn = [] (float value) {
+    if (value < 0.5f) {
+      return ch::easeInQuad(lmap(value, 0.0f, 0.5f, 0.0f, 1.0f));
+    }
+    else {
+      return ch::easeInQuad(lmap(value, 0.5f, 1.0f, 1.0f, 0.0f));
+    }
+  };
   for (auto &r: _ribbons)
   {
-    r._triangles = sansumbrella::createRibbon(12.0f, ch::EaseInOutQuad(), _camera.getViewDirection(), r._spine);
+    r._triangles = sansumbrella::createRibbon(12.0f, shape_fn, _camera.getViewDirection(), r._spine);
   }
 
 //  _camera.lookAt(currentJointPosition(0));
