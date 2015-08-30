@@ -1,0 +1,638 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720219952D00008149E2 /* AVFoundation.framework */; };
+		006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720319952D00008149E2 /* CoreMedia.framework */; };
+		0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0091D8F80E81B9330029341E /* OpenGL.framework */; };
+		00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784AF0FF439BC000DE1D7 /* Accelerate.framework */; };
+		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
+		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
+		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
+		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		01EF8DC3361447BCB15D5BA2 /* TimelineItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E894D9CF5FE04F90821D8D41 /* TimelineItem.cpp */; };
+		0802E576E69F46729AFD46D2 /* Timeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA32A4C5D7A343968CD76CC0 /* Timeline.cpp */; };
+		15CD7D1E1B93866D00C76083 /* DiscontinuousBodyApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D1D1B93866D00C76083 /* DiscontinuousBodyApp.cpp */; };
+		15CD7D241B9387A600C76083 /* RibbonFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D221B9387A600C76083 /* RibbonFunctions.cpp */; };
+		15CD7D2C1B93979300C76083 /* CCL_MocapData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D261B93979300C76083 /* CCL_MocapData.cpp */; };
+		15CD7D2D1B93979300C76083 /* CCL_MocapJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D281B93979300C76083 /* CCL_MocapJoint.cpp */; };
+		15CD7D2E1B93979300C76083 /* Jzon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D2A1B93979300C76083 /* Jzon.cpp */; };
+		2A692D06E2124FBB8E7E89E6 /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1165A23C5AEF4EFDBB731A37 /* VerletPhysicsSystem.cpp */; };
+		328D9D8B8A1C471A88FAA242 /* Cue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B10D6DB7758344BBA4EB54C1 /* Cue.cpp */; };
+		43A1633408DE428BB9F4E97C /* TransformSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8562A279F4944EAB81E0CB94 /* TransformSystem.cpp */; };
+		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
+		55A5B8D34AF2408FAE58DD19 /* CinderImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63142C0DDB434E6C8E03C235 /* CinderImGui.cpp */; };
+		5C304118C0214406B26B4770 /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = 160AE43553FC4289A9F76281 /* Entity.cc */; };
+		7D1E4182437A44C992573950 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5C314AEDDA0475BA67EA72A /* imgui.cpp */; };
+		81C8592353C84ABE993900A0 /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 97E8BF0F080E492C9CE7DF76 /* Pool.cc */; };
+		87E36C2FD9224F60A78FF011 /* ExpiresSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4442CC3ECA3448FDAE832A8B /* ExpiresSystem.cpp */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		B08F4D289B024A3B86436199 /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE9F37D0EA564BC5B017CB7B /* BehaviorSystem.cpp */; };
+		C7254A8EF7EE4E8EBDBB7991 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = FED9FD9A7FA44A2FAEC19C4D /* CinderApp.icns */; };
+		C8F495C63F224A7DA9DBCF50 /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = 70B943977F9440F9BD63C2BF /* System.cc */; };
+		CCF91ADC90A54A0A90E40BD3 /* MotionGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1937B5392EBF498B807829C0 /* MotionGroup.cpp */; };
+		E1C610691C904EDBAD84CAEE /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 639A272AF96440BE9C3B393A /* imgui_draw.cpp */; };
+		F10E58F827E34E53AF9860E4 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F7970A403A4C20985F6ABF /* imgui_demo.cpp */; };
+		FAEA712400224DC6B6C5A88A /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = 60215589D40B494291E97606 /* Event.cc */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		006D720219952D00008149E2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		006D720319952D00008149E2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0091D8F80E81B9330029341E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		00B784AF0FF439BC000DE1D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		00B784B10FF439BC000DE1D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		00B995581B128DF400A5C623 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		00B995591B128DF400A5C623 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
+		00F7970A403A4C20985F6ABF /* imgui_demo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = imgui_demo.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui_demo.cpp"; sourceTree = "<group>"; };
+		03B18178DB6A446B802CD0E0 /* DiscontinuousBody_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = DiscontinuousBody_Prefix.pch; sourceTree = "<group>"; };
+		0A707924567B43B08E951DF4 /* HierarchyComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HierarchyComponent.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/HierarchyComponent.h"; sourceTree = "<group>"; };
+		0F5ABD1082064C968941D9EC /* ExpiresSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExpiresSystem.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/ExpiresSystem.h"; sourceTree = "<group>"; };
+		0FD3FC57096F41E7A14B5BE1 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui.h"; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		1165A23C5AEF4EFDBB731A37 /* VerletPhysicsSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = VerletPhysicsSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/VerletPhysicsSystem.cpp"; sourceTree = "<group>"; };
+		1507217760A8449A941713AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15CD7D1D1B93866D00C76083 /* DiscontinuousBodyApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DiscontinuousBodyApp.cpp; sourceTree = "<group>"; };
+		15CD7D221B9387A600C76083 /* RibbonFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RibbonFunctions.cpp; sourceTree = "<group>"; };
+		15CD7D231B9387A600C76083 /* RibbonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RibbonFunctions.h; sourceTree = "<group>"; };
+		15CD7D261B93979300C76083 /* CCL_MocapData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCL_MocapData.cpp; sourceTree = "<group>"; };
+		15CD7D271B93979300C76083 /* CCL_MocapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCL_MocapData.h; sourceTree = "<group>"; };
+		15CD7D281B93979300C76083 /* CCL_MocapJoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCL_MocapJoint.cpp; sourceTree = "<group>"; };
+		15CD7D291B93979300C76083 /* CCL_MocapJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCL_MocapJoint.h; sourceTree = "<group>"; };
+		15CD7D2A1B93979300C76083 /* Jzon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Jzon.cpp; sourceTree = "<group>"; };
+		15CD7D2B1B93979300C76083 /* Jzon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jzon.h; sourceTree = "<group>"; };
+		160AE43553FC4289A9F76281 /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Entity.cc; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/Entity.cc"; sourceTree = "<group>"; };
+		1937B5392EBF498B807829C0 /* MotionGroup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = MotionGroup.cpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/MotionGroup.cpp; sourceTree = "<group>"; };
+		1D3F61C330CF47BFA2A5CC52 /* Timeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Timeline.h; sourceTree = "<group>"; };
+		2063A3232A8B480CA88A02B4 /* Cue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Cue.h; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Cue.h; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		2DEFF4F5CC10420987E3C94F /* Phrase.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Phrase.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Phrase.hpp; sourceTree = "<group>"; };
+		34D6E4131110416AABE2486C /* RenderLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RenderLayer.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/RenderLayer.h"; sourceTree = "<group>"; };
+		376D5053B26B4479A43DAE53 /* MotionGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MotionGroup.h; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/MotionGroup.h; sourceTree = "<group>"; };
+		3C3D0E31826D4B0D8AFD220C /* Motion.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Motion.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Motion.hpp; sourceTree = "<group>"; };
+		40AE09CC859743108F68D0F2 /* Output.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Output.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Output.hpp; sourceTree = "<group>"; };
+		4442CC3ECA3448FDAE832A8B /* ExpiresSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = ExpiresSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/ExpiresSystem.cpp"; sourceTree = "<group>"; };
+		49A4A89FDB4948C0B02B3A46 /* CinderImGui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CinderImGui.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/include/CinderImGui.h"; sourceTree = "<group>"; };
+		4BD196478E224AF990C85EFF /* TimeType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TimeType.h; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimeType.h; sourceTree = "<group>"; };
+		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		58E089B1D7D24E6390ABD0E7 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Event.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/Event.h"; sourceTree = "<group>"; };
+		60215589D40B494291E97606 /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Event.cc; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/Event.cc"; sourceTree = "<group>"; };
+		60C1CC2AB9A840CD914788D8 /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = entityx.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/entityx.h"; sourceTree = "<group>"; };
+		63142C0DDB434E6C8E03C235 /* CinderImGui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderImGui.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/src/CinderImGui.cpp"; sourceTree = "<group>"; };
+		639A272AF96440BE9C3B393A /* imgui_draw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = imgui_draw.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui_draw.cpp"; sourceTree = "<group>"; };
+		663EFD02ACDD44D59E682C46 /* Choreograph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Choreograph.h; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Choreograph.h; sourceTree = "<group>"; };
+		6CBA6AB030454E548BB91C54 /* imgui_user.inl */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = imgui_user.inl; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/include/imgui_user.inl"; sourceTree = "<group>"; };
+		70B943977F9440F9BD63C2BF /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = System.cc; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/System.cc"; sourceTree = "<group>"; };
+		72E4D8F129954A4D9F3405AF /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Behavior.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/Behavior.h"; sourceTree = "<group>"; };
+		734CE36FA300425B83F621F6 /* TimelineOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = TimelineOptions.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimelineOptions.hpp; sourceTree = "<group>"; };
+		80D52C08D83E45A890261E96 /* Easing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Easing.h; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Easing.h; sourceTree = "<group>"; };
+		841EB9FBFD9F47F0AA85061A /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/Entity.h"; sourceTree = "<group>"; };
+		8562A279F4944EAB81E0CB94 /* TransformSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = TransformSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/TransformSystem.cpp"; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* DiscontinuousBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscontinuousBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F176C7446434C708B62F8F2 /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = quick.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/quick.h"; sourceTree = "<group>"; };
+		8F2FF7083C454C378B279D15 /* VerletBody.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VerletBody.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/VerletBody.h"; sourceTree = "<group>"; };
+		97E8BF0F080E492C9CE7DF76 /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Pool.cc; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/help/Pool.cc"; sourceTree = "<group>"; };
+		983D4FF3599944E293ABF5D4 /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/Transform.h"; sourceTree = "<group>"; };
+		99C45D639BBC48B49A6A67B2 /* HierarchyComponentT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HierarchyComponentT.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/HierarchyComponentT.h"; sourceTree = "<group>"; };
+		9FD84F84A7E04F66A0E61D41 /* TimelineItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TimelineItem.h; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimelineItem.h; sourceTree = "<group>"; };
+		A7E68894D4B641498937EFB8 /* Expires.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Expires.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/Expires.h"; sourceTree = "<group>"; };
+		AA32A4C5D7A343968CD76CC0 /* Timeline.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = Timeline.cpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Timeline.cpp; sourceTree = "<group>"; };
+		AAF1FC52A07A4C44BB04C11E /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = config.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/entityx/config.h"; sourceTree = "<group>"; };
+		ACDBE48962C545DD8DDB1EC9 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
+		B10D6DB7758344BBA4EB54C1 /* Cue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = Cue.cpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Cue.cpp; sourceTree = "<group>"; };
+		B8418736615D46FFB60087C2 /* Sequence.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Sequence.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Sequence.hpp; sourceTree = "<group>"; };
+		CC99044A8BCA4F16A3D26278 /* imgui_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui_internal.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui_internal.h"; sourceTree = "<group>"; };
+		CF9B3A861EB348B293E6DF7D /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/System.h"; sourceTree = "<group>"; };
+		D51B44A2B19A4828A7388A14 /* BehaviorSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BehaviorSystem.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.h"; sourceTree = "<group>"; };
+		D9353135625147F49437CB0C /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imconfig.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imconfig.h"; sourceTree = "<group>"; };
+		DABF1F4C13CB42DC857DC6DF /* CinderSpecialization.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = CinderSpecialization.hpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/specialization/CinderSpecialization.hpp; sourceTree = "<group>"; };
+		DCA5CE242EDB45D9B51CD791 /* VerletPhysicsSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VerletPhysicsSystem.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/VerletPhysicsSystem.h"; sourceTree = "<group>"; };
+		DE79B3656F1C4288B0A90947 /* TransformSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TransformSystem.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/TransformSystem.h"; sourceTree = "<group>"; };
+		DE9F37D0EA564BC5B017CB7B /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BehaviorSystem.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.cpp"; sourceTree = "<group>"; };
+		E5C314AEDDA0475BA67EA72A /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = imgui.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui.cpp"; sourceTree = "<group>"; };
+		E894D9CF5FE04F90821D8D41 /* TimelineItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = TimelineItem.cpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/TimelineItem.cpp; sourceTree = "<group>"; };
+		FC133A2EF6C14048A628B7D8 /* imgui_user.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui_user.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/include/imgui_user.h"; sourceTree = "<group>"; };
+		FED9FD9A7FA44A2FAEC19C4D /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CinderApp.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */,
+				006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */,
+				5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */,
+				00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */,
+				00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */,
+				00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */,
+				00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */,
+				00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */,
+				00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				7121DE7F49DB42D7BB94C546 /* Choreograph */,
+				93128993BFE2481AA50DE026 /* ImGui */,
+				9B67E63CE3DA450C9C87F019 /* Entity Component System */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
+		0DF250B56BD84CBC9CCB835A /* specialization */ = {
+			isa = PBXGroup;
+			children = (
+				DABF1F4C13CB42DC857DC6DF /* CinderSpecialization.hpp */,
+			);
+			name = specialization;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				006D720219952D00008149E2 /* AVFoundation.framework */,
+				006D720319952D00008149E2 /* CoreMedia.framework */,
+				00B784AF0FF439BC000DE1D7 /* Accelerate.framework */,
+				00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */,
+				00B784B10FF439BC000DE1D7 /* AudioUnit.framework */,
+				00B784B20FF439BC000DE1D7 /* CoreAudio.framework */,
+				5323E6B10EAFCA74003A9687 /* CoreVideo.framework */,
+				0091D8F80E81B9330029341E /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				00B995581B128DF400A5C623 /* IOKit.framework */,
+				00B995591B128DF400A5C623 /* IOSurface.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		15CD7D1C1B93866D00C76083 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				15CD7D1D1B93866D00C76083 /* DiscontinuousBodyApp.cpp */,
+				15CD7D221B9387A600C76083 /* RibbonFunctions.cpp */,
+				15CD7D231B9387A600C76083 /* RibbonFunctions.h */,
+				15CD7D251B93979300C76083 /* other */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		15CD7D251B93979300C76083 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				15CD7D261B93979300C76083 /* CCL_MocapData.cpp */,
+				15CD7D271B93979300C76083 /* CCL_MocapData.h */,
+				15CD7D281B93979300C76083 /* CCL_MocapJoint.cpp */,
+				15CD7D291B93979300C76083 /* CCL_MocapJoint.h */,
+				15CD7D2A1B93979300C76083 /* Jzon.cpp */,
+				15CD7D2B1B93979300C76083 /* Jzon.h */,
+			);
+			path = other;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* DiscontinuousBody.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22CF98F5052A4FE38BD53931 /* choreograph */ = {
+			isa = PBXGroup;
+			children = (
+				3C3D0E31826D4B0D8AFD220C /* Motion.hpp */,
+				40AE09CC859743108F68D0F2 /* Output.hpp */,
+				2DEFF4F5CC10420987E3C94F /* Phrase.hpp */,
+				B8418736615D46FFB60087C2 /* Sequence.hpp */,
+				734CE36FA300425B83F621F6 /* TimelineOptions.hpp */,
+				663EFD02ACDD44D59E682C46 /* Choreograph.h */,
+				2063A3232A8B480CA88A02B4 /* Cue.h */,
+				80D52C08D83E45A890261E96 /* Easing.h */,
+				376D5053B26B4479A43DAE53 /* MotionGroup.h */,
+				1D3F61C330CF47BFA2A5CC52 /* Timeline.h */,
+				9FD84F84A7E04F66A0E61D41 /* TimelineItem.h */,
+				4BD196478E224AF990C85EFF /* TimeType.h */,
+				B10D6DB7758344BBA4EB54C1 /* Cue.cpp */,
+				1937B5392EBF498B807829C0 /* MotionGroup.cpp */,
+				AA32A4C5D7A343968CD76CC0 /* Timeline.cpp */,
+				E894D9CF5FE04F90821D8D41 /* TimelineItem.cpp */,
+				0DF250B56BD84CBC9CCB835A /* specialization */,
+			);
+			name = choreograph;
+			sourceTree = "<group>";
+		};
+		2615E56F5883484C96AAB797 /* soso */ = {
+			isa = PBXGroup;
+			children = (
+				4F3F137E3BCB4D498C66CD48 /* entityx */,
+				72E4D8F129954A4D9F3405AF /* Behavior.h */,
+				D51B44A2B19A4828A7388A14 /* BehaviorSystem.h */,
+				A7E68894D4B641498937EFB8 /* Expires.h */,
+				0F5ABD1082064C968941D9EC /* ExpiresSystem.h */,
+				0A707924567B43B08E951DF4 /* HierarchyComponent.h */,
+				99C45D639BBC48B49A6A67B2 /* HierarchyComponentT.h */,
+				34D6E4131110416AABE2486C /* RenderLayer.h */,
+				983D4FF3599944E293ABF5D4 /* Transform.h */,
+				DE79B3656F1C4288B0A90947 /* TransformSystem.h */,
+				8F2FF7083C454C378B279D15 /* VerletBody.h */,
+				DCA5CE242EDB45D9B51CD791 /* VerletPhysicsSystem.h */,
+				DE9F37D0EA564BC5B017CB7B /* BehaviorSystem.cpp */,
+				4442CC3ECA3448FDAE832A8B /* ExpiresSystem.cpp */,
+				8562A279F4944EAB81E0CB94 /* TransformSystem.cpp */,
+				1165A23C5AEF4EFDBB731A37 /* VerletPhysicsSystem.cpp */,
+			);
+			name = soso;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* DiscontinuousBody */ = {
+			isa = PBXGroup;
+			children = (
+				01B97315FEAEA392516A2CEA /* Blocks */,
+				29B97315FDCFA39411CA2CEA /* Headers */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				15CD7D1C1B93866D00C76083 /* src */,
+			);
+			name = DiscontinuousBody;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				ACDBE48962C545DD8DDB1EC9 /* Resources.h */,
+				03B18178DB6A446B802CD0E0 /* DiscontinuousBody_Prefix.pch */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FED9FD9A7FA44A2FAEC19C4D /* CinderApp.icns */,
+				1507217760A8449A941713AA /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3ED7338DCBDC4675AD6144F3 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				63142C0DDB434E6C8E03C235 /* CinderImGui.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		483208D1BD8B453591369BA1 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				22CF98F5052A4FE38BD53931 /* choreograph */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		4F3F137E3BCB4D498C66CD48 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				AAF1FC52A07A4C44BB04C11E /* config.h */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		57C505C1DAB24DCF990C0448 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2615E56F5883484C96AAB797 /* soso */,
+				DF9EA7F596F6419DB32F3D63 /* entityx */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		6866A7D37A1E4B23870CB559 /* imgui */ = {
+			isa = PBXGroup;
+			children = (
+				D9353135625147F49437CB0C /* imconfig.h */,
+				0FD3FC57096F41E7A14B5BE1 /* imgui.h */,
+				CC99044A8BCA4F16A3D26278 /* imgui_internal.h */,
+				E5C314AEDDA0475BA67EA72A /* imgui.cpp */,
+				639A272AF96440BE9C3B393A /* imgui_draw.cpp */,
+				00F7970A403A4C20985F6ABF /* imgui_demo.cpp */,
+			);
+			name = imgui;
+			sourceTree = "<group>";
+		};
+		6C49F59C005D48B48F55A811 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				49A4A89FDB4948C0B02B3A46 /* CinderImGui.h */,
+				FC133A2EF6C14048A628B7D8 /* imgui_user.h */,
+				6CBA6AB030454E548BB91C54 /* imgui_user.inl */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		6D90B6B5672D434AA7F78F34 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				841EB9FBFD9F47F0AA85061A /* Entity.h */,
+				60C1CC2AB9A840CD914788D8 /* entityx.h */,
+				58E089B1D7D24E6390ABD0E7 /* Event.h */,
+				8F176C7446434C708B62F8F2 /* quick.h */,
+				CF9B3A861EB348B293E6DF7D /* System.h */,
+				160AE43553FC4289A9F76281 /* Entity.cc */,
+				60215589D40B494291E97606 /* Event.cc */,
+				70B943977F9440F9BD63C2BF /* System.cc */,
+				7ACA92B8809842CE971E280B /* help */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		7121DE7F49DB42D7BB94C546 /* Choreograph */ = {
+			isa = PBXGroup;
+			children = (
+				483208D1BD8B453591369BA1 /* src */,
+			);
+			name = Choreograph;
+			sourceTree = "<group>";
+		};
+		76ADC6F7AEB14D9F8C18EC8F /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				6866A7D37A1E4B23870CB559 /* imgui */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		7ACA92B8809842CE971E280B /* help */ = {
+			isa = PBXGroup;
+			children = (
+				97E8BF0F080E492C9CE7DF76 /* Pool.cc */,
+			);
+			name = help;
+			sourceTree = "<group>";
+		};
+		93128993BFE2481AA50DE026 /* ImGui */ = {
+			isa = PBXGroup;
+			children = (
+				6C49F59C005D48B48F55A811 /* include */,
+				76ADC6F7AEB14D9F8C18EC8F /* lib */,
+				3ED7338DCBDC4675AD6144F3 /* src */,
+			);
+			name = ImGui;
+			sourceTree = "<group>";
+		};
+		9B67E63CE3DA450C9C87F019 /* Entity Component System */ = {
+			isa = PBXGroup;
+			children = (
+				57C505C1DAB24DCF990C0448 /* src */,
+			);
+			name = "Entity Component System";
+			sourceTree = "<group>";
+		};
+		DF9EA7F596F6419DB32F3D63 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				6D90B6B5672D434AA7F78F34 /* entityx */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* DiscontinuousBody */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "DiscontinuousBody" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DiscontinuousBody;
+			productInstallPath = "$(HOME)/Applications";
+			productName = DiscontinuousBody;
+			productReference = 8D1107320486CEB800E47090 /* DiscontinuousBody.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "DiscontinuousBody" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* DiscontinuousBody */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* DiscontinuousBody */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7254A8EF7EE4E8EBDBB7991 /* CinderApp.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15CD7D2C1B93979300C76083 /* CCL_MocapData.cpp in Sources */,
+				328D9D8B8A1C471A88FAA242 /* Cue.cpp in Sources */,
+				CCF91ADC90A54A0A90E40BD3 /* MotionGroup.cpp in Sources */,
+				0802E576E69F46729AFD46D2 /* Timeline.cpp in Sources */,
+				15CD7D2D1B93979300C76083 /* CCL_MocapJoint.cpp in Sources */,
+				01EF8DC3361447BCB15D5BA2 /* TimelineItem.cpp in Sources */,
+				55A5B8D34AF2408FAE58DD19 /* CinderImGui.cpp in Sources */,
+				7D1E4182437A44C992573950 /* imgui.cpp in Sources */,
+				15CD7D241B9387A600C76083 /* RibbonFunctions.cpp in Sources */,
+				E1C610691C904EDBAD84CAEE /* imgui_draw.cpp in Sources */,
+				F10E58F827E34E53AF9860E4 /* imgui_demo.cpp in Sources */,
+				B08F4D289B024A3B86436199 /* BehaviorSystem.cpp in Sources */,
+				87E36C2FD9224F60A78FF011 /* ExpiresSystem.cpp in Sources */,
+				43A1633408DE428BB9F4E97C /* TransformSystem.cpp in Sources */,
+				2A692D06E2124FBB8E7E89E6 /* VerletPhysicsSystem.cpp in Sources */,
+				15CD7D2E1B93979300C76083 /* Jzon.cpp in Sources */,
+				5C304118C0214406B26B4770 /* Entity.cc in Sources */,
+				FAEA712400224DC6B6C5A88A /* Event.cc in Sources */,
+				15CD7D1E1B93866D00C76083 /* DiscontinuousBodyApp.cpp in Sources */,
+				C8F495C63F224A7DA9DBCF50 /* System.cc in Sources */,
+				81C8592353C84ABE993900A0 /* Pool.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DiscontinuousBody_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = DiscontinuousBody;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DiscontinuousBody_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = DiscontinuousBody;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = ../../../../../Code/cinder/master;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../../../Code/cinder/master/blocks/Choreograph/src \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib\" \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/include\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx\"";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = ../../../../../Code/cinder/master;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../../../Code/cinder/master/blocks/Choreograph/src \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib\" \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/include\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx\"";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "DiscontinuousBody" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "DiscontinuousBody" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
