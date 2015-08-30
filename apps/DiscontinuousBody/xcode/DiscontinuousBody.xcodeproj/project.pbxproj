@@ -20,6 +20,9 @@
 		0802E576E69F46729AFD46D2 /* Timeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA32A4C5D7A343968CD76CC0 /* Timeline.cpp */; };
 		15CD7D1E1B93866D00C76083 /* DiscontinuousBodyApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D1D1B93866D00C76083 /* DiscontinuousBodyApp.cpp */; };
 		15CD7D241B9387A600C76083 /* RibbonFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D221B9387A600C76083 /* RibbonFunctions.cpp */; };
+		15CD7D2C1B93979300C76083 /* CCL_MocapData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D261B93979300C76083 /* CCL_MocapData.cpp */; };
+		15CD7D2D1B93979300C76083 /* CCL_MocapJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D281B93979300C76083 /* CCL_MocapJoint.cpp */; };
+		15CD7D2E1B93979300C76083 /* Jzon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D2A1B93979300C76083 /* Jzon.cpp */; };
 		2A692D06E2124FBB8E7E89E6 /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1165A23C5AEF4EFDBB731A37 /* VerletPhysicsSystem.cpp */; };
 		328D9D8B8A1C471A88FAA242 /* Cue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B10D6DB7758344BBA4EB54C1 /* Cue.cpp */; };
 		43A1633408DE428BB9F4E97C /* TransformSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8562A279F4944EAB81E0CB94 /* TransformSystem.cpp */; };
@@ -60,6 +63,12 @@
 		15CD7D1D1B93866D00C76083 /* DiscontinuousBodyApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DiscontinuousBodyApp.cpp; sourceTree = "<group>"; };
 		15CD7D221B9387A600C76083 /* RibbonFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RibbonFunctions.cpp; sourceTree = "<group>"; };
 		15CD7D231B9387A600C76083 /* RibbonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RibbonFunctions.h; sourceTree = "<group>"; };
+		15CD7D261B93979300C76083 /* CCL_MocapData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCL_MocapData.cpp; sourceTree = "<group>"; };
+		15CD7D271B93979300C76083 /* CCL_MocapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCL_MocapData.h; sourceTree = "<group>"; };
+		15CD7D281B93979300C76083 /* CCL_MocapJoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCL_MocapJoint.cpp; sourceTree = "<group>"; };
+		15CD7D291B93979300C76083 /* CCL_MocapJoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCL_MocapJoint.h; sourceTree = "<group>"; };
+		15CD7D2A1B93979300C76083 /* Jzon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Jzon.cpp; sourceTree = "<group>"; };
+		15CD7D2B1B93979300C76083 /* Jzon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jzon.h; sourceTree = "<group>"; };
 		160AE43553FC4289A9F76281 /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; name = Entity.cc; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/Entity.cc"; sourceTree = "<group>"; };
 		1937B5392EBF498B807829C0 /* MotionGroup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = MotionGroup.cpp; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/MotionGroup.cpp; sourceTree = "<group>"; };
 		1D3F61C330CF47BFA2A5CC52 /* Timeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Timeline.h; path = ../../../../../Code/cinder/master/blocks/Choreograph/src/choreograph/Timeline.h; sourceTree = "<group>"; };
@@ -188,9 +197,23 @@
 				15CD7D1D1B93866D00C76083 /* DiscontinuousBodyApp.cpp */,
 				15CD7D221B9387A600C76083 /* RibbonFunctions.cpp */,
 				15CD7D231B9387A600C76083 /* RibbonFunctions.h */,
+				15CD7D251B93979300C76083 /* other */,
 			);
 			name = src;
 			path = ../src;
+			sourceTree = "<group>";
+		};
+		15CD7D251B93979300C76083 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				15CD7D261B93979300C76083 /* CCL_MocapData.cpp */,
+				15CD7D271B93979300C76083 /* CCL_MocapData.h */,
+				15CD7D281B93979300C76083 /* CCL_MocapJoint.cpp */,
+				15CD7D291B93979300C76083 /* CCL_MocapJoint.h */,
+				15CD7D2A1B93979300C76083 /* Jzon.cpp */,
+				15CD7D2B1B93979300C76083 /* Jzon.h */,
+			);
+			path = other;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -473,9 +496,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15CD7D2C1B93979300C76083 /* CCL_MocapData.cpp in Sources */,
 				328D9D8B8A1C471A88FAA242 /* Cue.cpp in Sources */,
 				CCF91ADC90A54A0A90E40BD3 /* MotionGroup.cpp in Sources */,
 				0802E576E69F46729AFD46D2 /* Timeline.cpp in Sources */,
+				15CD7D2D1B93979300C76083 /* CCL_MocapJoint.cpp in Sources */,
 				01EF8DC3361447BCB15D5BA2 /* TimelineItem.cpp in Sources */,
 				55A5B8D34AF2408FAE58DD19 /* CinderImGui.cpp in Sources */,
 				7D1E4182437A44C992573950 /* imgui.cpp in Sources */,
@@ -486,6 +511,7 @@
 				87E36C2FD9224F60A78FF011 /* ExpiresSystem.cpp in Sources */,
 				43A1633408DE428BB9F4E97C /* TransformSystem.cpp in Sources */,
 				2A692D06E2124FBB8E7E89E6 /* VerletPhysicsSystem.cpp in Sources */,
+				15CD7D2E1B93979300C76083 /* Jzon.cpp in Sources */,
 				5C304118C0214406B26B4770 /* Entity.cc in Sources */,
 				FAEA712400224DC6B6C5A88A /* Event.cc in Sources */,
 				15CD7D1E1B93866D00C76083 /* DiscontinuousBodyApp.cpp in Sources */,

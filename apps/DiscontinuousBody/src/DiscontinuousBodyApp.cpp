@@ -8,21 +8,33 @@
 #include "choreograph/Choreograph.h"
 
 #include "RibbonFunctions.h"
+#include "CCL_MocapData.h"
+
+#include "cinder/Rand.h"
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 
+struct Ribbon
+{
+  vec3              _target;
+  std::vector<vec3> _spine;
+  std::vector<vec3> _triangles;
+};
+
 class DiscontinuousBodyApp : public App {
 public:
 	void setup() override;
-	void mouseDown( MouseEvent event ) override;
+	void keyDown( KeyEvent event ) override;
 	void update() override;
 	void draw() override;
 private:
-  CameraPersp _camera;
-  CameraUi    _camera_ui;
+  CameraPersp     _camera;
+  CameraUi        _camera_ui;
   gl::GlslProgRef _shader;
+
+  vector<Ribbon>  _ribbons;
 };
 
 void DiscontinuousBodyApp::setup()
@@ -32,14 +44,47 @@ void DiscontinuousBodyApp::setup()
   _camera_ui.connect(getWindow());
 
   _camera.lookAt(vec3(0, 0, -50.0f), vec3(0), vec3(0, 1, 0));
+
+  auto r = Ribbon();
+  for (auto i = 0; i < 12; i += 1)
+  {
+    auto t = i / 12.0f;
+    auto x = mix(0.0f, 4.0f, t);
+    auto y = sin(t * M_PI * 4.0f + getElapsedSeconds() * 3.0f);
+    r._spine.push_back(vec3(x, y, 0));
+  }
+  _ribbons.push_back(r);
 }
 
-void DiscontinuousBodyApp::mouseDown( MouseEvent event )
+void DiscontinuousBodyApp::keyDown( KeyEvent event )
 {
+  auto pos = randVec3() * 3.0f;
+  for (auto &r : _ribbons)
+  {
+    r._target = vec3(pos);
+  }
 }
 
 void DiscontinuousBodyApp::update()
 {
+  auto easing = 0.5f;
+  for (auto &r: _ribbons)
+  {
+    auto &points = r._spine;
+    for (auto i = points.size() - 1; i > 0; i -= 1)
+    {
+      auto &p1 = points.at(i);
+      auto &p2 = points.at(i - 1);
+      p1 += (p2 - p1) * easing;
+    }
+    auto &point = points.at(0);
+    point += (r._target - point) * easing;
+  }
+
+  for (auto &r: _ribbons)
+  {
+    r._triangles = sansumbrella::createRibbon(0.2f, ch::EaseOutCubic(), _camera.getViewDirection(), r._spine);
+  }
 }
 
 void DiscontinuousBodyApp::draw()
@@ -50,23 +95,15 @@ void DiscontinuousBodyApp::draw()
 
   gl::drawColorCube(vec3(0), vec3(1));
 
-  vector<vec3> points;
-  for (auto i = 0; i < 100; i += 1)
+  for (auto &ribbon: _ribbons)
   {
-    auto t = i / 100.0f;
-    auto x = mix(0.0f, 4.0f, t);
-    auto y = sin(t * M_PI * 4.0f + getElapsedSeconds() * 3.0f);
-    points.push_back(vec3(x, y, 0));
+    gl::begin(GL_TRIANGLE_STRIP);
+    for (auto &p : ribbon._triangles)
+    {
+      gl::vertex(p);
+    }
+    gl::end();
   }
-
-  auto ribbon = sansumbrella::createRibbon(0.2f, ch::EaseOutCubic(), _camera.getViewDirection(), points);
-
-  gl::begin(GL_TRIANGLE_STRIP);
-  for (auto &p : ribbon)
-  {
-    gl::vertex(p);
-  }
-  gl::end();
 }
 
 CINDER_APP( DiscontinuousBodyApp, RendererGl )
