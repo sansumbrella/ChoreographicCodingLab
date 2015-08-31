@@ -75,7 +75,7 @@ private:
   float     _camera_height = 0.5f;
   ci::vec2  _camera_pos = vec2(0.5f);
 
-  ci::vec3  _view_direction;
+  ci::vec2  _view_direction;
   float     _camera_angle = 0.0f;
 
   shared_ptr<JsonClient> _client;
@@ -101,7 +101,7 @@ ci::JsonTree IslandDrawingApp::cameraMessage() const
   json.addChild(JsonTree("type", "camera"));
   json.addChild(JsonTree("x", _camera_pos.x));
   json.addChild(JsonTree("y", _camera_pos.y));
-  json.addChild(JsonTree("z", _camera_height));
+  json.addChild(JsonTree("height", _camera_height));
 
   return json;
 }
@@ -273,7 +273,7 @@ void IslandDrawingApp::update()
   }
   if (ui::SliderAngle("Angle", &_camera_angle))
   {
-//    _view_direction = glm::rotateY(vec3(0, 1, 0), <#const T &angle#>)
+    _view_direction = glm::rotate(vec2(0, -1), _camera_angle);
   }
 }
 
@@ -306,6 +306,7 @@ void IslandDrawingApp::draw()
 
   auto pos = _camera_pos * float(getWindowWidth());
   gl::drawStrokedCircle(pos, 12.0f);
+  gl::drawLine(pos, pos + _view_direction * 24.0f);
 }
 
 CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {
