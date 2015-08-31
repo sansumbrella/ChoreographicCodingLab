@@ -51,7 +51,8 @@ private:
   ch::Output<CameraSettings>	_current_settings;
 
   ci::vec3                    _target_position;
-  float                       _animation_speed = 0.4f;
+  ci::vec3                    _view_direction;
+  float                       _animation_speed = 0.8f;
 };
 
 } // namespace sansumbrella

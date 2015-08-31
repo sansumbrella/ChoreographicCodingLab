@@ -77,7 +77,7 @@ void DeltasIslandsApp::setup()
     handleDataReceived(data);
   });
 
-//  createTestIsland();
+  createTestIsland();
 }
 
 void DeltasIslandsApp::reloadAssets()
@@ -165,7 +165,7 @@ void DeltasIslandsApp::handleCameraData(const ci::JsonTree &data)
 void DeltasIslandsApp::createTestIsland()
 {
   auto path = Path2d();
-  auto pos = vec2(0);
+  auto pos = vec2(-2.5f, 0.0f);
   path.moveTo(pos);
   auto len = 5.0f;
   path.quadTo(pos + vec2(1, 1) * len, pos + vec2(2, 0) * len);

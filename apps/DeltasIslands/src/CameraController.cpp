@@ -32,9 +32,10 @@ _camera_ui(&_camera)
   _camera.setNearClip(0.1f);
   _camera.setFarClip(500.0f);
   _camera.setWorldUp(vec3(0, 1, 0));
-  _camera.lookAt(vec3(0, 3, -50), vec3(0));
+  _camera.lookAt(vec3(0, 0, -50), vec3(0));
 
   _target_position = _camera.getEyePoint();
+  _view_direction = _camera.getViewDirection();
 }
 
 void CameraController::keyDown(const ci::app::KeyEvent &event)
@@ -75,9 +76,14 @@ void CameraController::drawGui()
 
 void CameraController::update(float dt)
 {
+
   auto p = _camera.getEyePoint();
   auto delta = (_target_position - p) * dt * _animation_speed;
   _camera.setEyePoint(p + delta);
+
+  auto q = glm::rotation(vec3(0, 0, 1), _view_direction);
+  auto tq = normalize(mix(_camera.getOrientation(), q, dt * _animation_speed));
+  _camera.setOrientation(tq);
 }
 
 void CameraController::animateToView(int index)
