@@ -13,6 +13,7 @@
 #include "cinder/Path2d.h"
 #include "CameraController.h"
 #include "JsonClient.h"
+#include "Island.h"
 
 #include "SharedTimeline.h"
 #include "DataExport.h"
@@ -37,6 +38,7 @@ public:
   void keyDown( KeyEvent event ) override;
   void update() override;
   void draw() override;
+  void reset();
   void reloadAssets();
   void handleDataReceived(const ci::JsonTree &data);
   void handlePathData(const ci::JsonTree &data);
@@ -77,7 +79,7 @@ void DeltasIslandsApp::setup()
     handleDataReceived(data);
   });
 
-  createTestIsland();
+//  createTestIsland();
 }
 
 void DeltasIslandsApp::reloadAssets()
@@ -97,6 +99,33 @@ void DeltasIslandsApp::handleDataReceived(const ci::JsonTree &data)
     else if (type == "camera")
     {
       handleCameraData(data);
+    }
+    else if (type == "reset")
+    {
+      reset();
+    }
+  }
+}
+
+void DeltasIslandsApp::reset()
+{
+  for (auto e : _entities.entities_with_components<Island>())
+  {
+    auto xf = e.component<Transform>();
+    if (xf)
+    {
+      sharedTimeline().apply(&xf->position)
+        .hold(randFloat())
+        .then<RampTo>(xf->position() - vec3(0, 2, 0), 1.0f, ch::EaseInQuad())
+        .finishFn([e] (Motion<vec3> &m) mutable {
+          if (e) {
+            e.destroy();
+          }
+        });
+    }
+    else
+    {
+      e.destroy();
     }
   }
 }
@@ -170,6 +199,11 @@ void DeltasIslandsApp::handleCameraData(const ci::JsonTree &data)
       auto tilt = data.getValueForKey<float>("tilt");
       _camera.setTargetTilt(tilt);
     }
+
+    {
+      auto suddenness = data.getValueForKey<float>("suddenness");
+      _camera.setSuddenness(suddenness);
+    }
   }
   catch (const std::exception &exc)
   {
@@ -204,6 +238,14 @@ void DeltasIslandsApp::keyDown( KeyEvent event )
     break;
     case KeyEvent::KEY_f:
       setFullScreen(! isFullScreen());
+      if (isFullScreen())
+      {
+        hideCursor();
+      }
+      else
+      {
+        showCursor();
+      }
     break;
     case KeyEvent::KEY_w:
     {

@@ -64,6 +64,7 @@ public:
   void connectDebugClient();
 
   ci::JsonTree cameraMessage() const;
+  ci::JsonTree resetMessage() const;
 
   MouseEvent toMouseEvent(const TouchEvent &event) const;
 
@@ -81,6 +82,7 @@ private:
   ci::vec2  _view_direction = vec2(0, -1);
   float     _camera_angle = 0.0f;
   float     _camera_tilt = 0.0f;
+  float     _camera_suddenness = 1.0f;
 
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
@@ -115,6 +117,15 @@ ci::JsonTree IslandDrawingApp::cameraMessage() const
   json.addChild(JsonTree("view_y", 0));
   json.addChild(JsonTree("view_z", _view_direction.y));
   json.addChild(JsonTree("tilt", _camera_tilt));
+  json.addChild(JsonTree("suddenness", _camera_suddenness));
+
+  return json;
+}
+
+ci::JsonTree IslandDrawingApp::resetMessage() const
+{
+  auto json = JsonTree();
+  json.addChild(JsonTree("type", "reset"));
 
   return json;
 }
@@ -295,13 +306,13 @@ void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
 
 void IslandDrawingApp::update()
 {
-  ui::ScopedWindow window("Camera Controls", toPixels(vec2(400.0f, 250.0f)), 0.5f);
+  ui::ScopedWindow window("Camera Controls", toPixels(vec2(400.0f, 280.0f)), 0.5f);
   ui::Text(("IP: " + System::getIpAddress()).c_str(), "");
   if (ui::SliderFloat("Height", &_camera_height, 0.0f, 1.0f))
   {
     _server->sendMessage(cameraMessage());
   }
-  if (ui::SliderFloat("Angle", &_camera_angle, -M_PI, M_PI))
+  if (ui::SliderFloat("Angle", &_camera_angle, 0.0, 2 * M_PI))
   {
     _view_direction = glm::rotate(vec2(0, -1), _camera_angle);
     _server->sendMessage(cameraMessage());
@@ -309,6 +320,18 @@ void IslandDrawingApp::update()
   if (ui::SliderFloat("Tilt", &_camera_tilt, -M_PI * 0.33f, M_PI * 0.33f))
   {
     _server->sendMessage(cameraMessage());
+  }
+  if (ui::SliderFloat("Suddenness", &_camera_suddenness, 0.2f, 12.0f))
+  {
+    _server->sendMessage(cameraMessage());
+  }
+  if (ui::Button("Reset"))
+  {
+    for (auto &p : _paths)
+    {
+      p._points.clear();
+    }
+    _server->sendMessage(resetMessage());
   }
 }
 
