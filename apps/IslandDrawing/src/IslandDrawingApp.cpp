@@ -63,6 +63,8 @@ public:
 
   ci::JsonTree cameraMessage() const;
 
+  MouseEvent toMouseEvent(const TouchEvent &event);
+
 private:
   std::vector<Path>                   _paths;
   std::unordered_map<uint32_t, Touch> _touches;
@@ -76,6 +78,14 @@ private:
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
 };
+
+MouseEvent IslandDrawingApp::toMouseEvent(const cinder::app::TouchEvent &event)
+{
+  auto pt = event.getTouches().front().getPos();
+  int mods = 0;
+  mods |= MouseEvent::LEFT_DOWN;
+  return MouseEvent( getWindow(), MouseEvent::LEFT_DOWN, pt.x, pt.y, mods, 0.0f, 0 );
+}
 
 vec2 IslandDrawingApp::normalizePosition(const ci::vec2 &position) const
 {
@@ -200,6 +210,9 @@ void IslandDrawingApp::broadcastPath(const Path &path)
 
 void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
 {
+  auto me = toMouseEvent(event);
+  getWindow()->emitMouseDown(&me);
+
   for (auto &touch : event.getTouches())
   {
     auto t = Touch(getElapsedSeconds());
@@ -210,6 +223,9 @@ void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
 
 void IslandDrawingApp::touchesMoved(cinder::app::TouchEvent event)
 {
+  auto me = toMouseEvent(event);
+  getWindow()->emitMouseDrag(&me);
+
   for (auto &touch : event.getTouches())
   {
     auto &t = _touches[touch.getId()];
@@ -224,17 +240,23 @@ void IslandDrawingApp::touchesMoved(cinder::app::TouchEvent event)
 
 void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
 {
+  auto me = toMouseEvent(event);
+  getWindow()->emitMouseUp(&me);
+
   for (auto &touch : event.getTouches())
   {
-    auto &t = _touches[touch.getId()];
-    auto pos = touch.getPos();
-    auto d = distance(t._points.back(), pos);
-    if (d > 4.0f)
+    if (! me.isHandled())
     {
-      t._points.push_back(pos);
-    }
+      auto &t = _touches[touch.getId()];
+      auto pos = touch.getPos();
+      auto d = distance(t._points.back(), pos);
+      if (d > 4.0f)
+      {
+        t._points.push_back(pos);
+      }
 
-    createPath(t);
+      createPath(t);
+    }
     _touches.erase(touch.getId());
   }
 }
