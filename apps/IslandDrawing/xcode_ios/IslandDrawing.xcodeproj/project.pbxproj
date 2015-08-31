@@ -11,6 +11,11 @@
 		0087D25512CD809F002CD69F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0087D25412CD809F002CD69F /* CoreText.framework */; };
 		00A66A361965AC8800B17EB3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A66A351965AC8800B17EB3 /* Accelerate.framework */; };
 		00CFDF6B1138442D0091E310 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CFDF6A1138442D0091E310 /* CoreGraphics.framework */; };
+		15ABBA871B93DCBA006A9CC3 /* imgui_user.inl in Resources */ = {isa = PBXBuildFile; fileRef = 15ABBA191B93DCBA006A9CC3 /* imgui_user.inl */; };
+		15ABBABE1B93DCBA006A9CC3 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA7B1B93DCBA006A9CC3 /* imgui.cpp */; };
+		15ABBABF1B93DCBA006A9CC3 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA7D1B93DCBA006A9CC3 /* imgui_demo.cpp */; };
+		15ABBAC01B93DCBA006A9CC3 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA7E1B93DCBA006A9CC3 /* imgui_draw.cpp */; };
+		15ABBAC31B93DCBA006A9CC3 /* CinderImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA861B93DCBA006A9CC3 /* CinderImGui.cpp */; };
 		15CD7D1A1B923E0800C76083 /* JsonClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D161B923E0800C76083 /* JsonClient.cpp */; };
 		15CD7D1B1B923E0800C76083 /* JsonServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CD7D181B923E0800C76083 /* JsonServer.cpp */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -37,6 +42,19 @@
 		00CFDF6A1138442D0091E310 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		00CFDF6A1138442D0091FFFF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		12DADE8726D14B7088F9D9A3 /* IslandDrawingApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = IslandDrawingApp.cpp; path = ../src/IslandDrawingApp.cpp; sourceTree = "<group>"; };
+		15ABBA171B93DCBA006A9CC3 /* CinderImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinderImGui.h; sourceTree = "<group>"; };
+		15ABBA181B93DCBA006A9CC3 /* imgui_user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_user.h; sourceTree = "<group>"; };
+		15ABBA191B93DCBA006A9CC3 /* imgui_user.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imgui_user.inl; sourceTree = "<group>"; };
+		15ABBA7A1B93DCBA006A9CC3 /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
+		15ABBA7B1B93DCBA006A9CC3 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
+		15ABBA7C1B93DCBA006A9CC3 /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
+		15ABBA7D1B93DCBA006A9CC3 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
+		15ABBA7E1B93DCBA006A9CC3 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		15ABBA7F1B93DCBA006A9CC3 /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
+		15ABBA821B93DCBA006A9CC3 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
+		15ABBA831B93DCBA006A9CC3 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
+		15ABBA841B93DCBA006A9CC3 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		15ABBA861B93DCBA006A9CC3 /* CinderImGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CinderImGui.cpp; sourceTree = "<group>"; };
 		15CD7D161B923E0800C76083 /* JsonClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonClient.cpp; sourceTree = "<group>"; };
 		15CD7D171B923E0800C76083 /* JsonClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonClient.h; sourceTree = "<group>"; };
 		15CD7D181B923E0800C76083 /* JsonServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonServer.cpp; sourceTree = "<group>"; };
@@ -143,6 +161,61 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		15ABBA151B93DC93006A9CC3 /* ImGui */ = {
+			isa = PBXGroup;
+			children = (
+				15ABBA161B93DCBA006A9CC3 /* include */,
+				15ABBA1A1B93DCBA006A9CC3 /* lib */,
+				15ABBA851B93DCBA006A9CC3 /* src */,
+			);
+			name = ImGui;
+			sourceTree = "<group>";
+		};
+		15ABBA161B93DCBA006A9CC3 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				15ABBA171B93DCBA006A9CC3 /* CinderImGui.h */,
+				15ABBA181B93DCBA006A9CC3 /* imgui_user.h */,
+				15ABBA191B93DCBA006A9CC3 /* imgui_user.inl */,
+			);
+			name = include;
+			path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/include";
+			sourceTree = "<group>";
+		};
+		15ABBA1A1B93DCBA006A9CC3 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				15ABBA1B1B93DCBA006A9CC3 /* imgui */,
+			);
+			name = lib;
+			path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib";
+			sourceTree = "<group>";
+		};
+		15ABBA1B1B93DCBA006A9CC3 /* imgui */ = {
+			isa = PBXGroup;
+			children = (
+				15ABBA7A1B93DCBA006A9CC3 /* imconfig.h */,
+				15ABBA7B1B93DCBA006A9CC3 /* imgui.cpp */,
+				15ABBA7C1B93DCBA006A9CC3 /* imgui.h */,
+				15ABBA7D1B93DCBA006A9CC3 /* imgui_demo.cpp */,
+				15ABBA7E1B93DCBA006A9CC3 /* imgui_draw.cpp */,
+				15ABBA7F1B93DCBA006A9CC3 /* imgui_internal.h */,
+				15ABBA821B93DCBA006A9CC3 /* stb_rect_pack.h */,
+				15ABBA831B93DCBA006A9CC3 /* stb_textedit.h */,
+				15ABBA841B93DCBA006A9CC3 /* stb_truetype.h */,
+			);
+			path = imgui;
+			sourceTree = "<group>";
+		};
+		15ABBA851B93DCBA006A9CC3 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				15ABBA861B93DCBA006A9CC3 /* CinderImGui.cpp */,
+			);
+			name = src;
+			path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/src";
+			sourceTree = "<group>";
+		};
 		15CD7D151B923E0800C76083 /* common */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +240,7 @@
 		99692BD914FF149000DFFFFF /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
+				15ABBA151B93DC93006A9CC3 /* ImGui */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -205,6 +279,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 00692BC414FF149000D0A05E;
 			productRefGroup = 00692BD014FF149000D0A05E /* Products */;
@@ -222,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00748058165D41390024B57A /* assets in Resources */,
+				15ABBA871B93DCBA006A9CC3 /* imgui_user.inl in Resources */,
 				E0A18925E30042B683ACCFCF /* CinderApp_ios.png in Resources */,
 				E3795223B52D4DA29D1A8239 /* Images.xcassets in Resources */,
 				5ECF69E106A64941A538B481 /* LaunchScreen.xib in Resources */,
@@ -235,9 +311,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15ABBABE1B93DCBA006A9CC3 /* imgui.cpp in Sources */,
 				15CD7D1A1B923E0800C76083 /* JsonClient.cpp in Sources */,
+				15ABBABF1B93DCBA006A9CC3 /* imgui_demo.cpp in Sources */,
 				15CD7D1B1B923E0800C76083 /* JsonServer.cpp in Sources */,
+				15ABBAC31B93DCBA006A9CC3 /* CinderImGui.cpp in Sources */,
 				59F3F75E3C0842AC8AE2E700 /* IslandDrawingApp.cpp in Sources */,
+				15ABBAC01B93DCBA006A9CC3 /* imgui_draw.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +418,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = IslandDrawing_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/davidwicks/Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/examples/libs/glfw/lib-vc2010-32",
+					"/Users/davidwicks/Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/examples/libs/glfw/lib-vc2010-64",
+				);
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone_d.a\"",
 					"-lz",
@@ -357,6 +442,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = IslandDrawing_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/davidwicks/Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/examples/libs/glfw/lib-vc2010-32",
+					"/Users/davidwicks/Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/examples/libs/glfw/lib-vc2010-64",
+				);
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"\"$(CINDER_PATH)/lib/libcinder-iphone.a\"",
 					"-lz",
