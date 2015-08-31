@@ -114,6 +114,7 @@ ci::JsonTree IslandDrawingApp::cameraMessage() const
   json.addChild(JsonTree("view_x", _view_direction.x));
   json.addChild(JsonTree("view_y", 0));
   json.addChild(JsonTree("view_z", _view_direction.y));
+  json.addChild(JsonTree("tilt", _camera_tilt));
 
   return json;
 }
@@ -305,12 +306,10 @@ void IslandDrawingApp::update()
     _view_direction = glm::rotate(vec2(0, -1), _camera_angle);
     _server->sendMessage(cameraMessage());
   }
-  /*
-  if (ui::SliderAngle("Tilt", &_camera_tilt))
+  if (ui::SliderFloat("Tilt", &_camera_tilt, -M_PI, M_PI))
   {
     _server->sendMessage(cameraMessage());
   }
-  */
 }
 
 void IslandDrawingApp::draw()

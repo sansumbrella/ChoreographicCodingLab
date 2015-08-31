@@ -42,6 +42,7 @@ public:
 
   void setTarget(const ci::vec3 &position) { _target_position = position; }
   void setTargetDirection(const ci::vec3 &direction) { _view_direction = direction; }
+  void setTargetTilt(float tilt) { _target_tilt = tilt; }
 
   void update(float dt);
 private:
@@ -53,6 +54,8 @@ private:
 
   ci::vec3                    _target_position;
   ci::vec3                    _view_direction;
+  float                       _target_tilt = 0.0f;
+  float                       _tilt = 0.0f;
   float                       _animation_speed = 0.9f;
 };
 

@@ -77,7 +77,7 @@ void DeltasIslandsApp::setup()
     handleDataReceived(data);
   });
 
-//  createTestIsland();
+  createTestIsland();
 }
 
 void DeltasIslandsApp::reloadAssets()
@@ -164,6 +164,11 @@ void DeltasIslandsApp::handleCameraData(const ci::JsonTree &data)
       auto y = data.getValueForKey<float>("view_y");
       auto z = data.getValueForKey<float>("view_z");
       _camera.setTargetDirection(vec3(x, y, z));
+    }
+
+    {
+      auto tilt = data.getValueForKey<float>("tilt");
+      _camera.setTargetTilt(tilt);
     }
   }
   catch (const std::exception &exc)
