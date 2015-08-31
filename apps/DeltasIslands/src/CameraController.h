@@ -53,7 +53,7 @@ private:
 
   ci::vec3                    _target_position;
   ci::vec3                    _view_direction;
-  float                       _animation_speed = 0.8f;
+  float                       _animation_speed = 0.9f;
 };
 
 } // namespace sansumbrella
