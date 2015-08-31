@@ -77,7 +77,7 @@ void DeltasIslandsApp::setup()
     handleDataReceived(data);
   });
 
-  createTestIsland();
+//  createTestIsland();
 }
 
 void DeltasIslandsApp::reloadAssets()
