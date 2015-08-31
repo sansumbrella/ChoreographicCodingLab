@@ -75,8 +75,9 @@ private:
   float     _camera_height = 0.5f;
   ci::vec2  _camera_pos = vec2(0.5f);
 
-  ci::vec2  _view_direction;
+  ci::vec2  _view_direction = vec2(0, -1);
   float     _camera_angle = 0.0f;
+  float     _camera_tilt = 0.0f;
 
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
@@ -102,6 +103,9 @@ ci::JsonTree IslandDrawingApp::cameraMessage() const
   json.addChild(JsonTree("x", _camera_pos.x));
   json.addChild(JsonTree("y", _camera_pos.y));
   json.addChild(JsonTree("height", _camera_height));
+  json.addChild(JsonTree("view_x", _view_direction.x));
+  json.addChild(JsonTree("view_y", 0));
+  json.addChild(JsonTree("view_z", _view_direction.y));
 
   return json;
 }
@@ -274,7 +278,14 @@ void IslandDrawingApp::update()
   if (ui::SliderAngle("Angle", &_camera_angle))
   {
     _view_direction = glm::rotate(vec2(0, -1), _camera_angle);
+    _server->sendMessage(cameraMessage());
   }
+  /*
+  if (ui::SliderAngle("Tilt", &_camera_tilt))
+  {
+    _server->sendMessage(cameraMessage());
+  }
+  */
 }
 
 void IslandDrawingApp::draw()
