@@ -71,7 +71,6 @@ private:
   std::unordered_map<uint32_t, Touch> _touches;
   const uint32_t                      _max_paths = 7;
   uint32_t                            _current_id = 0;
-  gl::TextureFontRef                  _font;
 
   float     _camera_height = 0.5f;
   ci::vec2  _camera_pos = vec2(0.5f);
@@ -109,8 +108,6 @@ ci::JsonTree IslandDrawingApp::cameraMessage() const
 
 void IslandDrawingApp::setup()
 {
-  _font = gl::TextureFont::create(Font("Avenir-Medium", 16.0f));
-
   _server = make_shared<JsonServer>( Port );
   _server->start();
 
@@ -264,7 +261,8 @@ void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
 
 void IslandDrawingApp::update()
 {
-  ui::ScopedWindow window("Camera Controls", toPixels(vec2(400.0f, 400.0f)));
+  ui::ScopedWindow window("Camera Controls", toPixels(vec2(400.0f)), 0.5f);
+  ui::Text(("IP: " + System::getIpAddress()).c_str(), "");
   if (ui::SliderFloat("Height", &_camera_height, 0.0f, 1.0f))
   {
     _server->sendMessage(cameraMessage());
@@ -308,8 +306,6 @@ void IslandDrawingApp::draw()
 
   auto pos = _camera_pos * float(getWindowWidth());
   gl::drawStrokedCircle(pos, 12.0f);
-
-  _font->drawString("IP: " + System::getIpAddress(), vec2(20, 20));
 }
 
 CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {
