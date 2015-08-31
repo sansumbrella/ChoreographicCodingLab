@@ -41,6 +41,7 @@ public:
   void animateToPosition(const ci::vec3 &position);
 
   void setTarget(const ci::vec3 &position) { _target_position = position; }
+  void setTargetDirection(const ci::vec3 &direction) { _view_direction = direction; }
 
   void update(float dt);
 private:

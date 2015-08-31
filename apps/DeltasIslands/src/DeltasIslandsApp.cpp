@@ -148,13 +148,23 @@ void DeltasIslandsApp::handleCameraData(const ci::JsonTree &data)
 {
   try
   {
-    auto x = data.getValueForKey<float>("x");
-    auto y = data.getValueForKey<float>("y");
-    auto z = data.getValueForKey<float>("z");
+    {
+      auto x = data.getValueForKey<float>("x");
+      auto y = data.getValueForKey<float>("height");
+      auto z = data.getValueForKey<float>("y");
 
-    auto p2 = mix(vec2(-20.0f, -25.0f), vec2(20.0f, 25.0f), vec2(x, y));
+      auto p2 = mix(vec2(-20.0f), vec2(20.0f), vec2(x, z));
+      y = mix(-2.0f, 4.0f, y);
 
-    _camera.setTarget(vec3(p2.x, z, p2.y));
+      _camera.setTarget(vec3(p2[0], y, p2[1]));
+    }
+
+    {
+      auto x = data.getValueForKey<float>("view_x");
+      auto y = data.getValueForKey<float>("view_y");
+      auto z = data.getValueForKey<float>("view_z");
+      _camera.setTargetDirection(vec3(x, y, z));
+    }
   }
   catch (const std::exception &exc)
   {
