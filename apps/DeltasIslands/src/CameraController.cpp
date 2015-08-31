@@ -33,6 +33,8 @@ _camera_ui(&_camera)
   _camera.setFarClip(500.0f);
   _camera.setWorldUp(vec3(0, 1, 0));
   _camera.lookAt(vec3(0, 3, -50), vec3(0));
+
+  _target_position = _camera.getEyePoint();
 }
 
 void CameraController::keyDown(const ci::app::KeyEvent &event)
@@ -69,6 +71,13 @@ void CameraController::drawGui()
   if (ui::ListBox("Camera view", &_current_setting_index, labels, 5)) {
     animateToView(_current_setting_index);
   }
+}
+
+void CameraController::update(float dt)
+{
+  auto p = _camera.getEyePoint();
+  auto delta = (_target_position - p) * dt * _animation_speed;
+  _camera.setEyePoint(p + delta);
 }
 
 void CameraController::animateToView(int index)

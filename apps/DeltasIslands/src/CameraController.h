@@ -38,12 +38,20 @@ public:
 
   void drawGui();
   void animateToView(int index);
+  void animateToPosition(const ci::vec3 &position);
+
+  void setTarget(const ci::vec3 &position) { _target_position = position; }
+
+  void update(float dt);
 private:
   ci::CameraPersp							_camera;
   ci::CameraUi								_camera_ui;
   std::vector<CameraSettings>	_settings;
   int													_current_setting_index = -1;
   ch::Output<CameraSettings>	_current_settings;
+
+  ci::vec3                    _target_position;
+  float                       _animation_speed = 0.4f;
 };
 
 } // namespace sansumbrella

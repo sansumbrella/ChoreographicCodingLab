@@ -264,7 +264,7 @@ void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
 void IslandDrawingApp::update()
 {
   ui::ScopedWindow window("Camera Controls", toPixels(vec2(400.0f, 400.0f)));
-  if (ui::SliderFloat("Height", &_camera_height, -50.0f, 100.0f))
+  if (ui::SliderFloat("Height", &_camera_height, -5.0f, 10.0f))
   {
     _server->sendMessage(cameraMessage());
   }

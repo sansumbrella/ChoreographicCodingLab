@@ -148,7 +148,13 @@ void DeltasIslandsApp::handleCameraData(const ci::JsonTree &data)
 {
   try
   {
+    auto x = data.getValueForKey<float>("x");
+    auto y = data.getValueForKey<float>("y");
+    auto z = data.getValueForKey<float>("z");
 
+    auto p2 = mix(vec2(-20.0f, -25.0f), vec2(20.0f, 25.0f), vec2(x, y));
+
+    _camera.setTarget(vec3(p2.x, z, p2.y));
   }
   catch (const std::exception &exc)
   {
@@ -207,6 +213,7 @@ void DeltasIslandsApp::update()
   _timer.start();
 
   sharedTimeline().step(dt);
+  _camera.update(dt);
   _systems.update<WindSystem>(dt);
   _systems.update<InstanceRenderer>(dt);
 
