@@ -81,7 +81,7 @@ void CameraController::update(float dt)
   auto delta = (_target_position - p) * dt * _animation_speed;
   _camera.setEyePoint(p + delta);
 
-  auto q = glm::rotation(vec3(0, 0, 1), _view_direction);
+  auto q = glm::rotation(vec3(0, 0, -1), _view_direction);
   auto tq = normalize(mix(_camera.getOrientation(), q, dt * _animation_speed));
   _camera.setOrientation(tq);
 }
