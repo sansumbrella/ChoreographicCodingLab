@@ -46,7 +46,7 @@ private:
   gl::VboRef			_instance_vbo;
 
   int             _current_frame = 0;
-  float           _fps = 4.0f;
+  float           _fps = 18.0f;
   float           _frame_duration = 1.0f / _fps;
   float           _current_time = 0.0f;
   Timer           _frame_timer;
@@ -86,7 +86,7 @@ void DiscontinuousBodyApp::setup()
     _ribbons.push_back(r);
   }
 
-  _ordered_indices = generateOrderedIndices(_joint_list);
+//  _ordered_indices = generateOrderedIndices(_joint_list);
 }
 
 vector<size_t> DiscontinuousBodyApp::generateOrderedIndices(const std::vector<CCL_MocapJoint> &joints)
@@ -181,16 +181,17 @@ void DiscontinuousBodyApp::updateRibbons()
   }
 
   auto shape_fn = [] (float value) {
-    if (value < 0.5f) {
-      return ch::easeInQuad(lmap(value, 0.0f, 0.5f, 0.0f, 1.0f));
+    auto edge = 0.25f;
+    if (value < edge) {
+      return ch::easeOutQuad(lmap(value, 0.0f, edge, 0.0f, 1.0f));
     }
     else {
-      return ch::easeInQuad(lmap(value, 0.5f, 1.0f, 1.0f, 0.0f));
+      return ch::easeInOutQuad(lmap(value, edge, 1.0f, 1.0f, 0.0f));
     }
   };
   for (auto &r: _ribbons)
   {
-    r._triangles = sansumbrella::createRibbon(12.0f, shape_fn, _camera.getViewDirection(), r._spine);
+    r._triangles = sansumbrella::createRibbon(24.0f, shape_fn, _camera.getViewDirection(), r._spine);
   }
 
 //  _camera.lookAt(currentJointPosition(0));
