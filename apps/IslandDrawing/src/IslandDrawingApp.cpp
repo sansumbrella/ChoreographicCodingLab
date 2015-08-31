@@ -9,6 +9,7 @@
 #include "cinder/Utilities.h"
 #include "cinder/System.h"
 #include "cinder/Rand.h"
+#include "CinderImGui.h"
 
 #include <unordered_map>
 
@@ -18,6 +19,14 @@ using namespace std;
 using namespace sansumbrella;
 
 const int Port = 9191;
+
+template <typename Number>
+ImVec2& operator *= (ImVec2 &lhs, Number rhs)
+{
+  lhs.x *= rhs;
+  lhs.y *= rhs;
+  return lhs;
+}
 
 struct Path
 {
@@ -48,9 +57,13 @@ public:
 
   void createPath(const Touch &touch);
   void broadcastPath(const Path &path);
-  vec2 normalizePosition(const ci::vec2 &position);
+  vec2 normalizePosition(const ci::vec2 &position) const;
 
   void connectDebugClient();
+
+  ci::JsonTree cameraMessage() const;
+
+  MouseEvent toMouseEvent(const TouchEvent &event);
 
 private:
   std::vector<Path>                   _paths;
@@ -59,13 +72,36 @@ private:
   uint32_t                            _current_id = 0;
   gl::TextureFontRef                  _font;
 
+  float     _camera_height = 1.0f;
+  ci::vec2  _camera_pos;
+
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
 };
 
-vec2 IslandDrawingApp::normalizePosition(const ci::vec2 &position)
+MouseEvent IslandDrawingApp::toMouseEvent(const cinder::app::TouchEvent &event)
+{
+  auto pt = event.getTouches().front().getPos();
+  int mods = 0;
+  mods |= MouseEvent::LEFT_DOWN;
+  return MouseEvent( getWindow(), MouseEvent::LEFT_DOWN, pt.x, pt.y, mods, 0.0f, 0 );
+}
+
+vec2 IslandDrawingApp::normalizePosition(const ci::vec2 &position) const
 {
   return position / vec2(getWindowSize());
+}
+
+ci::JsonTree IslandDrawingApp::cameraMessage() const
+{
+  auto np = normalizePosition(_camera_pos);
+  auto json = JsonTree();
+  json.addChild(JsonTree("type", "camera"));
+  json.addChild(JsonTree("x", np.x));
+  json.addChild(JsonTree("y", np.y));
+  json.addChild(JsonTree("z", _camera_height));
+
+  return json;
 }
 
 void IslandDrawingApp::setup()
@@ -75,8 +111,24 @@ void IslandDrawingApp::setup()
   _server = make_shared<JsonServer>( Port );
   _server->start();
 
-#if ! defined(CINDER_COCOA_TOUCH)
+  _camera_pos = getWindowCenter();
+
+#if defined(CINDER_COCOA_TOUCH)
+  auto options = ui::Options();
+  auto font = getAssetPath("Cousine-Regular.ttf");
+  console() << "Font path: " << font << endl;
+  options.font(font, toPixels(21.0f));
+  ui::initialize(options);
+
+  auto &style = ImGui::GetStyle();
+  style.WindowMinSize = ImVec2(400.0f, 400.0f);
+  style.ItemInnerSpacing *= 5.0f;
+  style.ItemSpacing *= 5.0f;
+  style.TouchExtraPadding = ImVec2(30.0f, 10.0f);
+  style.FramePadding *= 20.0f;
+#else
   connectDebugClient();
+  ui::initialize();
 #endif
 }
 
@@ -158,6 +210,9 @@ void IslandDrawingApp::broadcastPath(const Path &path)
 
 void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
 {
+  auto me = toMouseEvent(event);
+  getWindow()->emitMouseDown(&me);
+
   for (auto &touch : event.getTouches())
   {
     auto t = Touch(getElapsedSeconds());
@@ -168,6 +223,9 @@ void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
 
 void IslandDrawingApp::touchesMoved(cinder::app::TouchEvent event)
 {
+  auto me = toMouseEvent(event);
+  getWindow()->emitMouseDrag(&me);
+
   for (auto &touch : event.getTouches())
   {
     auto &t = _touches[touch.getId()];
@@ -182,23 +240,40 @@ void IslandDrawingApp::touchesMoved(cinder::app::TouchEvent event)
 
 void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
 {
+  auto me = toMouseEvent(event);
+  getWindow()->emitMouseUp(&me);
+
   for (auto &touch : event.getTouches())
   {
-    auto &t = _touches[touch.getId()];
-    auto pos = touch.getPos();
-    auto d = distance(t._points.back(), pos);
-    if (d > 4.0f)
+    if (! me.isHandled())
     {
-      t._points.push_back(pos);
-    }
+      auto &t = _touches[touch.getId()];
+      auto pos = touch.getPos();
+      auto d = distance(t._points.back(), pos);
+      if (d > 4.0f)
+      {
+        t._points.push_back(pos);
+      }
 
-    createPath(t);
+      createPath(t);
+    }
     _touches.erase(touch.getId());
   }
 }
 
 void IslandDrawingApp::update()
 {
+  ui::ScopedWindow window("Camera Controls", toPixels(vec2(400.0f, 400.0f)));
+  if (ui::SliderFloat("Height", &_camera_height, -50.0f, 100.0f))
+  {
+    _server->sendMessage(cameraMessage());
+  }
+  if (ui::SliderFloat2("Position", &_camera_pos.x, 0.0f, getWindowHeight()))
+  {
+    _server->sendMessage(cameraMessage());
+  }
+  float angle;
+  ui::SliderAngle("Angle", &angle);
 }
 
 void IslandDrawingApp::draw()
@@ -227,6 +302,8 @@ void IslandDrawingApp::draw()
     }
     gl::end();
   }
+
+  gl::drawStrokedCircle(_camera_pos, 12.0f);
 
   _font->drawString("IP: " + System::getIpAddress(), vec2(20, 20));
 }
