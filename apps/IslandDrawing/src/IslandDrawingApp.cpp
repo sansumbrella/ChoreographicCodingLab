@@ -56,6 +56,7 @@ public:
 	void draw() override;
 
   vec2 normalizePosition(const ci::vec2 &position) const;
+  vec2 denormalizePosition(const ci::vec2 &position) const;
 
   void createPath(const Touch &touch);
   void broadcastPath(const Path &path);
@@ -72,6 +73,8 @@ private:
   const uint32_t                      _max_paths = 7;
   uint32_t                            _current_id = 0;
 
+  uint32_t                            _dragging_touch = 0;
+
   float     _camera_height = 0.5f;
   ci::vec2  _camera_pos = vec2(0.5f);
 
@@ -86,6 +89,11 @@ private:
 vec2 IslandDrawingApp::normalizePosition(const ci::vec2 &position) const
 {
   return position / float(getWindowWidth());
+}
+
+vec2 IslandDrawingApp::denormalizePosition(const ci::vec2 &position) const
+{
+  return position * float(getWindowWidth());
 }
 
 MouseEvent IslandDrawingApp::toMouseEvent(const cinder::app::TouchEvent &event) const
@@ -220,6 +228,13 @@ void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
     auto t = Touch(getElapsedSeconds());
     t._points.push_back(touch.getPos());
     _touches[touch.getId()] = t;
+
+    if (distance(touch.getPos(), denormalizePosition(_camera_pos)) < 24.0f)
+    {
+      _dragging_touch = touch.getId();
+      _camera_pos = normalizePosition(touch.getPos());
+      _server->sendMessage(cameraMessage());
+    }
   }
 }
 
@@ -237,6 +252,12 @@ void IslandDrawingApp::touchesMoved(cinder::app::TouchEvent event)
     {
       t._points.push_back(pos);
     }
+
+    if (touch.getId() == _dragging_touch)
+    {
+      _camera_pos = normalizePosition(touch.getPos());
+      _server->sendMessage(cameraMessage());
+    }
   }
 }
 
@@ -247,6 +268,14 @@ void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
 
   for (auto &touch : event.getTouches())
   {
+    if (touch.getId() == _dragging_touch)
+    {
+      _camera_pos = normalizePosition(touch.getPos());
+      _server->sendMessage(cameraMessage());
+      me.setHandled();
+      _dragging_touch = 0;
+    }
+
     if (! me.isHandled())
     {
       auto &t = _touches[touch.getId()];
@@ -315,7 +344,7 @@ void IslandDrawingApp::draw()
     gl::end();
   }
 
-  auto pos = _camera_pos * float(getWindowWidth());
+  auto pos = denormalizePosition(_camera_pos);
   gl::drawStrokedCircle(pos, 12.0f);
   gl::drawLine(pos, pos + _view_direction * 24.0f);
 }
