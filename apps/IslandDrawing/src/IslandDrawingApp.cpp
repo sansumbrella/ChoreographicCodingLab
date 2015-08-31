@@ -306,7 +306,7 @@ void IslandDrawingApp::update()
     _view_direction = glm::rotate(vec2(0, -1), _camera_angle);
     _server->sendMessage(cameraMessage());
   }
-  if (ui::SliderFloat("Tilt", &_camera_tilt, -M_PI, M_PI))
+  if (ui::SliderFloat("Tilt", &_camera_tilt, -M_PI * 0.33f, M_PI * 0.33f))
   {
     _server->sendMessage(cameraMessage());
   }
