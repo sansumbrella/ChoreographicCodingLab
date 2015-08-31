@@ -84,7 +84,7 @@ void CameraController::update(float dt)
 
   auto m = glm::mat4_cast(glm::rotation(vec3(0, 0, -1), _view_direction));
   auto q = glm::quat_cast(glm::rotate(m, _tilt, vec3(1, 0, 0)));
-  auto tq = normalize(mix(_camera.getOrientation(), q, t));
+  auto tq = normalize(glm::slerp(_camera.getOrientation(), q, t));
   _camera.setOrientation(tq);
 }
 
