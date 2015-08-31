@@ -38,7 +38,9 @@ public:
   void update() override;
   void draw() override;
   void reloadAssets();
+  void handleDataReceived(const ci::JsonTree &data);
   void handlePathData(const ci::JsonTree &data);
+  void handleCameraData(const ci::JsonTree &data);
 private:
   CameraController       _camera;
   entityx::EventManager	 _events;
@@ -72,8 +74,7 @@ void DeltasIslandsApp::setup()
     CI_LOG_I("Json Client " << (success ? "Successfully Connected" : "Failed to connect.") );
   });
   _json_client.getSignalDataReceived().connect([this] (const ci::JsonTree &data) {
-    CI_LOG_I("Received Path");
-    handlePathData(data);
+    handleDataReceived(data);
   });
 
 //  createTestIsland();
@@ -84,57 +85,97 @@ void DeltasIslandsApp::reloadAssets()
   _systems.system<InstanceRenderer>()->reloadAssets();
 }
 
-void DeltasIslandsApp::handlePathData(const ci::JsonTree &data)
+void DeltasIslandsApp::handleDataReceived(const ci::JsonTree &data)
 {
-  try
+  if (data.hasChild("type"))
   {
     auto type = data.getChild("type").getValue();
     if (type == "path")
     {
-      auto id = data.getChild("id").getValue<uint32_t>();
-      auto points = data.getChild("points");
-      auto duration = data.getValueForKey<float>("duration");
+      handlePathData(data);
+    }
+    else if (type == "camera")
+    {
+      handleCameraData(data);
+    }
+  }
+}
 
-      Path2d path;
-      for (auto &p : points)
+void DeltasIslandsApp::handlePathData(const ci::JsonTree &data)
+{
+  try
+  {
+    auto id = data.getChild("id").getValue<uint32_t>();
+    auto points = data.getChild("points");
+    auto duration = data.getValueForKey<float>("duration");
+
+    Path2d path;
+    for (auto &p : points)
+    {
+      auto pos = vec2(p.getValueForKey<float>("x"), p.getValueForKey<float>("y"));
+      pos = mix(vec2(-20.0f, -25.0f), vec2(20.0f, 25.0f), pos);
+
+      if(path.empty())
       {
-        auto pos = vec2(p.getValueForKey<float>("x"), p.getValueForKey<float>("y"));
-        pos = mix(vec2(-20.0f, -25.0f), vec2(20.0f, 25.0f), pos);
-
-        if(path.empty())
-        {
-          path.moveTo(pos);
-        }
-        else
-        {
-          path.lineTo(pos);
-        }
-      }
-
-      auto island = gatherIsland(_entities, id);
-      if (island.empty())
-      {
-        CI_LOG_I("Creating New Island: " << id);
-        island = createIslandFromPath(_entities, path, id, 50);
-        animateIslandIntoPosition(island, duration);
+        path.moveTo(pos);
       }
       else
       {
-        CI_LOG_I("Moving Island: " << id);
-        mapIslandToPath(island, path, duration);
+        path.lineTo(pos);
       }
     }
+
+    auto island = gatherIsland(_entities, id);
+    if (island.empty())
+    {
+      CI_LOG_I("Creating New Island: " << id);
+      island = createIslandFromPath(_entities, path, id, 50);
+      animateIslandIntoPosition(island, duration);
+    }
+    else
+    {
+      CI_LOG_I("Moving Island: " << id);
+      mapIslandToPath(island, path, duration);
+    }
   }
-  catch (std::exception &exc)
+  catch (const std::exception &exc)
   {
     CI_LOG_W("Exception parsing path data: " << exc.what());
+  }
+}
+
+void DeltasIslandsApp::handleCameraData(const ci::JsonTree &data)
+{
+  try
+  {
+    {
+      auto x = data.getValueForKey<float>("x");
+      auto y = data.getValueForKey<float>("height");
+      auto z = data.getValueForKey<float>("y");
+
+      auto p2 = mix(vec2(-20.0f), vec2(20.0f), vec2(x, z));
+      y = mix(-2.0f, 4.0f, y);
+
+      _camera.setTarget(vec3(p2[0], y, p2[1]));
+    }
+
+    {
+      auto x = data.getValueForKey<float>("view_x");
+      auto y = data.getValueForKey<float>("view_y");
+      auto z = data.getValueForKey<float>("view_z");
+      _camera.setTargetDirection(vec3(x, y, z));
+    }
+  }
+  catch (const std::exception &exc)
+  {
+    CI_LOG_W("Exception parsing camera data: " << exc.what());
   }
 }
 
 void DeltasIslandsApp::createTestIsland()
 {
   auto path = Path2d();
-  auto pos = vec2(0);
+  auto pos = vec2(-2.5f, 0.0f);
   path.moveTo(pos);
   auto len = 5.0f;
   path.quadTo(pos + vec2(1, 1) * len, pos + vec2(2, 0) * len);
@@ -182,6 +223,7 @@ void DeltasIslandsApp::update()
   _timer.start();
 
   sharedTimeline().step(dt);
+  _camera.update(dt);
   _systems.update<WindSystem>(dt);
   _systems.update<InstanceRenderer>(dt);
 

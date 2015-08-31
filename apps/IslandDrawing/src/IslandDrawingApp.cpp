@@ -55,31 +55,48 @@ public:
 	void update() override;
 	void draw() override;
 
+  vec2 normalizePosition(const ci::vec2 &position) const;
+  vec2 denormalizePosition(const ci::vec2 &position) const;
+
   void createPath(const Touch &touch);
   void broadcastPath(const Path &path);
-  vec2 normalizePosition(const ci::vec2 &position) const;
 
   void connectDebugClient();
 
   ci::JsonTree cameraMessage() const;
 
-  MouseEvent toMouseEvent(const TouchEvent &event);
+  MouseEvent toMouseEvent(const TouchEvent &event) const;
 
 private:
   std::vector<Path>                   _paths;
   std::unordered_map<uint32_t, Touch> _touches;
   const uint32_t                      _max_paths = 7;
   uint32_t                            _current_id = 0;
-  gl::TextureFontRef                  _font;
 
-  float     _camera_height = 1.0f;
-  ci::vec2  _camera_pos;
+  uint32_t                            _dragging_touch = 0;
+
+  float     _camera_height = 0.5f;
+  ci::vec2  _camera_pos = vec2(0.5f);
+
+  ci::vec2  _view_direction = vec2(0, -1);
+  float     _camera_angle = 0.0f;
+  float     _camera_tilt = 0.0f;
 
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
 };
 
-MouseEvent IslandDrawingApp::toMouseEvent(const cinder::app::TouchEvent &event)
+vec2 IslandDrawingApp::normalizePosition(const ci::vec2 &position) const
+{
+  return position / float(getWindowWidth());
+}
+
+vec2 IslandDrawingApp::denormalizePosition(const ci::vec2 &position) const
+{
+  return position * float(getWindowWidth());
+}
+
+MouseEvent IslandDrawingApp::toMouseEvent(const cinder::app::TouchEvent &event) const
 {
   auto pt = event.getTouches().front().getPos();
   int mods = 0;
@@ -87,31 +104,24 @@ MouseEvent IslandDrawingApp::toMouseEvent(const cinder::app::TouchEvent &event)
   return MouseEvent( getWindow(), MouseEvent::LEFT_DOWN, pt.x, pt.y, mods, 0.0f, 0 );
 }
 
-vec2 IslandDrawingApp::normalizePosition(const ci::vec2 &position) const
-{
-  return position / vec2(getWindowSize());
-}
-
 ci::JsonTree IslandDrawingApp::cameraMessage() const
 {
-  auto np = normalizePosition(_camera_pos);
   auto json = JsonTree();
   json.addChild(JsonTree("type", "camera"));
-  json.addChild(JsonTree("x", np.x));
-  json.addChild(JsonTree("y", np.y));
-  json.addChild(JsonTree("z", _camera_height));
+  json.addChild(JsonTree("x", _camera_pos.x));
+  json.addChild(JsonTree("y", _camera_pos.y));
+  json.addChild(JsonTree("height", _camera_height));
+  json.addChild(JsonTree("view_x", _view_direction.x));
+  json.addChild(JsonTree("view_y", 0));
+  json.addChild(JsonTree("view_z", _view_direction.y));
 
   return json;
 }
 
 void IslandDrawingApp::setup()
 {
-  _font = gl::TextureFont::create(Font("Avenir-Medium", 16.0f));
-
   _server = make_shared<JsonServer>( Port );
   _server->start();
-
-  _camera_pos = getWindowCenter();
 
 #if defined(CINDER_COCOA_TOUCH)
   auto options = ui::Options();
@@ -121,11 +131,11 @@ void IslandDrawingApp::setup()
   ui::initialize(options);
 
   auto &style = ImGui::GetStyle();
-  style.WindowMinSize = ImVec2(400.0f, 400.0f);
-  style.ItemInnerSpacing *= 5.0f;
+  style.WindowMinSize = ImVec2(300.0f, 300.0f);
+  style.ItemInnerSpacing *= 3.0f;
   style.ItemSpacing *= 5.0f;
   style.TouchExtraPadding = ImVec2(30.0f, 10.0f);
-  style.FramePadding *= 20.0f;
+  style.FramePadding *= 12.0f; // this is the magic number for sizing
 #else
   connectDebugClient();
   ui::initialize();
@@ -218,6 +228,13 @@ void IslandDrawingApp::touchesBegan(cinder::app::TouchEvent event)
     auto t = Touch(getElapsedSeconds());
     t._points.push_back(touch.getPos());
     _touches[touch.getId()] = t;
+
+    if (distance(touch.getPos(), denormalizePosition(_camera_pos)) < 24.0f)
+    {
+      _dragging_touch = touch.getId();
+      _camera_pos = normalizePosition(touch.getPos());
+      _server->sendMessage(cameraMessage());
+    }
   }
 }
 
@@ -235,6 +252,12 @@ void IslandDrawingApp::touchesMoved(cinder::app::TouchEvent event)
     {
       t._points.push_back(pos);
     }
+
+    if (touch.getId() == _dragging_touch)
+    {
+      _camera_pos = normalizePosition(touch.getPos());
+      _server->sendMessage(cameraMessage());
+    }
   }
 }
 
@@ -245,6 +268,14 @@ void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
 
   for (auto &touch : event.getTouches())
   {
+    if (touch.getId() == _dragging_touch)
+    {
+      _camera_pos = normalizePosition(touch.getPos());
+      _server->sendMessage(cameraMessage());
+      me.setHandled();
+      _dragging_touch = 0;
+    }
+
     if (! me.isHandled())
     {
       auto &t = _touches[touch.getId()];
@@ -263,17 +294,23 @@ void IslandDrawingApp::touchesEnded(cinder::app::TouchEvent event)
 
 void IslandDrawingApp::update()
 {
-  ui::ScopedWindow window("Camera Controls", toPixels(vec2(400.0f, 400.0f)));
-  if (ui::SliderFloat("Height", &_camera_height, -50.0f, 100.0f))
+  ui::ScopedWindow window("Camera Controls", toPixels(vec2(400.0f, 250.0f)), 0.5f);
+  ui::Text(("IP: " + System::getIpAddress()).c_str(), "");
+  if (ui::SliderFloat("Height", &_camera_height, 0.0f, 1.0f))
   {
     _server->sendMessage(cameraMessage());
   }
-  if (ui::SliderFloat2("Position", &_camera_pos.x, 0.0f, getWindowHeight()))
+  if (ui::SliderFloat("Angle", &_camera_angle, -M_PI, M_PI))
+  {
+    _view_direction = glm::rotate(vec2(0, -1), _camera_angle);
+    _server->sendMessage(cameraMessage());
+  }
+  /*
+  if (ui::SliderAngle("Tilt", &_camera_tilt))
   {
     _server->sendMessage(cameraMessage());
   }
-  float angle;
-  ui::SliderAngle("Angle", &angle);
+  */
 }
 
 void IslandDrawingApp::draw()
@@ -303,9 +340,9 @@ void IslandDrawingApp::draw()
     gl::end();
   }
 
-  gl::drawStrokedCircle(_camera_pos, 12.0f);
-
-  _font->drawString("IP: " + System::getIpAddress(), vec2(20, 20));
+  auto pos = denormalizePosition(_camera_pos);
+  gl::drawStrokedCircle(pos, 12.0f);
+  gl::drawLine(pos, pos + _view_direction * 24.0f);
 }
 
 CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {
