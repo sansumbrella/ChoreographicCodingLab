@@ -76,15 +76,15 @@ void CameraController::drawGui()
 
 void CameraController::update(float dt)
 {
-
+  auto t = glm::clamp(dt * _animation_speed, 0.0f, 1.0f);
   auto p = _camera.getEyePoint();
-  auto delta = (_target_position - p) * dt * _animation_speed;
+  auto delta = (_target_position - p) * t;
   _camera.setEyePoint(p + delta);
   _tilt = mix(_tilt, _target_tilt, 0.2f);
 
   auto m = glm::mat4_cast(glm::rotation(vec3(0, 0, -1), _view_direction));
   auto q = glm::quat_cast(glm::rotate(m, _tilt, vec3(1, 0, 0)));
-  auto tq = normalize(mix(_camera.getOrientation(), q, dt * _animation_speed));
+  auto tq = normalize(mix(_camera.getOrientation(), q, t));
   _camera.setOrientation(tq);
 }
 

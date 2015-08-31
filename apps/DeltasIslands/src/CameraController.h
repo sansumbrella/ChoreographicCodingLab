@@ -44,6 +44,9 @@ public:
   void setTargetDirection(const ci::vec3 &direction) { _view_direction = direction; }
   void setTargetTilt(float tilt) { _target_tilt = tilt; }
 
+  // in range of 0.1 - ~30
+  void setSuddenness(float suddenness) { _animation_speed = suddenness; }
+
   void update(float dt);
 private:
   ci::CameraPersp							_camera;
