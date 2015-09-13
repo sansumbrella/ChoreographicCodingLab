@@ -1,0 +1,648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720219952D00008149E2 /* AVFoundation.framework */; };
+		006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720319952D00008149E2 /* CoreMedia.framework */; };
+		0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0091D8F80E81B9330029341E /* OpenGL.framework */; };
+		00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784AF0FF439BC000DE1D7 /* Accelerate.framework */; };
+		00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */; };
+		00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B10FF439BC000DE1D7 /* AudioUnit.framework */; };
+		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
+		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
+		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		84E4A81B5BD545258A8ABBEC /* Pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = DEAD4BC6767E47F5BAF7F109 /* Pool.cc */; };
+		84252685174645E4AE01C2D3 /* System.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9078E8C94342470783F02891 /* System.cc */; };
+		9A7E2941835742D3AB483CAD /* Event.cc in Sources */ = {isa = PBXBuildFile; fileRef = F81A2F0EF7334DDE9C9B4854 /* Event.cc */; };
+		B3F14A4D59034AB3A997BAD3 /* Entity.cc in Sources */ = {isa = PBXBuildFile; fileRef = 031A26A3F9CE4627ABCA6416 /* Entity.cc */; };
+		B3C9BAC7F6C74740ADE8A699 /* System.h in Headers */ = {isa = PBXBuildFile; fileRef = 45293379224342FF8D90B5E5 /* System.h */; };
+		AF873DE35CCC4443A1DB285A /* quick.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F2C99CE12C44DFBCB62679 /* quick.h */; };
+		577BD01BF32C40A9B6EEB98F /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 4686607A7B124D91B6532F87 /* Event.h */; };
+		C8B312112F744A84BECC9ABE /* entityx.h in Headers */ = {isa = PBXBuildFile; fileRef = F17786D18880478083D7411A /* entityx.h */; };
+		7A40B92C22044FD1BB014154 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = DCB4EBF436DA4B4D967C5ABD /* Entity.h */; };
+		E1F5C536FD03438EBCFCC40C /* VerletPhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0C95F6CCC1F4293B85CDBDA /* VerletPhysicsSystem.cpp */; };
+		5AF6A5AD35A3437D9807B691 /* TransformSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35EA815FA4A14AE196D3F9D9 /* TransformSystem.cpp */; };
+		5C516BDAA3644247A5BDC482 /* ExpiresSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63E7C9AD9F084A12BB3B1A56 /* ExpiresSystem.cpp */; };
+		54A9C3A9B1F94D5E8C2A58CD /* BehaviorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34DCDCBFB17A4E1AB10A95BE /* BehaviorSystem.cpp */; };
+		932DFDCFA95040F1ABCD1D94 /* VerletPhysicsSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 9995907F60BF4966B9A35661 /* VerletPhysicsSystem.h */; };
+		9ED4754673D143F3B216114F /* VerletBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 654DD84ADB9E403EA104E565 /* VerletBody.h */; };
+		D3476E17A7EE4C62A2607224 /* TransformSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C512491C75D44D0A5EC5B56 /* TransformSystem.h */; };
+		8DCBA3220A32414A8A05431C /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DAF0B0B185446AEB704A4D3 /* Transform.h */; };
+		4D15CE88B81B4305ACDAB729 /* RenderLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FB2F24EF2E42459C174C3F /* RenderLayer.h */; };
+		2C25AC1D50B34EC3A301AD67 /* HierarchyComponentT.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7C56D0F8E3468EBCE5ADFC /* HierarchyComponentT.h */; };
+		29A807DDE2894B7EA5B72004 /* HierarchyComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CFFD7E412094D42BA06C9C6 /* HierarchyComponent.h */; };
+		0C3675E4E77F427FA2CD8207 /* ExpiresSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = AD380115D63E4986A1BDF89C /* ExpiresSystem.h */; };
+		3BE3EA01A1D4493D88172363 /* Expires.h in Headers */ = {isa = PBXBuildFile; fileRef = 15C56665A4B84C0083149373 /* Expires.h */; };
+		5FF5E095A4B74A68BFB61F33 /* BehaviorSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = B5D280C5B2554AFF818E8757 /* BehaviorSystem.h */; };
+		3D2C5F559AB14B36B5BA935B /* Behavior.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E02757848A4BCD8CB76F8F /* Behavior.h */; };
+		322EB0CD05AC4B4EBF92E074 /* SvgRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D80EE40080947FCB87BEE92 /* SvgRenderer.cpp */; };
+		CC3C92CD6FF0458191963860 /* ci_nanovg_gl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090C85E687C34402A5220756 /* ci_nanovg_gl.cpp */; };
+		2466A52A9BCC4B96A6BFF0DB /* ci_nanovg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A056CBBA940FAA7ED502C /* ci_nanovg.cpp */; };
+		D4315F8865E0457EB4CB55C5 /* SvgRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 78CD177072E24C9083A71F44 /* SvgRenderer.hpp */; };
+		496A9A30A57C43DFB2D3018B /* ci_nanovg_gl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3C37E9594C064874A7A3A48A /* ci_nanovg_gl.hpp */; };
+		18B104187BA2472DB79990F2 /* ci_nanovg.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 58417F33458444A4892B972C /* ci_nanovg.hpp */; };
+		9714281A229F423EA9DF4799 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 210C8884F8424C1CAE95FFED /* nanovg.c */; };
+		26177CB21F6B4355BEE0FBFE /* stb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = 08F19B50C24B484191A3F121 /* stb_truetype.h */; };
+		3930DDD33126493D9C62669C /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = D7FA79FE18B04D6C9353C03C /* stb_image.h */; };
+		25740CCB03A743EF88EB439D /* nanovg_gl_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD2B5DBE29A4788B854528D /* nanovg_gl_utils.h */; };
+		7E381A20F585428EB0DAA3B5 /* nanovg_gl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B07F1949BD14ED3BA0309FF /* nanovg_gl.h */; };
+		23CE00BD06ED4E829AFD0F49 /* nanovg.h in Headers */ = {isa = PBXBuildFile; fileRef = 51F01D4F78AB4FB498415E13 /* nanovg.h */; };
+		28029CCF65DA4B06A1028C6C /* fontstash.h in Headers */ = {isa = PBXBuildFile; fileRef = FF51EDBC355B420692D10DAD /* fontstash.h */; };
+		E9F00396FD4B497D89C07EC7 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 744BC4F23DE347EC95F03F35 /* imgui_demo.cpp */; };
+		6AFEE156B6B54272AA55F61A /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A76BB13A3B994454B2ECB4E7 /* imgui_draw.cpp */; };
+		32AA3501B5884AB8AB84F145 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CCBFAA4AAF2459D8DC553E6 /* imgui.cpp */; };
+		0A8B9AD919F64CEE90A61A6E /* CinderImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E288876372D4B98ADACD9AF /* CinderImGui.cpp */; };
+		0030818BF1414AEDAC5D41D5 /* imgui_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = ED7D1415D47442EEB0A0E222 /* imgui_internal.h */; };
+		328AB39DAAE844428B91F179 /* imgui.h in Headers */ = {isa = PBXBuildFile; fileRef = 354F3990A9EC4E239CB55AD0 /* imgui.h */; };
+		573ABCB564924607A12729E7 /* imconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 13D7B88C527B44699DAA2F9E /* imconfig.h */; };
+		0FA6E5D9F49B4BB2B39FA008 /* imgui_user.inl in Headers */ = {isa = PBXBuildFile; fileRef = 6CE54CE42D7F4613AA816EAD /* imgui_user.inl */; };
+		11A6D68B73D34A5AB28E744C /* imgui_user.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BB9E82DF1FF42FE862DA44B /* imgui_user.h */; };
+		FB89D81D32EE41D7956C7B1C /* CinderImGui.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E30FAB3D3374CC4B43D945E /* CinderImGui.h */; };
+		E0BD1319D1834FDC90D79047 /* PeopleTrackerTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA4198CE4AB4E04B0FD37AB /* PeopleTrackerTestApp.cpp */; };
+		6AF3B468D2074420BD5E5780 /* PeopleTrackerTest_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 76274DBE08D24CE2BB64531A /* PeopleTrackerTest_Prefix.pch */; };
+		27E7D5043B1948358440BB65 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3EA1F4C77F234A77A7EBDE55 /* CinderApp.icns */; };
+		F5B56F9015D647EC911995EC /* Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = A039A8AA535545A6BC80333B /* Resources.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		006D720219952D00008149E2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		006D720319952D00008149E2 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0091D8F80E81B9330029341E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		00B784AF0FF439BC000DE1D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		00B784B10FF439BC000DE1D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		00B995581B128DF400A5C623 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		00B995591B128DF400A5C623 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		8D1107320486CEB800E47090 /* PeopleTrackerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeopleTrackerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A039A8AA535545A6BC80333B /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../include/Resources.h; sourceTree = "<group>"; name = Resources.h; };
+		3EA1F4C77F234A77A7EBDE55 /* CinderApp.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ../resources/CinderApp.icns; sourceTree = "<group>"; name = CinderApp.icns; };
+		D18393B0E083458181D6E269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; name = Info.plist; };
+		76274DBE08D24CE2BB64531A /* PeopleTrackerTest_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = PeopleTrackerTest_Prefix.pch; sourceTree = "<group>"; name = PeopleTrackerTest_Prefix.pch; };
+		1AA4198CE4AB4E04B0FD37AB /* PeopleTrackerTestApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = ../src/PeopleTrackerTestApp.cpp; sourceTree = "<group>"; name = PeopleTrackerTestApp.cpp; };
+		2E30FAB3D3374CC4B43D945E /* CinderImGui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/include/CinderImGui.h"; sourceTree = "<group>"; name = CinderImGui.h; };
+		4BB9E82DF1FF42FE862DA44B /* imgui_user.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/include/imgui_user.h"; sourceTree = "<group>"; name = imgui_user.h; };
+		6CE54CE42D7F4613AA816EAD /* imgui_user.inl */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/include/imgui_user.inl"; sourceTree = "<group>"; name = imgui_user.inl; };
+		13D7B88C527B44699DAA2F9E /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imconfig.h"; sourceTree = "<group>"; name = imconfig.h; };
+		354F3990A9EC4E239CB55AD0 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui.h"; sourceTree = "<group>"; name = imgui.h; };
+		ED7D1415D47442EEB0A0E222 /* imgui_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui_internal.h"; sourceTree = "<group>"; name = imgui_internal.h; };
+		6E288876372D4B98ADACD9AF /* CinderImGui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/src/CinderImGui.cpp"; sourceTree = "<group>"; name = CinderImGui.cpp; };
+		9CCBFAA4AAF2459D8DC553E6 /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui.cpp"; sourceTree = "<group>"; name = imgui.cpp; };
+		A76BB13A3B994454B2ECB4E7 /* imgui_draw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui_draw.cpp"; sourceTree = "<group>"; name = imgui_draw.cpp; };
+		744BC4F23DE347EC95F03F35 /* imgui_demo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imgui_demo.cpp"; sourceTree = "<group>"; name = imgui_demo.cpp; };
+		FF51EDBC355B420692D10DAD /* fontstash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/deps/nanovg/src/fontstash.h"; sourceTree = "<group>"; name = fontstash.h; };
+		51F01D4F78AB4FB498415E13 /* nanovg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/deps/nanovg/src/nanovg.h"; sourceTree = "<group>"; name = nanovg.h; };
+		7B07F1949BD14ED3BA0309FF /* nanovg_gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/deps/nanovg/src/nanovg_gl.h"; sourceTree = "<group>"; name = nanovg_gl.h; };
+		4CD2B5DBE29A4788B854528D /* nanovg_gl_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/deps/nanovg/src/nanovg_gl_utils.h"; sourceTree = "<group>"; name = nanovg_gl_utils.h; };
+		D7FA79FE18B04D6C9353C03C /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/deps/nanovg/src/stb_image.h"; sourceTree = "<group>"; name = stb_image.h; };
+		08F19B50C24B484191A3F121 /* stb_truetype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/deps/nanovg/src/stb_truetype.h"; sourceTree = "<group>"; name = stb_truetype.h; };
+		210C8884F8424C1CAE95FFED /* nanovg.c */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/deps/nanovg/src/nanovg.c"; sourceTree = "<group>"; name = nanovg.c; };
+		58417F33458444A4892B972C /* ci_nanovg.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/include/ci_nanovg.hpp"; sourceTree = "<group>"; name = ci_nanovg.hpp; };
+		3C37E9594C064874A7A3A48A /* ci_nanovg_gl.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/include/ci_nanovg_gl.hpp"; sourceTree = "<group>"; name = ci_nanovg_gl.hpp; };
+		78CD177072E24C9083A71F44 /* SvgRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/include/SvgRenderer.hpp"; sourceTree = "<group>"; name = SvgRenderer.hpp; };
+		8A1A056CBBA940FAA7ED502C /* ci_nanovg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/src/ci_nanovg.cpp"; sourceTree = "<group>"; name = ci_nanovg.cpp; };
+		090C85E687C34402A5220756 /* ci_nanovg_gl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/src/ci_nanovg_gl.cpp"; sourceTree = "<group>"; name = ci_nanovg_gl.cpp; };
+		3D80EE40080947FCB87BEE92 /* SvgRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Cinder-NanoVG/src/SvgRenderer.cpp"; sourceTree = "<group>"; name = SvgRenderer.cpp; };
+		E6E02757848A4BCD8CB76F8F /* Behavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/Behavior.h"; sourceTree = "<group>"; name = Behavior.h; };
+		B5D280C5B2554AFF818E8757 /* BehaviorSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.h"; sourceTree = "<group>"; name = BehaviorSystem.h; };
+		15C56665A4B84C0083149373 /* Expires.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/Expires.h"; sourceTree = "<group>"; name = Expires.h; };
+		AD380115D63E4986A1BDF89C /* ExpiresSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/ExpiresSystem.h"; sourceTree = "<group>"; name = ExpiresSystem.h; };
+		2CFFD7E412094D42BA06C9C6 /* HierarchyComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/HierarchyComponent.h"; sourceTree = "<group>"; name = HierarchyComponent.h; };
+		1B7C56D0F8E3468EBCE5ADFC /* HierarchyComponentT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/HierarchyComponentT.h"; sourceTree = "<group>"; name = HierarchyComponentT.h; };
+		37FB2F24EF2E42459C174C3F /* RenderLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/RenderLayer.h"; sourceTree = "<group>"; name = RenderLayer.h; };
+		0DAF0B0B185446AEB704A4D3 /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/Transform.h"; sourceTree = "<group>"; name = Transform.h; };
+		1C512491C75D44D0A5EC5B56 /* TransformSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/TransformSystem.h"; sourceTree = "<group>"; name = TransformSystem.h; };
+		654DD84ADB9E403EA104E565 /* VerletBody.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/VerletBody.h"; sourceTree = "<group>"; name = VerletBody.h; };
+		9995907F60BF4966B9A35661 /* VerletPhysicsSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/VerletPhysicsSystem.h"; sourceTree = "<group>"; name = VerletPhysicsSystem.h; };
+		34DCDCBFB17A4E1AB10A95BE /* BehaviorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/BehaviorSystem.cpp"; sourceTree = "<group>"; name = BehaviorSystem.cpp; };
+		63E7C9AD9F084A12BB3B1A56 /* ExpiresSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/ExpiresSystem.cpp"; sourceTree = "<group>"; name = ExpiresSystem.cpp; };
+		35EA815FA4A14AE196D3F9D9 /* TransformSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/TransformSystem.cpp"; sourceTree = "<group>"; name = TransformSystem.cpp; };
+		B0C95F6CCC1F4293B85CDBDA /* VerletPhysicsSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/VerletPhysicsSystem.cpp"; sourceTree = "<group>"; name = VerletPhysicsSystem.cpp; };
+		DCB4EBF436DA4B4D967C5ABD /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/Entity.h"; sourceTree = "<group>"; name = Entity.h; };
+		F17786D18880478083D7411A /* entityx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/entityx.h"; sourceTree = "<group>"; name = entityx.h; };
+		4686607A7B124D91B6532F87 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/Event.h"; sourceTree = "<group>"; name = Event.h; };
+		D1F2C99CE12C44DFBCB62679 /* quick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/quick.h"; sourceTree = "<group>"; name = quick.h; };
+		45293379224342FF8D90B5E5 /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/System.h"; sourceTree = "<group>"; name = System.h; };
+		031A26A3F9CE4627ABCA6416 /* Entity.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/Entity.cc"; sourceTree = "<group>"; name = Entity.cc; };
+		F81A2F0EF7334DDE9C9B4854 /* Event.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/Event.cc"; sourceTree = "<group>"; name = Event.cc; };
+		9078E8C94342470783F02891 /* System.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/System.cc"; sourceTree = "<group>"; name = System.cc; };
+		DEAD4BC6767E47F5BAF7F109 /* Pool.cc */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx/entityx/help/Pool.cc"; sourceTree = "<group>"; name = Pool.cc; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006D720419952D00008149E2 /* AVFoundation.framework in Frameworks */,
+				006D720519952D00008149E2 /* CoreMedia.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0091D8F90E81B9330029341E /* OpenGL.framework in Frameworks */,
+				5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */,
+				00B784B30FF439BC000DE1D7 /* Accelerate.framework in Frameworks */,
+				00B784B40FF439BC000DE1D7 /* AudioToolbox.framework in Frameworks */,
+				00B784B50FF439BC000DE1D7 /* AudioUnit.framework in Frameworks */,
+				00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */,
+				00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */,
+				00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				1AA4198CE4AB4E04B0FD37AB /* PeopleTrackerTestApp.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				006D720219952D00008149E2 /* AVFoundation.framework */,
+				006D720319952D00008149E2 /* CoreMedia.framework */,
+				00B784AF0FF439BC000DE1D7 /* Accelerate.framework */,
+				00B784B00FF439BC000DE1D7 /* AudioToolbox.framework */,
+				00B784B10FF439BC000DE1D7 /* AudioUnit.framework */,
+				00B784B20FF439BC000DE1D7 /* CoreAudio.framework */,
+				5323E6B10EAFCA74003A9687 /* CoreVideo.framework */,
+				0091D8F80E81B9330029341E /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				00B995581B128DF400A5C623 /* IOKit.framework */,
+				00B995591B128DF400A5C623 /* IOSurface.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* PeopleTrackerTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* PeopleTrackerTest */ = {
+			isa = PBXGroup;
+			children = (
+				01B97315FEAEA392516A2CEA /* Blocks */,
+				29B97315FDCFA39411CA2CEA /* Headers */,
+				080E96DDFE201D6D7F000001 /* Source */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = PeopleTrackerTest;
+			sourceTree = "<group>";
+		};
+		B6F5A16FBA0048DDBA37B1FB /* include */ = {
+			isa = PBXGroup;
+			children = (
+				2E30FAB3D3374CC4B43D945E /* CinderImGui.h */,
+				4BB9E82DF1FF42FE862DA44B /* imgui_user.h */,
+				6CE54CE42D7F4613AA816EAD /* imgui_user.inl */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		FD75202C9D874A7481520CA4 /* imgui */ = {
+			isa = PBXGroup;
+			children = (
+				13D7B88C527B44699DAA2F9E /* imconfig.h */,
+				354F3990A9EC4E239CB55AD0 /* imgui.h */,
+				ED7D1415D47442EEB0A0E222 /* imgui_internal.h */,
+				9CCBFAA4AAF2459D8DC553E6 /* imgui.cpp */,
+				A76BB13A3B994454B2ECB4E7 /* imgui_draw.cpp */,
+				744BC4F23DE347EC95F03F35 /* imgui_demo.cpp */,
+			);
+			name = imgui;
+			sourceTree = "<group>";
+		};
+		585A28C8C2C84ADAB8069E9D /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				FD75202C9D874A7481520CA4 /* imgui */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		8EB098328CBB4F049BE90A1F /* src */ = {
+			isa = PBXGroup;
+			children = (
+				6E288876372D4B98ADACD9AF /* CinderImGui.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		F88E7BAA4F274677AAF7C9D6 /* ImGui */ = {
+			isa = PBXGroup;
+			children = (
+				B6F5A16FBA0048DDBA37B1FB /* include */,
+				585A28C8C2C84ADAB8069E9D /* lib */,
+				8EB098328CBB4F049BE90A1F /* src */,
+			);
+			name = ImGui;
+			sourceTree = "<group>";
+		};
+		FE2C5CC74BA042689569A2F0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FF51EDBC355B420692D10DAD /* fontstash.h */,
+				51F01D4F78AB4FB498415E13 /* nanovg.h */,
+				7B07F1949BD14ED3BA0309FF /* nanovg_gl.h */,
+				4CD2B5DBE29A4788B854528D /* nanovg_gl_utils.h */,
+				D7FA79FE18B04D6C9353C03C /* stb_image.h */,
+				08F19B50C24B484191A3F121 /* stb_truetype.h */,
+				210C8884F8424C1CAE95FFED /* nanovg.c */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		FAB4B6C3643E4A1D998400A9 /* nanovg */ = {
+			isa = PBXGroup;
+			children = (
+				FE2C5CC74BA042689569A2F0 /* src */,
+			);
+			name = nanovg;
+			sourceTree = "<group>";
+		};
+		D71D0AF0BCB64FFB9363A816 /* deps */ = {
+			isa = PBXGroup;
+			children = (
+				FAB4B6C3643E4A1D998400A9 /* nanovg */,
+			);
+			name = deps;
+			sourceTree = "<group>";
+		};
+		4C314F12E5384E3EAA698EDF /* include */ = {
+			isa = PBXGroup;
+			children = (
+				58417F33458444A4892B972C /* ci_nanovg.hpp */,
+				3C37E9594C064874A7A3A48A /* ci_nanovg_gl.hpp */,
+				78CD177072E24C9083A71F44 /* SvgRenderer.hpp */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		453133D0DF9245FDBC27E233 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8A1A056CBBA940FAA7ED502C /* ci_nanovg.cpp */,
+				090C85E687C34402A5220756 /* ci_nanovg_gl.cpp */,
+				3D80EE40080947FCB87BEE92 /* SvgRenderer.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		A76E849EC0E242D4B2FD7047 /* NanoVG */ = {
+			isa = PBXGroup;
+			children = (
+				D71D0AF0BCB64FFB9363A816 /* deps */,
+				4C314F12E5384E3EAA698EDF /* include */,
+				453133D0DF9245FDBC27E233 /* src */,
+			);
+			name = NanoVG;
+			sourceTree = "<group>";
+		};
+		E0EACB7E97194F8C8563C7D5 /* soso */ = {
+			isa = PBXGroup;
+			children = (
+				E6E02757848A4BCD8CB76F8F /* Behavior.h */,
+				B5D280C5B2554AFF818E8757 /* BehaviorSystem.h */,
+				15C56665A4B84C0083149373 /* Expires.h */,
+				AD380115D63E4986A1BDF89C /* ExpiresSystem.h */,
+				2CFFD7E412094D42BA06C9C6 /* HierarchyComponent.h */,
+				1B7C56D0F8E3468EBCE5ADFC /* HierarchyComponentT.h */,
+				37FB2F24EF2E42459C174C3F /* RenderLayer.h */,
+				0DAF0B0B185446AEB704A4D3 /* Transform.h */,
+				1C512491C75D44D0A5EC5B56 /* TransformSystem.h */,
+				654DD84ADB9E403EA104E565 /* VerletBody.h */,
+				9995907F60BF4966B9A35661 /* VerletPhysicsSystem.h */,
+				34DCDCBFB17A4E1AB10A95BE /* BehaviorSystem.cpp */,
+				63E7C9AD9F084A12BB3B1A56 /* ExpiresSystem.cpp */,
+				35EA815FA4A14AE196D3F9D9 /* TransformSystem.cpp */,
+				B0C95F6CCC1F4293B85CDBDA /* VerletPhysicsSystem.cpp */,
+			);
+			name = soso;
+			sourceTree = "<group>";
+		};
+		767879A727204B39A7F903FE /* help */ = {
+			isa = PBXGroup;
+			children = (
+				DEAD4BC6767E47F5BAF7F109 /* Pool.cc */,
+			);
+			name = help;
+			sourceTree = "<group>";
+		};
+		CA66D8B92BBE48C69F3F83D6 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				DCB4EBF436DA4B4D967C5ABD /* Entity.h */,
+				F17786D18880478083D7411A /* entityx.h */,
+				4686607A7B124D91B6532F87 /* Event.h */,
+				D1F2C99CE12C44DFBCB62679 /* quick.h */,
+				45293379224342FF8D90B5E5 /* System.h */,
+				031A26A3F9CE4627ABCA6416 /* Entity.cc */,
+				F81A2F0EF7334DDE9C9B4854 /* Event.cc */,
+				9078E8C94342470783F02891 /* System.cc */,
+				767879A727204B39A7F903FE /* help */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		E64963F5D6824447AFFD5728 /* entityx */ = {
+			isa = PBXGroup;
+			children = (
+				CA66D8B92BBE48C69F3F83D6 /* entityx */,
+			);
+			name = entityx;
+			sourceTree = "<group>";
+		};
+		35CB99B6673E4975ACA2486A /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E0EACB7E97194F8C8563C7D5 /* soso */,
+				E64963F5D6824447AFFD5728 /* entityx */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		2C11845A3A054F9181F157E6 /* Entity Component System */ = {
+			isa = PBXGroup;
+			children = (
+				35CB99B6673E4975ACA2486A /* src */,
+			);
+			name = "Entity Component System";
+			sourceTree = "<group>";
+		};
+		01B97315FEAEA392516A2CEA /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				F88E7BAA4F274677AAF7C9D6 /* ImGui */,
+				A76E849EC0E242D4B2FD7047 /* NanoVG */,
+				2C11845A3A054F9181F157E6 /* Entity Component System */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				A039A8AA535545A6BC80333B /* Resources.h */,
+				76274DBE08D24CE2BB64531A /* PeopleTrackerTest_Prefix.pch */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3EA1F4C77F234A77A7EBDE55 /* CinderApp.icns */,
+				D18393B0E083458181D6E269 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* PeopleTrackerTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "PeopleTrackerTest" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PeopleTrackerTest;
+			productInstallPath = "$(HOME)/Applications";
+			productName = PeopleTrackerTest;
+			productReference = 8D1107320486CEB800E47090 /* PeopleTrackerTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PeopleTrackerTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* PeopleTrackerTest */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* PeopleTrackerTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27E7D5043B1948358440BB65 /* CinderApp.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0BD1319D1834FDC90D79047 /* PeopleTrackerTestApp.cpp in Sources */,
+				0A8B9AD919F64CEE90A61A6E /* CinderImGui.cpp in Sources */,
+				32AA3501B5884AB8AB84F145 /* imgui.cpp in Sources */,
+				6AFEE156B6B54272AA55F61A /* imgui_draw.cpp in Sources */,
+				E9F00396FD4B497D89C07EC7 /* imgui_demo.cpp in Sources */,
+				9714281A229F423EA9DF4799 /* nanovg.c in Sources */,
+				2466A52A9BCC4B96A6BFF0DB /* ci_nanovg.cpp in Sources */,
+				CC3C92CD6FF0458191963860 /* ci_nanovg_gl.cpp in Sources */,
+				322EB0CD05AC4B4EBF92E074 /* SvgRenderer.cpp in Sources */,
+				54A9C3A9B1F94D5E8C2A58CD /* BehaviorSystem.cpp in Sources */,
+				5C516BDAA3644247A5BDC482 /* ExpiresSystem.cpp in Sources */,
+				5AF6A5AD35A3437D9807B691 /* TransformSystem.cpp in Sources */,
+				E1F5C536FD03438EBCFCC40C /* VerletPhysicsSystem.cpp in Sources */,
+				B3F14A4D59034AB3A997BAD3 /* Entity.cc in Sources */,
+				9A7E2941835742D3AB483CAD /* Event.cc in Sources */,
+				84252685174645E4AE01C2D3 /* System.cc in Sources */,
+				84E4A81B5BD545258A8ABBEC /* Pool.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PeopleTrackerTest_Prefix.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = PeopleTrackerTest;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PeopleTrackerTest_Prefix.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.libcinder.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = PeopleTrackerTest;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SYMROOT = ./build;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = "../../../../../Code/cinder/master";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(CINDER_PATH)/include\" ../include",
+					"\"../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib\"",
+					"\"../../../../../Code/cinder/master/blocks/Cinder-ImGui/include\"",
+					"\"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src\"",
+					"\"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/config\"",
+					"\"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx\"",
+				);
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CINDER_PATH = "../../../../../Code/cinder/master";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(CINDER_PATH)/include\" ../include",
+					"\"../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib\"",
+					"\"../../../../../Code/cinder/master/blocks/Cinder-ImGui/include\"",
+					"\"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src\"",
+					"\"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/config\"",
+					"\"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx\"",
+				);
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "PeopleTrackerTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PeopleTrackerTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
