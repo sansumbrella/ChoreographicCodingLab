@@ -1,11 +1,14 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/Rand.h"
+#include "cinder/Log.h"
 
 #include "entityx/Entity.h"
 #include "soso/BehaviorSystem.h"
 #include "soso/ExpiresSystem.h"
 #include "soso/Expires.h"
+
+#include "JsonReceiverUDP.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -20,6 +23,8 @@ public:
   void update() override;
   void draw() override;
 
+  void keyDown(KeyEvent event) override;
+
   void createTestEntities();
 
 private:
@@ -27,11 +32,13 @@ private:
   entityx::EntityManager _entities;
   entityx::SystemManager _systems;
   ci::Timer              _frame_timer;
+  sansumbrella::JsonReceiverUDP _json_receiver;
 };
 
 PeopleTrackerTestApp::PeopleTrackerTestApp()
 : _entities(_events),
-  _systems(_entities, _events)
+  _systems(_entities, _events),
+  _json_receiver(io_service())
 {}
 
 void PeopleTrackerTestApp::setup()
@@ -41,6 +48,16 @@ void PeopleTrackerTestApp::setup()
   _systems.configure();
 
   createTestEntities();
+
+  _json_receiver.connect("127.0.0.155", 12);
+  _json_receiver.getSignalJsonReceived().connect([this] (const JsonTree &json) {
+    CI_LOG_I("Got some JSON: " << json.serialize());
+  });
+}
+
+void PeopleTrackerTestApp::keyDown(cinder::app::KeyEvent event)
+{
+  _json_receiver.connect("127.0.0.1", 5000);
 }
 
 void PeopleTrackerTestApp::createTestEntities()
