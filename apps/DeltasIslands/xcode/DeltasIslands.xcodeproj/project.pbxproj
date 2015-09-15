@@ -724,7 +724,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../../../Code/cinder/master/blocks/Choreograph/src \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib\" \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/include\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../../../Code/cinder/master/blocks/Choreograph/src \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib\" \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/include\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx\" \"$(CINDER_PATH)/blocks/Entity-Component-Sample/src/soso/config\"";
 			};
 			name = Debug;
 		};
@@ -740,7 +740,7 @@
 				HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../../../Code/cinder/master/blocks/Choreograph/src \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib\" \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/include\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include ../../../../../Code/cinder/master/blocks/Choreograph/src \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib\" \"../../../../../Code/cinder/master/blocks/Cinder-ImGui/include\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso\" \"../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/entityx\" \"$(CINDER_PATH)/blocks/Entity-Component-Sample/src/soso/config\"";
 			};
 			name = Release;
 		};
