@@ -8,7 +8,7 @@
 #include "soso/ExpiresSystem.h"
 #include "soso/Expires.h"
 
-#include "UDPJsonListener.h"
+#include "JSonListenerUDP.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -30,7 +30,7 @@ private:
   entityx::EntityManager        _entities;
   entityx::SystemManager        _systems;
   ci::Timer                     _frame_timer;
-  sansumbrella::UDPJsonListener _json_receiver;
+  sansumbrella::JSonListenerUDP _json_receiver;
 };
 
 PeopleTrackerTestApp::PeopleTrackerTestApp()

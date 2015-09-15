@@ -17,8 +17,7 @@
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
 		0A8B9AD919F64CEE90A61A6E /* CinderImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E288876372D4B98ADACD9AF /* CinderImGui.cpp */; };
-		1522AD921BA63B5C0066B7D6 /* JsonReceiverUDP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1522AD901BA63B5C0066B7D6 /* JsonReceiverUDP.cpp */; };
-		156541941BA8DC540073C9D5 /* UDPJsonListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 156541921BA8DC540073C9D5 /* UDPJsonListener.cpp */; };
+		156541941BA8DC540073C9D5 /* JsonListenerUDP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 156541921BA8DC540073C9D5 /* JsonListenerUDP.cpp */; };
 		2466A52A9BCC4B96A6BFF0DB /* ci_nanovg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A056CBBA940FAA7ED502C /* ci_nanovg.cpp */; };
 		27E7D5043B1948358440BB65 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3EA1F4C77F234A77A7EBDE55 /* CinderApp.icns */; };
 		322EB0CD05AC4B4EBF92E074 /* SvgRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D80EE40080947FCB87BEE92 /* SvgRenderer.cpp */; };
@@ -56,10 +55,8 @@
 		0DAF0B0B185446AEB704A4D3 /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/Transform.h"; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13D7B88C527B44699DAA2F9E /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imconfig.h; path = "../../../../../Code/cinder/master/blocks/Cinder-ImGui/lib/imgui/imconfig.h"; sourceTree = "<group>"; };
-		1522AD901BA63B5C0066B7D6 /* JsonReceiverUDP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonReceiverUDP.cpp; path = ../src/JsonReceiverUDP.cpp; sourceTree = "<group>"; };
-		1522AD911BA63B5C0066B7D6 /* JsonReceiverUDP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonReceiverUDP.h; path = ../src/JsonReceiverUDP.h; sourceTree = "<group>"; };
-		156541921BA8DC540073C9D5 /* UDPJsonListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UDPJsonListener.cpp; path = ../src/UDPJsonListener.cpp; sourceTree = "<group>"; };
-		156541931BA8DC540073C9D5 /* UDPJsonListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDPJsonListener.h; path = ../src/UDPJsonListener.h; sourceTree = "<group>"; };
+		156541921BA8DC540073C9D5 /* JsonListenerUDP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonListenerUDP.cpp; path = ../src/JsonListenerUDP.cpp; sourceTree = "<group>"; };
+		156541931BA8DC540073C9D5 /* JsonListenerUDP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonListenerUDP.h; path = ../src/JsonListenerUDP.h; sourceTree = "<group>"; };
 		15C56665A4B84C0083149373 /* Expires.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Expires.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/Expires.h"; sourceTree = "<group>"; };
 		1AA4198CE4AB4E04B0FD37AB /* PeopleTrackerTestApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = PeopleTrackerTestApp.cpp; path = ../src/PeopleTrackerTestApp.cpp; sourceTree = "<group>"; };
 		1B7C56D0F8E3468EBCE5ADFC /* HierarchyComponentT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HierarchyComponentT.h; path = "../../../../../Code/cinder/master/blocks/Entity-Component-Sample/src/soso/HierarchyComponentT.h"; sourceTree = "<group>"; };
@@ -149,10 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				1AA4198CE4AB4E04B0FD37AB /* PeopleTrackerTestApp.cpp */,
-				1522AD901BA63B5C0066B7D6 /* JsonReceiverUDP.cpp */,
-				1522AD911BA63B5C0066B7D6 /* JsonReceiverUDP.h */,
-				156541921BA8DC540073C9D5 /* UDPJsonListener.cpp */,
-				156541931BA8DC540073C9D5 /* UDPJsonListener.h */,
+				156541921BA8DC540073C9D5 /* JsonListenerUDP.cpp */,
+				156541931BA8DC540073C9D5 /* JsonListenerUDP.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -486,11 +481,10 @@
 				322EB0CD05AC4B4EBF92E074 /* SvgRenderer.cpp in Sources */,
 				54A9C3A9B1F94D5E8C2A58CD /* BehaviorSystem.cpp in Sources */,
 				5C516BDAA3644247A5BDC482 /* ExpiresSystem.cpp in Sources */,
-				156541941BA8DC540073C9D5 /* UDPJsonListener.cpp in Sources */,
+				156541941BA8DC540073C9D5 /* JsonListenerUDP.cpp in Sources */,
 				5AF6A5AD35A3437D9807B691 /* TransformSystem.cpp in Sources */,
 				E1F5C536FD03438EBCFCC40C /* VerletPhysicsSystem.cpp in Sources */,
 				B3F14A4D59034AB3A997BAD3 /* Entity.cc in Sources */,
-				1522AD921BA63B5C0066B7D6 /* JsonReceiverUDP.cpp in Sources */,
 				9A7E2941835742D3AB483CAD /* Event.cc in Sources */,
 				84252685174645E4AE01C2D3 /* System.cc in Sources */,
 				84E4A81B5BD545258A8ABBEC /* Pool.cc in Sources */,

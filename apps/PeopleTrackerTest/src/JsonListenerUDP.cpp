@@ -25,7 +25,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "UDPJsonListener.h"
+#include "JSonListenerUDP.h"
 #include "cinder/Log.h"
 
 using namespace std;
@@ -33,7 +33,7 @@ using namespace asio;
 using namespace asio::ip;
 using namespace sansumbrella;
 
-UDPJsonListener::UDPJsonListener(asio::io_service &io_service, int port)
+JSonListenerUDP::JSonListenerUDP(asio::io_service &io_service, int port)
 : _io_service(io_service),
   _socket(_io_service, udp::endpoint(udp::v4(), port))
 {
@@ -41,14 +41,14 @@ UDPJsonListener::UDPJsonListener(asio::io_service &io_service, int port)
   wait_for_data();
 }
 
-void UDPJsonListener::wait_for_data()
+void JSonListenerUDP::wait_for_data()
 {
   _socket.async_receive_from(asio::buffer(_received_data), _remote_endpoint, [this] (const asio::error_code &ec, size_t bytes_received) {
     handle_data(ec, bytes_received);
   });
 }
 
-void UDPJsonListener::handle_data(const asio::error_code &ec, size_t bytes_received)
+void JSonListenerUDP::handle_data(const asio::error_code &ec, size_t bytes_received)
 {
   if (! ec)
   {
