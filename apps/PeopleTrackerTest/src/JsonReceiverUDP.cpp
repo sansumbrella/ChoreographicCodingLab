@@ -53,9 +53,8 @@ bool JsonReceiverUDP::connect(const std::string &server, int port)
   udp::resolver::query query(udp::v4(), server, to_string(port));
   auto receiver_endpoint = *resolver.resolve(query);
 
-  auto hello = array<char, 1>{ 0 };
   auto ec = asio::error_code();
-  _socket.send_to(asio::buffer(hello), receiver_endpoint, 0, ec);
+  _socket.connect(receiver_endpoint, ec);
 
   if (ec)
   {
