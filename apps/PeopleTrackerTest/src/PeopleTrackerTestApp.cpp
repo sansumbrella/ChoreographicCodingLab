@@ -51,9 +51,9 @@ void PeopleTrackerTestApp::setup()
     if (json.hasChild("tracks"))
     {
       auto &tracks = json.getChild("tracks");
-      for (auto &t : tracks)
+      for (auto &t: tracks)
       {
-        console() << t.getValueForKey<float>("x", 0.0f) << endl;
+        console() << t.getValueForKey<int>("id", 0) << ": " << t.getValueForKey<float>("x", 0.0f) << endl;
       }
     }
   });
