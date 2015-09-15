@@ -25,14 +25,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "PeopleTrackerJsonReceiver.h"
+#include "UDPJsonListener.h"
 #include "cinder/Log.h"
 
 using namespace std;
 using namespace asio;
 using namespace asio::ip;
+using namespace sansumbrella;
 
-PeopleTrackerJsonReceiver::PeopleTrackerJsonReceiver(asio::io_service &io_service, int port)
+UDPJsonListener::UDPJsonListener(asio::io_service &io_service, int port)
 : _io_service(io_service),
   _socket(_io_service, udp::endpoint(udp::v4(), port))
 {
@@ -40,14 +41,14 @@ PeopleTrackerJsonReceiver::PeopleTrackerJsonReceiver(asio::io_service &io_servic
   wait_for_data();
 }
 
-void PeopleTrackerJsonReceiver::wait_for_data()
+void UDPJsonListener::wait_for_data()
 {
   _socket.async_receive_from(asio::buffer(_received_data), _remote_endpoint, [this] (const asio::error_code &ec, size_t bytes_received) {
     handle_data(ec, bytes_received);
   });
 }
 
-void PeopleTrackerJsonReceiver::handle_data(const asio::error_code &ec, size_t bytes_received)
+void UDPJsonListener::handle_data(const asio::error_code &ec, size_t bytes_received)
 {
   if (! ec)
   {

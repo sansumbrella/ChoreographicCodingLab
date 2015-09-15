@@ -30,10 +30,13 @@
 #include "cinder/Json.h"
 #include "asio/asio.hpp"
 
-class PeopleTrackerJsonReceiver
+namespace sansumbrella
+{
+
+class UDPJsonListener
 {
 public:
-  PeopleTrackerJsonReceiver(asio::io_service &io_service, int port);
+  UDPJsonListener(asio::io_service &io_service, int port);
 
   void listen(int port);
   auto& get_signal_json_received() { return _json_received; }
@@ -48,3 +51,5 @@ private:
   void handle_data(const asio::error_code &ec, size_t bytes_received);
   void wait_for_data();
 };
+
+} // namespace sansumbrella
