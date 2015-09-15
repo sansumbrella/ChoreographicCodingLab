@@ -49,7 +49,10 @@ void PeopleTrackerTestApp::setup()
 
   createTestEntities();
 
-  _json_receiver.connect("127.0.0.155", 12);
+  _json_receiver.connect("", 21234);
+  auto server_address = asio::ip::address_v4::from_string("230.0.0.110");
+  auto listener_address = asio::ip::address_v4::from_string(System::getIpAddress());
+  _json_receiver.connect_multicast(listener_address, server_address, 21234);
   _json_receiver.getSignalJsonReceived().connect([this] (const JsonTree &json) {
     CI_LOG_I("Got some JSON: " << json.serialize());
   });
@@ -57,7 +60,10 @@ void PeopleTrackerTestApp::setup()
 
 void PeopleTrackerTestApp::keyDown(cinder::app::KeyEvent event)
 {
-  _json_receiver.connect("127.0.0.1", 5000);
+//  _json_receiver.connect("", 21234);
+  auto server_address = asio::ip::address_v4::from_string("230.0.0.110");
+  auto listener_address = asio::ip::address_v4::from_string(System::getIpAddress());
+  _json_receiver.connect_multicast(listener_address, server_address, 21234);
 }
 
 void PeopleTrackerTestApp::createTestEntities()
