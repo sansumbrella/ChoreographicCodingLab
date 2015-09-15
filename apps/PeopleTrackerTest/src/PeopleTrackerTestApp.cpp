@@ -7,6 +7,7 @@
 #include "soso/BehaviorSystem.h"
 #include "soso/ExpiresSystem.h"
 #include "soso/Expires.h"
+#include "soso/Transform.h"
 
 #include "JSonListenerUDP.h"
 
@@ -14,6 +15,54 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 using namespace soso;
+
+struct Person
+{
+  Person() = default;
+  Person(uint32_t id): _id(id) {}
+
+  uint32_t _id = 0;
+};
+
+struct Position
+{
+  Position() = default;
+
+  std::vector<ci::vec2> _positions;
+};
+
+entityx::Entity create_or_update_point(entityx::EntityManager &entities, uint32_t id, const ci::vec2 &pos)
+{
+  entityx::Entity entity;
+  entityx::ComponentHandle<Person> person;
+  for (auto e: entities.entities_with_components(person))
+  {
+    if (person->_id == id)
+    {
+      entity = e;
+      break;
+    }
+  }
+
+  if (! entity)
+  {
+    entity = entities.create();
+    entity.assign<Person>( id );
+    entity.assign<Position>();
+    entity.assign<Expires>( 1.0f );
+  }
+
+  auto position = entity.component<Position>();
+  position->_positions.push_back(pos);
+  entity.component<Expires>()->time = 1.0f;
+
+  if (position->_positions.size() > 45)
+  {
+    position->_positions.erase(position->_positions.begin());
+  }
+
+  return entity;
+}
 
 class PeopleTrackerTestApp : public App
 {
@@ -53,7 +102,11 @@ void PeopleTrackerTestApp::setup()
       auto &tracks = json.getChild("tracks");
       for (auto &t: tracks)
       {
-        console() << t.getValueForKey<int>("id", 0) << ": " << t.getValueForKey<float>("x", 0.0f) << endl;
+        auto id = t.getValueForKey<int>("id", 0);
+        auto pos = vec2(t.getValueForKey<float>("x", 0.0f), t.getValueForKey<float>("y", 0.0f));
+        create_or_update_point(_entities, id, pos);
+
+        console() << id << ": " << pos << endl;
       }
     }
   });
@@ -84,7 +137,22 @@ void PeopleTrackerTestApp::update()
 void PeopleTrackerTestApp::draw()
 {
   gl::clear();
+  gl::ScopedModelMatrix mat;
+  gl::translate(getWindowCenter());
+  gl::scale(vec3(20.0f));
 
+  entityx::ComponentHandle<Position> position;
+  for (auto __unused e: _entities.entities_with_components(position))
+  {
+    gl::begin(GL_LINE_STRIP);
+    for (auto &p: position->_positions)
+    {
+      gl::vertex(p);
+    }
+    gl::end();
+    gl::drawSolidCircle(vec2(position->_positions.back()), 0.5f, 24);
+  }
+  /*
   auto position = vec2(10);
   for (auto e : _entities.entities_with_components<Expires>())
   {
@@ -100,6 +168,7 @@ void PeopleTrackerTestApp::draw()
       position.x += 210;
     }
   }
+  */
 }
 
 CINDER_APP( PeopleTrackerTestApp, RendererGl )
