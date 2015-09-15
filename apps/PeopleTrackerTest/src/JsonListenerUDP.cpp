@@ -25,77 +25,50 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "JsonReceiverUDP.h"
+#include "JSonListenerUDP.h"
 #include "cinder/Log.h"
 
-using namespace sansumbrella;
 using namespace std;
 using namespace asio;
 using namespace asio::ip;
+using namespace sansumbrella;
 
-JsonReceiverUDP::JsonReceiverUDP(asio::io_service &io_service)
+JSonListenerUDP::JSonListenerUDP(asio::io_service &io_service, int port)
 : _io_service(io_service),
-  _socket(_io_service)
+  _socket(_io_service, udp::endpoint(udp::v4(), port))
 {
-  asio::error_code ec;
-  _socket.open(udp::v4(), ec);
-  if (ec)
-  {
-    CI_LOG_E("Error opening socket: " << ec);
-  }
+
+  wait_for_data();
 }
 
-bool JsonReceiverUDP::connect(const std::string &server, int port)
+void JSonListenerUDP::wait_for_data()
 {
-  _socket.cancel();
-
-  udp::resolver resolver(_io_service);
-  udp::resolver::query query(udp::v4(), server, to_string(port));
-  auto receiver_endpoint = *resolver.resolve(query);
-
-  auto hello = array<char, 1>{ 0 };
-  auto ec = asio::error_code();
-  _socket.send_to(asio::buffer(hello), receiver_endpoint, 0, ec);
-
-  if (ec)
-  {
-    // never seems to be a problem, even if there is no receiving process.
-    CI_LOG_E("Error sending initial data: " << ec.message());
-    return false;
-  }
-
-  listen();
-  return true;
-}
-
-void JsonReceiverUDP::listen()
-{
-  udp::endpoint sender_endpoint;
-
-  _socket.async_receive_from(asio::buffer(_received_data), sender_endpoint, [this] (const asio::error_code &ec, size_t bytes_read) {
-    if (! ec)
-    {
-      auto str = string(_received_data.begin(), _received_data.begin() + bytes_read);
-
-      try
-      {
-        auto json = ci::JsonTree(str);
-        _json_received.emit(json);
-      }
-      catch (const exception &exc)
-      {
-        CI_LOG_E("Exception parsing JSON" << exc.what());
-      }
-
-      listen();
-    }
-    else
-    {
-      CI_LOG_W("Error in receive: " << ec.message());
-      if (ec != asio::error::operation_aborted)
-      {
-        listen();
-      }
-    }
+  _socket.async_receive_from(asio::buffer(_received_data), _remote_endpoint, [this] (const asio::error_code &ec, size_t bytes_received) {
+    handle_data(ec, bytes_received);
   });
 }
+
+void JSonListenerUDP::handle_data(const asio::error_code &ec, size_t bytes_received)
+{
+  if (! ec)
+  {
+    auto str = string(_received_data.begin(), _received_data.begin() + bytes_received);
+
+    try
+    {
+      auto json = ci::JsonTree(str);
+      _json_received.emit(json);
+    }
+    catch (const exception &exc)
+    {
+      CI_LOG_E("Exception parsing JSON" << exc.what());
+    }
+  }
+  else
+  {
+    CI_LOG_W("Error receiving data: " << ec.message());
+  }
+  wait_for_data();
+}
+
+

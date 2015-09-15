@@ -33,24 +33,26 @@
 namespace sansumbrella
 {
 
-using JsonReceiverUDPURef = std::unique_ptr<class JsonReceiverUDP>;
-
-class JsonReceiverUDP
+///
+/// Listens for JSON to arrive over UDP.
+/// Emits a signal whenever valid JSON arrives.
+///
+class JSonListenerUDP
 {
 public:
-  JsonReceiverUDP(asio::io_service &io_service);
-  /// Connect to a UDP server.
-  /// Returns true on success, false on failure.
-  bool connect(const std::string &server, int port);
+  JSonListenerUDP(asio::io_service &io_service, int port);
 
-  auto& getSignalJsonReceived() { return _json_received; }
+  auto& get_signal_json_received() { return _json_received; }
 private:
   asio::io_service                                &_io_service;
   asio::ip::udp::socket                           _socket;
   ci::signals::Signal<void (const ci::JsonTree&)> _json_received;
 
-  std::array<char, 1024> _received_data;
-  void listen();
+  std::array<char, 2048>  _received_data;
+  asio::ip::udp::endpoint _remote_endpoint;
+
+  void handle_data(const asio::error_code &ec, size_t bytes_received);
+  void wait_for_data();
 };
 
 } // namespace sansumbrella
