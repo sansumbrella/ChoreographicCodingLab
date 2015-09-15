@@ -8,7 +8,7 @@
 #include "soso/ExpiresSystem.h"
 #include "soso/Expires.h"
 
-#include "JsonReceiverUDP.h"
+#include "PeopleTrackerJsonReceiver.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -23,8 +23,6 @@ public:
   void update() override;
   void draw() override;
 
-  void keyDown(KeyEvent event) override;
-
   void createTestEntities();
 
 private:
@@ -32,13 +30,13 @@ private:
   entityx::EntityManager _entities;
   entityx::SystemManager _systems;
   ci::Timer              _frame_timer;
-  sansumbrella::JsonReceiverUDP _json_receiver;
+  PeopleTrackerJsonReceiver _json_receiver;
 };
 
 PeopleTrackerTestApp::PeopleTrackerTestApp()
 : _entities(_events),
   _systems(_entities, _events),
-  _json_receiver(io_service())
+  _json_receiver(io_service(), 21234)
 {}
 
 void PeopleTrackerTestApp::setup()
@@ -49,25 +47,16 @@ void PeopleTrackerTestApp::setup()
 
   createTestEntities();
 
-  _json_receiver.connect("", 21234);
-  /*
-  auto server_address = asio::ip::address_v4::from_string("230.0.0.110");
-  auto listener_address = asio::ip::address_v4::from_string(System::getIpAddress());
-  _json_receiver.connect_multicast(listener_address, server_address, 21234);
-  */
-  _json_receiver.getSignalJsonReceived().connect([this] (const JsonTree &json) {
-    CI_LOG_I("Got some JSON: " << json.serialize());
+  _json_receiver.get_signal_json_received().connect([this] (const JsonTree &json) {
+    if (json.hasChild("tracks"))
+    {
+      auto &tracks = json.getChild("tracks");
+      for (auto &t : tracks)
+      {
+        console() << t.getValueForKey<float>("x", 0.0f) << endl;
+      }
+    }
   });
-}
-
-void PeopleTrackerTestApp::keyDown(cinder::app::KeyEvent event)
-{
-  _json_receiver.connect("", 21234);
-  /*
-  auto server_address = asio::ip::address_v4::from_string("230.0.0.110");
-  auto listener_address = asio::ip::address_v4::from_string(System::getIpAddress());
-  _json_receiver.connect_multicast(listener_address, server_address, 21234);
-  */
 }
 
 void PeopleTrackerTestApp::createTestEntities()

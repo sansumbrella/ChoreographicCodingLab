@@ -45,6 +45,15 @@ JsonReceiverUDP::JsonReceiverUDP(asio::io_service &io_service)
   }
 }
 
+void JsonReceiverUDP::listen_as_server(int port)
+{
+  _socket = udp::socket(_io_service, udp::endpoint(udp::v4(), port));
+  _socket.async_receive_from(asio::buffer(_received_data), _remote_endpoint, [this] (const asio::error_code &ec, size_t bytes_read) {
+    auto str = string(_received_data.begin(), _received_data.begin() + bytes_read);
+    CI_LOG_I("Received data: " << bytes_read);
+  });
+}
+
 bool JsonReceiverUDP::connect(const std::string &server, int port)
 {
   _socket.cancel();

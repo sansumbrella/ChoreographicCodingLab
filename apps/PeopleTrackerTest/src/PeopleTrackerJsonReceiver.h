@@ -30,36 +30,21 @@
 #include "cinder/Json.h"
 #include "asio/asio.hpp"
 
-namespace sansumbrella
-{
-
-using JsonReceiverUDPURef = std::unique_ptr<class JsonReceiverUDP>;
-
-///
-/// Receives JSON over UDP multicast.
-///
-class JsonReceiverUDP
+class PeopleTrackerJsonReceiver
 {
 public:
-  JsonReceiverUDP(asio::io_service &io_service);
-  /// Connect to a UDP server.
-  /// Returns true on success, false on failure.
-  bool connect(const std::string &server, int port);
-  bool connect_multicast(const asio::ip::address_v4 &local_address, const asio::ip::address_v4 &sender_address, int port);
+  PeopleTrackerJsonReceiver(asio::io_service &io_service, int port);
 
-  void listen_as_server(int port);
-
-  auto& getSignalJsonReceived() { return _json_received; }
+  void listen(int port);
+  auto& get_signal_json_received() { return _json_received; }
 private:
   asio::io_service                                &_io_service;
   asio::ip::udp::socket                           _socket;
   ci::signals::Signal<void (const ci::JsonTree&)> _json_received;
-  asio::ip::udp::endpoint                         _sender_endpoint;
 
-  std::array<char, 2048> _received_data;
+  std::array<char, 2048>  _received_data;
   asio::ip::udp::endpoint _remote_endpoint;
-  void listen();
-  void handle_receive(const asio::error_code &ec, size_t bytes_received);
-};
 
-} // namespace sansumbrella
+  void handle_data(const asio::error_code &ec, size_t bytes_received);
+  void wait_for_data();
+};
