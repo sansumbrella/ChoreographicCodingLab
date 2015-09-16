@@ -69,6 +69,8 @@ public:
 
   MouseEvent toMouseEvent(const TouchEvent &event) const;
 
+  void createServer();
+
 private:
   std::vector<Path>                   _paths;
   std::unordered_map<uint32_t, Touch> _touches;
@@ -132,11 +134,14 @@ ci::JsonTree IslandDrawingApp::resetMessage() const
   return json;
 }
 
-void IslandDrawingApp::setup()
+void IslandDrawingApp::createServer()
 {
   _server = make_shared<JsonServer>( Port );
   _server->start();
+}
 
+void IslandDrawingApp::setup()
+{
   MotionManager::enable();
 
 #if defined(CINDER_COCOA_TOUCH)
@@ -156,6 +161,10 @@ void IslandDrawingApp::setup()
   connectDebugClient();
   ui::initialize();
 #endif
+
+  getSignalDidBecomeActive().connect([this] () {
+    createServer();
+  });
 }
 
 void IslandDrawingApp::connectDebugClient()
@@ -312,6 +321,7 @@ void IslandDrawingApp::update()
 {
   ui::ScopedWindow window("Camera Controls", toPixels(vec2(400.0f, 280.0f)), 0.5f);
   ui::Text(("IP: " + System::getIpAddress()).c_str(), "");
+  ui::Text(("Port: " + to_string(Port)).c_str(), "");
   if (ui::SliderFloat("Height", &_camera_height, 0.0f, 1.0f))
   {
     _server->sendMessage(cameraMessage());
@@ -336,6 +346,12 @@ void IslandDrawingApp::update()
       p._points.clear();
     }
     _server->sendMessage(resetMessage());
+  }
+
+  if (ui::Button("Restart Server"))
+  {
+    _server.reset();
+    createServer();
   }
 
   if (_send_accelerometer)
@@ -392,4 +408,5 @@ CINDER_APP( IslandDrawingApp, RendererGl, [] (App::Settings *settings) {
   settings->setWindowSize(768, 1024);
 #endif
   settings->setMultiTouchEnabled();
+  settings->setPowerManagementEnabled(false);
 } )
