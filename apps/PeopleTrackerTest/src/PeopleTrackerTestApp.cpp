@@ -56,7 +56,7 @@ entityx::Entity create_or_update_point(entityx::EntityManager &entities, uint32_
   position->_positions.push_back(pos);
   entity.component<Expires>()->time = 1.0f;
 
-  if (position->_positions.size() > 90)
+  if (position->_positions.size() > 120)
   {
     position->_positions.erase(position->_positions.begin());
   }
@@ -137,7 +137,7 @@ void PeopleTrackerTestApp::draw()
   gl::clear();
   gl::ScopedModelMatrix mat;
   gl::translate(getWindowCenter());
-  gl::scale(vec3(20.0f));
+  auto scaling = vec2(50.0f);
 
   entityx::ComponentHandle<Position> position;
   entityx::ComponentHandle<Person>   person;
@@ -146,11 +146,11 @@ void PeopleTrackerTestApp::draw()
     gl::begin(GL_LINE_STRIP);
     for (auto &p: position->_positions)
     {
-      gl::vertex(p);
+      gl::vertex(p * scaling);
     }
     gl::end();
-    gl::drawStrokedCircle(vec2(position->_positions.back()), 0.5f, 24);
-//    gl::drawString(to_string(person->_id), position->_positions.back());
+    gl::drawStrokedCircle(vec2(position->_positions.back() * scaling), 2.0f);
+    gl::drawString(to_string(person->_id), position->_positions.back() * scaling);
   }
 }
 
