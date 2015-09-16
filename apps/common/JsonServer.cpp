@@ -37,8 +37,6 @@ void FrameConnection::broadcast( const ci::JsonTree &data )
 {
   asio::error_code error;
   auto data_str = data.serialize();
-  const auto header = (int)data_str.size();
-  asio::write( socket, asio::buffer( &header, sizeof(header) ), error );
   asio::write( socket, asio::buffer( data_str ), error );
 
   if (error)
@@ -66,6 +64,7 @@ JsonServer::~JsonServer()
 void JsonServer::start()
 {
 	running = true;
+  ioService.reset();
 	thread = std::thread( [this] { run(); } );
 }
 
