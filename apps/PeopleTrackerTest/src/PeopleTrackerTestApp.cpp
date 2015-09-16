@@ -94,8 +94,6 @@ void PeopleTrackerTestApp::setup()
   _systems.add<ExpiresSystem>();
   _systems.configure();
 
-  createTestEntities();
-
   _json_receiver.get_signal_json_received().connect([this] (const JsonTree &json) {
     if (json.hasChild("tracks"))
     {
@@ -152,23 +150,6 @@ void PeopleTrackerTestApp::draw()
     gl::end();
     gl::drawSolidCircle(vec2(position->_positions.back()), 0.5f, 24);
   }
-  /*
-  auto position = vec2(10);
-  for (auto e : _entities.entities_with_components<Expires>())
-  {
-    auto ec = e.component<Expires>();
-    auto index = to_string(e.id().index());
-    auto time_remaining = to_string(ec->time);
-    gl::drawString(index + " expires in " + time_remaining + " seconds.", position);
-
-    position += vec2(0, 20);
-    if (position.y > getWindowHeight())
-    {
-      position.y = 10;
-      position.x += 210;
-    }
-  }
-  */
 }
 
 CINDER_APP( PeopleTrackerTestApp, RendererGl )
