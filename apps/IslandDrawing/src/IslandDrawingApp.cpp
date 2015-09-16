@@ -12,6 +12,7 @@
 #include "CinderImGui.h"
 
 #include <unordered_map>
+#include "MotionManager.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -83,6 +84,7 @@ private:
   float     _camera_angle = 0.0f;
   float     _camera_tilt = 0.0f;
   float     _camera_suddenness = 1.0f;
+  bool      _send_accelerometer = true;
 
   shared_ptr<JsonClient> _client;
   shared_ptr<JsonServer> _server;
@@ -134,6 +136,8 @@ void IslandDrawingApp::setup()
 {
   _server = make_shared<JsonServer>( Port );
   _server->start();
+
+  MotionManager::enable();
 
 #if defined(CINDER_COCOA_TOUCH)
   auto options = ui::Options();
@@ -332,6 +336,21 @@ void IslandDrawingApp::update()
       p._points.clear();
     }
     _server->sendMessage(resetMessage());
+  }
+
+  if (_send_accelerometer)
+  {
+    auto json = ci::JsonTree();
+    auto acc = MotionManager::getAcceleration();
+    auto acc_json = JsonTree::makeObject("acceleration");
+
+    acc_json.addChild(JsonTree("x", acc.x));
+    acc_json.addChild(JsonTree("y", acc.y));
+    acc_json.addChild(JsonTree("z", acc.z));
+    json.addChild(acc_json);
+    json.addChild(JsonTree("type", "accelerometer"));
+
+    _server->sendMessage(json);
   }
 }
 

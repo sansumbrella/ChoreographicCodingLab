@@ -100,9 +100,21 @@ void DeltasIslandsApp::handleDataReceived(const ci::JsonTree &data)
     {
       handleCameraData(data);
     }
+    else if (type == "accelerometer")
+    {
+      auto acc = data.getChild("acceleration");
+      auto x = acc.getValueForKey<float>("x");
+      auto y = acc.getValueForKey<float>("y");
+      auto z = acc.getValueForKey<float>("z");
+      console() << "Acc data: " << vec3(x, y, z) << endl;
+    }
     else if (type == "reset")
     {
       reset();
+    }
+    else
+    {
+      CI_LOG_I("Unknown type received: " << data);
     }
   }
 }

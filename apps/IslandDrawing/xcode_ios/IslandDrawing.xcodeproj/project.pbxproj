@@ -11,6 +11,9 @@
 		0087D25512CD809F002CD69F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0087D25412CD809F002CD69F /* CoreText.framework */; };
 		00A66A361965AC8800B17EB3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A66A351965AC8800B17EB3 /* Accelerate.framework */; };
 		00CFDF6B1138442D0091E310 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CFDF6A1138442D0091E310 /* CoreGraphics.framework */; };
+		1565419B1BA8EB0A0073C9D5 /* MotionImplCoreMotion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 156541981BA8EB0A0073C9D5 /* MotionImplCoreMotion.mm */; };
+		1565419C1BA8EB0A0073C9D5 /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 156541991BA8EB0A0073C9D5 /* MotionManager.cpp */; };
+		1565419F1BA8EC690073C9D5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1565419E1BA8EC690073C9D5 /* CoreMotion.framework */; };
 		15ABBA871B93DCBA006A9CC3 /* imgui_user.inl in Resources */ = {isa = PBXBuildFile; fileRef = 15ABBA191B93DCBA006A9CC3 /* imgui_user.inl */; };
 		15ABBABE1B93DCBA006A9CC3 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA7B1B93DCBA006A9CC3 /* imgui.cpp */; };
 		15ABBABF1B93DCBA006A9CC3 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15ABBA7D1B93DCBA006A9CC3 /* imgui_demo.cpp */; };
@@ -42,6 +45,11 @@
 		00CFDF6A1138442D0091E310 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		00CFDF6A1138442D0091FFFF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		12DADE8726D14B7088F9D9A3 /* IslandDrawingApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = IslandDrawingApp.cpp; path = ../src/IslandDrawingApp.cpp; sourceTree = "<group>"; };
+		156541971BA8EB0A0073C9D5 /* MotionImplCoreMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionImplCoreMotion.h; sourceTree = "<group>"; };
+		156541981BA8EB0A0073C9D5 /* MotionImplCoreMotion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MotionImplCoreMotion.mm; sourceTree = "<group>"; };
+		156541991BA8EB0A0073C9D5 /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
+		1565419A1BA8EB0A0073C9D5 /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
+		1565419E1BA8EC690073C9D5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		15ABBA171B93DCBA006A9CC3 /* CinderImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinderImGui.h; sourceTree = "<group>"; };
 		15ABBA181B93DCBA006A9CC3 /* imgui_user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_user.h; sourceTree = "<group>"; };
 		15ABBA191B93DCBA006A9CC3 /* imgui_user.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imgui_user.inl; sourceTree = "<group>"; };
@@ -81,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1565419F1BA8EC690073C9D5 /* CoreMotion.framework in Frameworks */,
 				C725E001121DAC8F00FA186B /* AVFoundation.framework in Frameworks */,
 				C725DFFE121DAC7F00FA186B /* CoreMedia.framework in Frameworks */,
 				C725E001121DAC8FFFFA18FF /* ImageIO.framework in Frameworks */,
@@ -124,6 +133,7 @@
 		00692BD214FF149000D0A05E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1565419E1BA8EC690073C9D5 /* CoreMotion.framework */,
 				C7FB19D5124BC0D70045AFD2 /* AudioToolbox.framework */,
 				00A66A351965AC8800B17EB3 /* Accelerate.framework */,
 				C727C02B121B400300192073 /* CoreMedia.framework */,
@@ -159,6 +169,34 @@
 				BF86781493174952AD67A444 /* Info.plist */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		156541951BA8EB0A0073C9D5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				156541961BA8EB0A0073C9D5 /* cinder */,
+			);
+			name = src;
+			path = ../../../../../Code/cinder/master/blocks/MotionManager/src;
+			sourceTree = "<group>";
+		};
+		156541961BA8EB0A0073C9D5 /* cinder */ = {
+			isa = PBXGroup;
+			children = (
+				156541971BA8EB0A0073C9D5 /* MotionImplCoreMotion.h */,
+				156541981BA8EB0A0073C9D5 /* MotionImplCoreMotion.mm */,
+				156541991BA8EB0A0073C9D5 /* MotionManager.cpp */,
+				1565419A1BA8EB0A0073C9D5 /* MotionManager.h */,
+			);
+			path = cinder;
+			sourceTree = "<group>";
+		};
+		1565419D1BA8EB0D0073C9D5 /* MotionManager */ = {
+			isa = PBXGroup;
+			children = (
+				156541951BA8EB0A0073C9D5 /* src */,
+			);
+			name = MotionManager;
 			sourceTree = "<group>";
 		};
 		15ABBA151B93DC93006A9CC3 /* ImGui */ = {
@@ -240,6 +278,7 @@
 		99692BD914FF149000DFFFFF /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
+				1565419D1BA8EB0D0073C9D5 /* MotionManager */,
 				15ABBA151B93DC93006A9CC3 /* ImGui */,
 			);
 			name = Blocks;
@@ -315,8 +354,10 @@
 				15CD7D1A1B923E0800C76083 /* JsonClient.cpp in Sources */,
 				15ABBABF1B93DCBA006A9CC3 /* imgui_demo.cpp in Sources */,
 				15CD7D1B1B923E0800C76083 /* JsonServer.cpp in Sources */,
+				1565419C1BA8EB0A0073C9D5 /* MotionManager.cpp in Sources */,
 				15ABBAC31B93DCBA006A9CC3 /* CinderImGui.cpp in Sources */,
 				59F3F75E3C0842AC8AE2E700 /* IslandDrawingApp.cpp in Sources */,
+				1565419B1BA8EB0A0073C9D5 /* MotionImplCoreMotion.mm in Sources */,
 				15ABBAC01B93DCBA006A9CC3 /* imgui_draw.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
