@@ -102,9 +102,12 @@ void PeopleTrackerTestApp::setup()
       {
         auto id = t.getValueForKey<int>("id", 0);
         auto pos = vec2(t.getValueForKey<float>("x", 0.0f), t.getValueForKey<float>("y", 0.0f));
+        auto h = t.getValueForKey<float>("height");
+        auto confidence = t.getValueForKey<float>("confidence");
+        auto ts = getElapsedSeconds();
         create_or_update_point(_entities, id, pos);
 
-        console() << id << ": " << pos << endl;
+        console() << "id:" << id << " x:" << pos.x << " y:" << pos.y << " height:" << h << " confidence:" << confidence << " time:" << ts << endl;
       }
     }
   });
